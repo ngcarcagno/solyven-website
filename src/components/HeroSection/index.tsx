@@ -12,10 +12,10 @@ export const HeroSectionFaultyTerminal = ({ children }: HeroSectionProps) => (
     <HeroBackground>
       <FaultyTerminalBackground
         className=""
-        tint="#5F0807"
-        backgroundColor="#333333"
-        scale={1.5}
-        digitSize={3}
+        tint="#333333"
+        backgroundColor="#000000ff"
+        scale={0.7}
+        digitSize={2}
         noiseAmp={1}
         brightness={0.6}
         scanlineIntensity={0.5}
@@ -40,7 +40,7 @@ export const HeroSectionDotGrid = ({ children }: HeroSectionProps) => (
         className=""
         dotSize={10}
         gap={15}
-        baseColor="#333333"
+        baseColor="#33333338"
         activeColor="#5F0807"
         proximity={120}
         shockRadius={250}

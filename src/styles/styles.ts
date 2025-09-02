@@ -22,7 +22,7 @@ export const Styles = createGlobalStyle`
 
     :root {
       --color-primary: #5F0807;      
-      --color-secundary: #CC4E00;       
+      --color-secondary: #CC4E00;       
       --color-detail: #00357a;         
       --color-bg: #000000ff;         
       --color-text-primary: #FFFFFF;

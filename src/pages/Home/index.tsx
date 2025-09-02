@@ -8,6 +8,7 @@ import ContactContent from "../../content/ContactContent.json";
 import { ScrollSnapContainer } from "../../components/ContentBlock/styles";
 import { HeroSectionFaultyTerminal, HeroSectionDotGrid } from "../../components/HeroSection";
 import SecurityCameraAnimated from "../../components/Elements/SecurityCamera/SecurityCameraAnimated";
+import DomeCamera from "../../components/Elements/SecurityCamera/DomeCamera";
 
 const Contact = lazy(() => import("../../components/ContactForm"));
 const MiddleBlock = lazy(() => import("../../components/MiddleBlock"));
@@ -29,22 +30,26 @@ const Home = () => {
           content={IntroContent.text}
           button={IntroContent.button}
           icon={
-            <SecurityCameraAnimated
+            <DomeCamera
               cameraColor="#333333"
               lensColor="#000000ff"
               statusColor="#00ff40"
               label=""
               showLaser={false}
+              mounted={false}
             />
           }
           id="intro"
         />
       </HeroSectionFaultyTerminal>
-      <MiddleBlock
-        title={MiddleBlockContent.title}
-        content={MiddleBlockContent.text}
-        button={MiddleBlockContent.button}
-      />
+      <HeroSectionDotGrid>
+        <MiddleBlock
+          title={MiddleBlockContent.title}
+          content={MiddleBlockContent.text}
+          button={MiddleBlockContent.button}
+        />
+      </HeroSectionDotGrid>
+
       <HeroSectionDotGrid>
         <ContentBlock
           direction="left"
