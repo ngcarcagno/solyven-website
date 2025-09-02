@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import styled, { keyframes, css } from "styled-components";
+import { darken, lighten } from "./utils";
 
 const SecurityCamera = ({
-  cameraColor = "#1a1f2e",
-  lensColor = "#0b1007ff",
+  cameraColor = "#3f0d00",
+  lensColor = "#000000ff",
   statusColor = "#00ff40",
-  label = "Cámara PTZ-8000",
+  label = "Mr.WebDev",
+  showLaser = true,
 }) => {
   const cameraLensRef = useRef(null);
   const statusLightRef = useRef(null);
@@ -13,18 +15,26 @@ const SecurityCamera = ({
 
   useEffect(() => {
     const handleMouseMove = (e) => {
-      if (!cameraLensRef.current) return;
+      if (!cameraLensRef.current || !lensInnerRef.current) return;
 
-      // Calcular la posición del cursor en porcentajes
-      const x = e.clientX / window.innerWidth;
-      const y = e.clientY / window.innerHeight;
+      // Obtén el centro de la cámara
+      const rect = cameraLensRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
 
-      // Calcular el movimiento de la cámara
-      const rotateX = (y - 0.5) * 30;
-      const rotateY = (x - 0.5) * 30;
+      // Offset del mouse respecto al centro
+      const offsetX = e.clientX - centerX;
+      const offsetY = e.clientY - centerY;
 
-      // Aplicar la transformación a la lente
-      cameraLensRef.current.style.transform = `translateX(-50%) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      // Máximo desplazamiento en px
+      const maxMove = 15;
+
+      // Normaliza el movimiento
+      const moveX = Math.max(-maxMove, Math.min(maxMove, offsetX / 5));
+      const moveY = Math.max(-maxMove, Math.min(maxMove, offsetY / 5));
+
+      // Aplica el movimiento a la pupila
+      lensInnerRef.current.style.transform = `translate(-50%, -50%) translate(${moveX}px, ${moveY}px)`;
 
       // Efecto de parpadeo aleatorio
       if (Math.random() > 0.995 && statusLightRef.current) {
@@ -65,16 +75,15 @@ const SecurityCamera = ({
   return (
     <CameraContainer>
       <SecurityCameraWrapper>
-        <CameraBody>
+        <CameraBody cameraColor={cameraColor}>
           <CameraLens ref={cameraLensRef} lensColor={lensColor}>
             <LensGlass>
-              <LensReflection />
               <LensInner ref={lensInnerRef} />
             </LensGlass>
           </CameraLens>
-          <CameraMount />
+          <CameraMount cameraColor={cameraColor} />
           <CameraStatus ref={statusLightRef} statusColor={statusColor} />
-          <ScanEffect />
+          {showLaser && <ScanEffect />}
         </CameraBody>
         <CameraLabel>{label}</CameraLabel>
       </SecurityCameraWrapper>
@@ -116,11 +125,18 @@ const CameraBody = styled.div`
   position: relative;
   width: 120px;
   height: 180px;
-  background: linear-gradient(145deg, #1a1f2e, #0f1320);
   border-radius: 20px;
   margin: 0 auto;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 -5px 10px rgba(0, 0, 0, 0.7),
-    inset 0 5px 10px rgba(255, 255, 255, 0.08);
+
+  background: linear-gradient(
+    145deg,
+    ${({ cameraColor }) => (typeof cameraColor === "string" ? cameraColor : "#3f0d00")},
+    ${({ cameraColor }) => (typeof cameraColor === "string" ? darken(cameraColor, 0.15) : darken("#3f0d00", 0.15))}
+  );
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5),
+    inset 0 -5px 10px ${({ cameraColor }) => (typeof cameraColor === "string" ? darken(cameraColor, 0.3) : darken("#3f0d00", 0.3))},
+    inset 0 5px 10px
+      ${({ cameraColor }) => (typeof cameraColor === "string" ? lighten(cameraColor, 0.2) : lighten("#3f0d00", 0.2))};
 `;
 
 const CameraLens = styled.div`
@@ -177,7 +193,11 @@ const CameraMount = styled.div`
   transform: translateX(-50%);
   width: 140px;
   height: 30px;
-  background: linear-gradient(145deg, #151a28, #101522);
+  background: linear-gradient(
+    145deg,
+    ${({ cameraColor }) => (typeof cameraColor === "string" ? cameraColor : "#3f0d00")},
+    ${({ cameraColor }) => (typeof cameraColor === "string" ? darken(cameraColor, 0.15) : darken("#3f0d00", 0.15))}
+  );
   border-radius: 5px;
 `;
 
@@ -217,12 +237,13 @@ const CameraLabel = styled.div`
 const ScanEffect = styled.div`
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: -20%;
+  width: 140%;
   height: 5px;
   background: linear-gradient(to bottom, rgba(59, 130, 246, 0.8), rgba(59, 130, 246, 0.2));
-  animation: ${scanAnimation} 4s linear infinite;
-  opacity: 0.7;
+  box-shadow: 0 0 24px 8px rgba(59, 130, 246, 0.7), 0 0 48px 16px rgba(59, 130, 246, 0.3);
+  animation: ${scanAnimation} 12s linear infinite;
+  opacity: 0.4;
   border-radius: 50%;
 `;
 

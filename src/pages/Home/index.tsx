@@ -28,7 +28,15 @@ const Home = () => {
           title={IntroContent.title}
           content={IntroContent.text}
           button={IntroContent.button}
-          icon={<SecurityCameraAnimated cameraColor="#3f0d00ff" lensColor="#ff00f2ff" statusColor="#00ff40" label="" />}
+          icon={
+            <SecurityCameraAnimated
+              cameraColor="#333333"
+              lensColor="#000000ff"
+              statusColor="#00ff40"
+              label=""
+              showLaser={false}
+            />
+          }
           id="intro"
         />
       </HeroSectionFaultyTerminal>
