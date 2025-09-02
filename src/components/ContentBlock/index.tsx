@@ -16,16 +16,7 @@ import {
   ButtonWrapper,
 } from "./styles";
 
-const ContentBlock = ({
-  icon,
-  title,
-  content,
-  section,
-  button,
-  t,
-  id,
-  direction,
-}: ContentBlockProps) => {
+const ContentBlock = ({ icon, title, content, section, button, t, id, direction }: ContentBlockProps) => {
   const scrollTo = (id: string) => {
     const element = document.getElementById(id) as HTMLDivElement;
     element.scrollIntoView({
@@ -36,14 +27,9 @@ const ContentBlock = ({
   return (
     <ContentSection>
       <Fade direction={direction} triggerOnce>
-        <StyledRow
-          justify="space-between"
-          align="middle"
-          id={id}
-          direction={direction}
-        >
+        <StyledRow justify="space-between" align="middle" id={id} direction={direction}>
           <Col lg={11} md={11} sm={12} xs={24}>
-            <SvgIcon src={icon} width="100%" height="100%" />
+            {typeof icon === "string" ? <SvgIcon src={icon} width="100%" height="100%" /> : icon}
           </Col>
           <Col lg={11} md={11} sm={11} xs={24}>
             <ContentWrapper>
@@ -61,11 +47,7 @@ const ContentBlock = ({
                         id: number
                       ) => {
                         return (
-                          <Button
-                            key={id}
-                            color={item.color}
-                            onClick={() => scrollTo("about")}
-                          >
+                          <Button key={id} color={item.color} onClick={() => scrollTo("about")}>
                             {t(item.title)}
                           </Button>
                         );
@@ -87,11 +69,7 @@ const ContentBlock = ({
                         ) => {
                           return (
                             <Col key={id} span={11}>
-                              <SvgIcon
-                                src={item.icon}
-                                width="60px"
-                                height="60px"
-                              />
+                              <SvgIcon src={item.icon} width="60px" height="60px" />
                               <MinTitle>{t(item.title)}</MinTitle>
                               <MinPara>{t(item.content)}</MinPara>
                             </Col>

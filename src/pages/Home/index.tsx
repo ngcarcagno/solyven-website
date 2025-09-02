@@ -7,12 +7,16 @@ import ProductContent from "../../content/ProductContent.json";
 import ContactContent from "../../content/ContactContent.json";
 import { ScrollSnapContainer } from "../../components/ContentBlock/styles";
 import { HeroSectionFaultyTerminal, HeroSectionDotGrid } from "../../components/HeroSection";
+import SecurityCameraAnimated from "../../components/Elements/SecurityCamera/SecurityCameraAnimated";
 
 const Contact = lazy(() => import("../../components/ContactForm"));
 const MiddleBlock = lazy(() => import("../../components/MiddleBlock"));
-//const Container = lazy(() => import("../../common/Container"));
 const ScrollToTop = lazy(() => import("../../common/ScrollToTop"));
-const ContentBlock = lazy(() => import("../../components/ContentBlock"));
+const ContentBlock = lazy(() =>
+  import("../../components/ContentBlock").then((module) => ({
+    default: module.default as React.ComponentType<any>,
+  }))
+);
 
 const Home = () => {
   return (
@@ -24,7 +28,7 @@ const Home = () => {
           title={IntroContent.title}
           content={IntroContent.text}
           button={IntroContent.button}
-          icon="developer.svg"
+          icon={<SecurityCameraAnimated cameraColor="#3f0d00ff" lensColor="#ff00f2ff" statusColor="#00ff40" label="" />}
           id="intro"
         />
       </HeroSectionFaultyTerminal>

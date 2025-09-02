@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cámara de Seguridad - Componente</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #0a0e17;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .security-camera-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .security-camera {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        margin-bottom: 20px;
+      }
+
+      .camera-body {
+        position: relative;
+        width: 120px;
+        height: 180px;
+        background: linear-gradient(145deg, #1a1f2e, #0f1320);
+        border-radius: 20px;
+        margin: 0 auto;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 -5px 10px rgba(0, 0, 0, 0.7),
+          inset 0 5px 10px rgba(255, 255, 255, 0.08);
+      }
+
+      .camera-lens {
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 80px;
+        background: #070a10;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 0 8px #131825, inset 0 0 20px rgba(0, 0, 0, 0.8);
+      }
+
+      .lens-glass {
+        width: 65px;
+        height: 65px;
+        background: radial-gradient(circle at 30% 30%, #3b4359 0%, #0e121b 70%);
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .lens-reflection {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        top: 15px;
+        right: 15px;
+      }
+
+      .lens-inner {
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        background: radial-gradient(circle, #0a0e17 10%, #1e2538 70%);
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .camera-mount {
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 140px;
+        height: 30px;
+        background: linear-gradient(145deg, #151a28, #101522);
+        border-radius: 5px;
+      }
+
+      .camera-status {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 10px;
+        height: 10px;
+        background: #00ff40;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #00ff40;
+        animation: pulse 2s infinite;
+      }
+
+      .scan-effect {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(to bottom, rgba(59, 130, 246, 0.8), rgba(59, 130, 246, 0.2));
+        animation: scan 4s linear infinite;
+        opacity: 0.7;
+        border-radius: 50%;
+      }
+
+      .camera-label {
+        color: #c3d4ec;
+        text-align: center;
+        margin-top: 15px;
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+
+      @keyframes scan {
+        0% {
+          top: 0;
+        }
+        50% {
+          top: 100%;
+        }
+        100% {
+          top: 0;
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 0.7;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.7;
+        }
+      }
+
+      .instructions {
+        color: #7c8ba3;
+        text-align: center;
+        max-width: 400px;
+        margin-top: 30px;
+        line-height: 1.5;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="security-camera-container">
+      <div class="security-camera">
+        <div class="camera-body">
+          <div class="camera-lens">
+            <div class="lens-glass">
+              <div class="lens-reflection"></div>
+              <div class="lens-inner"></div>
+            </div>
+          </div>
+          <div class="camera-mount"></div>
+          <div class="camera-status"></div>
+          <div class="scan-effect"></div>
+        </div>
+        <div class="camera-label">Cámara PTZ-8000</div>
+      </div>
+
+      <div class="instructions">
+        Mueve el cursor alrededor de la cámara para simular el seguimiento de movimiento. Este componente puede
+        integrarse fácilmente en React con Styled Components.
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const camera = document.querySelector(".camera-lens");
+        const cameraBody = document.querySelector(".camera-body");
+
+        document.addEventListener("mousemove", function (e) {
+          // Calcular la posición del cursor en porcentajes
+          const x = e.clientX / window.innerWidth;
+          const y = e.clientY / window.innerHeight;
+
+          // Calcular el movimiento de la cámara (máximo 15 grados de rotación)
+          const rotateX = (y - 0.5) * 30;
+          const rotateY = (x - 0.5) * 30;
+
+          // Aplicar la transformación a la lente
+          camera.style.transform = `translateX(-50%) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+          // Efecto de parpadeo aleatorio en la luz de estado
+          if (Math.random() > 0.995) {
+            const statusLight = document.querySelector(".camera-status");
+            statusLight.style.animation = "none";
+            setTimeout(function () {
+              statusLight.style.animation = "pulse 2s infinite";
+            }, 100);
+          }
+        });
+
+        // Efecto de enfoque aleatorio
+        setInterval(function () {
+          const lensInner = document.querySelector(".lens-inner");
+          lensInner.style.transition = "all 0.5s ease";
+          lensInner.style.width = 25 + Math.random() * 5 + "px";
+          lensInner.style.height = 25 + Math.random() * 5 + "px";
+
+          setTimeout(function () {
+            lensInner.style.width = "25px";
+            lensInner.style.height = "25px";
+          }, 500);
+        }, 3000);
+      });
+    </script>
+  </body>
+</html>
