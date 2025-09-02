@@ -3,7 +3,20 @@ import { Link } from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons";
 
 export const HeaderSection = styled("header")`
-  padding: 1rem 0.5rem;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw;
+  max-width: 1200px;
+  padding: 0.75rem 2rem;
+  background: rgba(24, 21, 37, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 24px 0 rgba(0, 0, 0, 0.08);
+  z-index: 1000;
 
   .ant-row-space-between {
     align-items: center;

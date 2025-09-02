@@ -20,6 +20,14 @@ export const Styles = createGlobalStyle`
         font-style: normal;
     }
 
+    :root {
+      --color-primary: #5F0807;      
+      --color-secundary: #CC4E00;       
+      --color-detail: #00357a;         
+      --color-bg: #000000ff;         
+      --color-text-primary: #FFFFFF;
+      --color-text-secondary: #333333;
+    }
 
     body,
     html,
@@ -27,25 +35,31 @@ export const Styles = createGlobalStyle`
         font-family: 'Montserrat Medium', sans-serif;
     }
 
-
     body {
         margin:0;
         padding:0;
         border: 0;
         outline: 0;
-        background: #fff;
+        background: var(--color-bg);
+        color: var(--color-text-secondary);
         overflow-x: hidden;
     }
 
-    a:hover {
-        color: #18216d;
+    a {
+        text-decoration: none;
+        outline: none;
+        color: var(--color-detail);
+
+        :hover {
+            color: var(--color-secondary);
+        }
     }
 
     input,
     textarea {
         border-radius: 4px;
         border: 0;
-        background: rgb(241, 242, 243);
+        background: var(--color-input-bg);
         transition: all 0.3s ease-in-out;  
         outline: none;
         width: 100%;  
@@ -53,7 +67,7 @@ export const Styles = createGlobalStyle`
 
         :focus-within {
             background: none;
-            box-shadow: #2e186a 0px 0px 0px 1px;
+            box-shadow: var(--color-primary) 0px 0px 0px 1px;
         }
     }
 
@@ -64,7 +78,7 @@ export const Styles = createGlobalStyle`
     h5,
     h6 {
         font-family: 'ArchivoBlack Regular', serif;
-        color: #18216d;
+        color: var(--color-text-primary);
         font-size: 56px;
         line-height: 1.18;
 
@@ -78,23 +92,13 @@ export const Styles = createGlobalStyle`
     }
 
     p {
-        color: #18216d;
+        color: var(--color-text-primary);
         font-size: 21px;        
         line-height: 1.41;
     }
 
     h1 {
         font-weight: 600;
-    }
-
-    a {
-        text-decoration: none;
-        outline: none;
-        color: #2E186A;
-
-        :hover {
-            color: #2e186a;
-        }
     }
     
     *:focus {
@@ -115,4 +119,4 @@ export const Styles = createGlobalStyle`
     .ant-drawer-content-wrapper {
         width: 300px !important;
     }
-`;
+        `;

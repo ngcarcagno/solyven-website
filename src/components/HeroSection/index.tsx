@@ -13,6 +13,7 @@ export const HeroSectionFaultyTerminal = ({ children }: HeroSectionProps) => (
       <FaultyTerminalBackground
         className=""
         tint="#5F0807"
+        backgroundColor="#333333"
         scale={1.5}
         digitSize={3}
         noiseAmp={1}

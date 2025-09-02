@@ -240,6 +240,7 @@ export default function FaultyTerminal({
   brightness = 1,
   className,
   style,
+  backgroundColor = "#000000",
   ...rest
 }) {
   const containerRef = useRef(null);
@@ -272,7 +273,21 @@ export default function FaultyTerminal({
     const renderer = new Renderer({ dpr });
     rendererRef.current = renderer;
     const gl = renderer.gl;
-    gl.clearColor(0, 0, 0, 1);
+
+    // Convierte el color hex a RGB
+    function hexToRgbArray(hex) {
+      let h = hex.replace("#", "").trim();
+      if (h.length === 3)
+        h = h
+          .split("")
+          .map((c) => c + c)
+          .join("");
+      const num = parseInt(h, 16);
+      return [((num >> 16) & 255) / 255, ((num >> 8) & 255) / 255, (num & 255) / 255];
+    }
+    const bgRgb = hexToRgbArray(backgroundColor);
+
+    gl.clearColor(bgRgb[0], bgRgb[1], bgRgb[2], 1); // <-- usa el color de fondo
 
     const geometry = new Triangle(gl);
 
@@ -393,6 +408,7 @@ export default function FaultyTerminal({
     mouseStrength,
     pageLoadAnimation,
     brightness,
+    backgroundColor,
     handleMouseMove,
   ]);
 
