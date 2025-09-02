@@ -6,10 +6,11 @@ import MissionContent from "../../content/MissionContent.json";
 import ProductContent from "../../content/ProductContent.json";
 import ContactContent from "../../content/ContactContent.json";
 import { ScrollSnapContainer } from "../../components/ContentBlock/styles";
+import { HeroSectionFaultyTerminal, HeroSectionDotGrid } from "../../components/HeroSection";
 
 const Contact = lazy(() => import("../../components/ContactForm"));
 const MiddleBlock = lazy(() => import("../../components/MiddleBlock"));
-const Container = lazy(() => import("../../common/Container"));
+//const Container = lazy(() => import("../../common/Container"));
 const ScrollToTop = lazy(() => import("../../common/ScrollToTop"));
 const ContentBlock = lazy(() => import("../../components/ContentBlock"));
 
@@ -17,27 +18,31 @@ const Home = () => {
   return (
     <ScrollSnapContainer>
       <ScrollToTop />
-      <ContentBlock
-        direction="right"
-        title={IntroContent.title}
-        content={IntroContent.text}
-        button={IntroContent.button}
-        icon="developer.svg"
-        id="intro"
-      />
+      <HeroSectionFaultyTerminal>
+        <ContentBlock
+          direction="right"
+          title={IntroContent.title}
+          content={IntroContent.text}
+          button={IntroContent.button}
+          icon="developer.svg"
+          id="intro"
+        />
+      </HeroSectionFaultyTerminal>
       <MiddleBlock
         title={MiddleBlockContent.title}
         content={MiddleBlockContent.text}
         button={MiddleBlockContent.button}
       />
-      <ContentBlock
-        direction="left"
-        title={AboutContent.title}
-        content={AboutContent.text}
-        section={AboutContent.section}
-        icon="graphs.svg"
-        id="about"
-      />
+      <HeroSectionDotGrid>
+        <ContentBlock
+          direction="left"
+          title={AboutContent.title}
+          content={AboutContent.text}
+          section={AboutContent.section}
+          icon="graphs.svg"
+          id="about"
+        />
+      </HeroSectionDotGrid>
       <ContentBlock
         direction="right"
         title={MissionContent.title}
