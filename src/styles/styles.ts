@@ -2,15 +2,21 @@ import { createGlobalStyle } from "styled-components";
 
 export const Styles = createGlobalStyle`
 
-    @font-face {
-        font-family: "Motiva Sans Light";
-        src: url("/fonts/Motiva-Sans-Light.ttf") format("truetype");
+     @font-face {
+        font-family: "ArchivoBlack Regular";
+        src: url("/fonts/ArchivoBlack-Regular.ttf") format("truetype");
         font-style: normal;
     }
 
-    @font-face {
-        font-family: "Motiva Sans Bold";
-        src: url("/fonts/Motiva-Sans-Bold.ttf") format("truetype");
+     @font-face {
+        font-family: "Montserrat Medium";
+        src: url("/fonts/Montserrat-Medium.ttf") format("truetype");
+        font-style: normal;
+    }
+
+     @font-face {
+        font-family: "Montserrat Regular";
+        src: url("/fonts/Montserrat-Regular.ttf") format("truetype");
         font-style: normal;
     }
 
@@ -18,7 +24,7 @@ export const Styles = createGlobalStyle`
     body,
     html,
     a {
-        font-family: 'Motiva Sans Light', sans-serif;
+        font-family: 'Montserrat Medium', sans-serif;
     }
 
 
@@ -57,7 +63,7 @@ export const Styles = createGlobalStyle`
     h4,
     h5,
     h6 {
-        font-family: 'Motiva Sans Bold', serif;
+        font-family: 'ArchivoBlack Regular', serif;
         color: #18216d;
         font-size: 56px;
         line-height: 1.18;

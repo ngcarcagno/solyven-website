@@ -1,8 +1,27 @@
 import { Row } from "antd";
 import styled from "styled-components";
 
+export const ScrollSnapContainer = styled("div")`
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+
+  /* Oculta scrollbars en algunos navegadores */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+`;
+
 export const ContentSection = styled("section")`
   position: relative;
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 10rem 0 8rem;
 
   @media only screen and (max-width: 1024px) {
@@ -15,8 +34,7 @@ export const Content = styled("p")`
 `;
 
 export const StyledRow = styled(Row)`
-  flex-direction: ${({ direction }: { direction: string }) =>
-    direction === "left" ? "row" : "row-reverse"};
+  flex-direction: ${({ direction }: { direction: string }) => (direction === "left" ? "row" : "row-reverse")};
 `;
 
 export const ContentWrapper = styled("div")`
@@ -40,7 +58,7 @@ export const MinTitle = styled("h6")`
   padding: 0.5rem 0;
   text-transform: uppercase;
   color: #000;
-  font-family: "Motiva Sans Light", sans-serif;
+  font-family: "Montserrat Medium", sans-serif;
 `;
 
 export const MinPara = styled("p")`

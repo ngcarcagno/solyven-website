@@ -2,6 +2,12 @@ import styled from "styled-components";
 
 export const ContactContainer = styled("div")`
   padding: 5rem 0;
+  position: relative;
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   @media only screen and (max-width: 1024px) {
     padding: 3rem 0;

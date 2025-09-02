@@ -1,12 +1,12 @@
 {
-  "title": "Landing page template for developers & startups",
-  "text": "Beautifully designed templates using React.js, ant design and styled-components! Save weeks of time and build your landing page in minutes.",
+  "title": "SEGURIDAD SOLYVEN",
+  "text": "Respuesta inmediata, tecnología real, confianza garantizada",
   "button": [
     {
-      "title": "Explore"
+      "title": "Conoce más"
     },
     {
-      "title": "Learn more",
+      "title": "Contactanos ahora",
       "color": "#fff"
     }
   ]

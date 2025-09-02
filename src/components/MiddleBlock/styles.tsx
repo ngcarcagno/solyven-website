@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const MiddleBlockSection = styled("section")`
   position: relative;
+  min-height: 100vh;
+  scroll-snap-align: start;
   padding: 7.5rem 0 3rem;
   text-align: center;
   display: flex;
