@@ -1,6 +1,6 @@
 {
   "homepage": "http://ngcarcagno.github.io/solyven-website",
-  "name": "",
+  "name": "solyven-website",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
