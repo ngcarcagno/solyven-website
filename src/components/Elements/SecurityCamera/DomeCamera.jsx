@@ -170,8 +170,8 @@ const CameraDome = styled.div`
   margin: 0 auto;
   background: ${({ cameraColor }) => cameraColor};
   border-radius: 50%;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6), inset 0 -5px 15px ${({ cameraColor }) => darken(cameraColor, 0.3)},
-    inset 0 5px 15px ${({ cameraColor }) => lighten(cameraColor, 0.1)};
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6), inset 0 -6px 18px ${({ cameraColor }) => darken(cameraColor, 0.3)},
+    inset 0 6px 18px ${({ cameraColor }) => lighten(cameraColor, 0.1)}, 0 0 35px rgba(161, 161, 161, 0.5);
   overflow: hidden;
 
   &::before {

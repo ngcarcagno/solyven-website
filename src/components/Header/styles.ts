@@ -10,7 +10,7 @@ export const HeaderSection = styled("header")`
   width: 90vw;
   max-width: 1200px;
   padding: 0.75rem 2rem;
-  background: rgba(24, 21, 37, 0.6);
+  background: #00357a17;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-radius: 32px;
