@@ -7,7 +7,6 @@ import ProductContent from "../../content/ProductContent.json";
 import ContactContent from "../../content/ContactContent.json";
 import { ScrollSnapContainer } from "../../components/ContentBlock/styles";
 import { HeroSectionFaultyTerminal, HeroSectionDotGrid } from "../../components/HeroSection";
-import SecurityCameraAnimated from "../../components/Elements/SecurityCamera/SecurityCameraAnimated";
 import DomeCamera from "../../components/Elements/SecurityCamera/DomeCamera";
 
 const Contact = lazy(() => import("../../components/ContactForm"));
