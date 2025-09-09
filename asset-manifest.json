@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/solyven-website/static/css/main.37ddbf14.css",
+    "main.js": "/solyven-website/static/js/main.614a722c.js",
+    "static/css/660.cf2b22b4.chunk.css": "/solyven-website/static/css/660.cf2b22b4.chunk.css",
+    "static/js/660.190c0204.chunk.js": "/solyven-website/static/js/660.190c0204.chunk.js",
+    "static/js/676.5e77ec39.chunk.js": "/solyven-website/static/js/676.5e77ec39.chunk.js",
+    "static/js/416.ded18b5c.chunk.js": "/solyven-website/static/js/416.ded18b5c.chunk.js",
+    "static/js/538.f68a19b8.chunk.js": "/solyven-website/static/js/538.f68a19b8.chunk.js",
+    "static/js/282.2af3647e.chunk.js": "/solyven-website/static/js/282.2af3647e.chunk.js",
+    "static/js/614.7a4cf942.chunk.js": "/solyven-website/static/js/614.7a4cf942.chunk.js",
+    "static/js/545.af82156d.chunk.js": "/solyven-website/static/js/545.af82156d.chunk.js",
+    "static/js/643.1f4e4cf6.chunk.js": "/solyven-website/static/js/643.1f4e4cf6.chunk.js",
+    "index.html": "/solyven-website/index.html",
+    "main.37ddbf14.css.map": "/solyven-website/static/css/main.37ddbf14.css.map",
+    "main.614a722c.js.map": "/solyven-website/static/js/main.614a722c.js.map",
+    "660.cf2b22b4.chunk.css.map": "/solyven-website/static/css/660.cf2b22b4.chunk.css.map",
+    "660.190c0204.chunk.js.map": "/solyven-website/static/js/660.190c0204.chunk.js.map",
+    "676.5e77ec39.chunk.js.map": "/solyven-website/static/js/676.5e77ec39.chunk.js.map",
+    "416.ded18b5c.chunk.js.map": "/solyven-website/static/js/416.ded18b5c.chunk.js.map",
+    "538.f68a19b8.chunk.js.map": "/solyven-website/static/js/538.f68a19b8.chunk.js.map",
+    "282.2af3647e.chunk.js.map": "/solyven-website/static/js/282.2af3647e.chunk.js.map",
+    "614.7a4cf942.chunk.js.map": "/solyven-website/static/js/614.7a4cf942.chunk.js.map",
+    "545.af82156d.chunk.js.map": "/solyven-website/static/js/545.af82156d.chunk.js.map",
+    "643.1f4e4cf6.chunk.js.map": "/solyven-website/static/js/643.1f4e4cf6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.37ddbf14.css",
+    "static/js/main.614a722c.js"
+  ]
+}
