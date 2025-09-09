@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { darken, lighten } from "./utils";
 
 const DomeCamera = ({
@@ -101,12 +101,6 @@ const DomeCamera = ({
 const scanAnimation = keyframes`
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-`;
-
-const pulseAnimation = keyframes`
-  0% { opacity: 0.3; }
-  50% { opacity: 1; }
-  100% { opacity: 0.3; }
 `;
 
 const infraredPulse = keyframes`

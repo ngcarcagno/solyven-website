@@ -1,4 +1,3 @@
-import { TFunction } from "react-i18next";
 import { ReactNode } from "react";
 
 export interface ContentBlockProps {
@@ -20,7 +19,6 @@ export interface ContentBlockProps {
         color: string;
       }
   )[];
-  t: TFunction;
   id: string;
   direction: "left" | "right";
 }

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Row, Col, Drawer } from "antd";
-import { withTranslation, TFunction } from "react-i18next";
 import Container from "../../common/Container";
 import { SvgIcon } from "../../common/SvgIcon";
 import { Button } from "../../common/Button";
@@ -16,7 +15,7 @@ import {
   Span,
 } from "./styles";
 
-const Header = ({ t }: { t: TFunction }) => {
+const Header = () => {
   const [visible, setVisibility] = useState(false);
 
   const toggleButton = () => {
@@ -34,17 +33,17 @@ const Header = ({ t }: { t: TFunction }) => {
     return (
       <>
         <CustomNavLinkSmall onClick={() => scrollTo("about")}>
-          <Span>{t("Nosotros")}</Span>
+          <Span>Nosotros</Span>
         </CustomNavLinkSmall>
         <CustomNavLinkSmall onClick={() => scrollTo("mission")}>
-          <Span>{t("Mision")}</Span>
+          <Span>"Mision"</Span>
         </CustomNavLinkSmall>
         <CustomNavLinkSmall onClick={() => scrollTo("product")}>
-          <Span>{t("Servicios")}</Span>
+          <Span>"Servicios"</Span>
         </CustomNavLinkSmall>
         <CustomNavLinkSmall style={{ width: "180px" }} onClick={() => scrollTo("contact")}>
           <Span>
-            <Button color="var(--color-secondary)">{t("Contacto")}</Button>
+            <Button color="var(--color-secondary)">Contacto</Button>
           </Span>
         </CustomNavLinkSmall>
       </>
@@ -83,4 +82,4 @@ const Header = ({ t }: { t: TFunction }) => {
   );
 };
 
-export default withTranslation()(Header);
+export default Header;
