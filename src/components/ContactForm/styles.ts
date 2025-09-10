@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ContactContainer = styled("div")`
-  padding: 5rem 0;
+  padding: 5rem 1rem; /* Agregar padding horizontal */
   position: relative;
   min-height: 100vh;
   scroll-snap-align: start;
@@ -10,7 +10,7 @@ export const ContactContainer = styled("div")`
   justify-content: center;
 
   @media only screen and (max-width: 1024px) {
-    padding: 3rem 0;
+    padding: 3rem 1rem; /* Ajustar padding en pantallas pequeñas */
   }
 `;
 

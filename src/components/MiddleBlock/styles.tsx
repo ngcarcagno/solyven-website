@@ -4,14 +4,14 @@ export const MiddleBlockSection = styled("section")`
   position: relative;
   min-height: 100vh;
   scroll-snap-align: start;
-  padding: 0; /* Eliminar padding desigual */
+  padding: 0 1rem; /* Agregar padding horizontal */
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center; /* Centrar verticalmente */
 
   @media screen and (max-width: 1024px) {
-    padding: 0; /* Mantener centrado en pantallas pequeñas */
+    padding: 0 1rem; /* Mantener padding horizontal en pantallas pequeñas */
   }
 `;
 

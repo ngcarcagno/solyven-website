@@ -22,10 +22,10 @@ export const ContentSection = styled("section")`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10rem 0 8rem;
+  padding: 10rem 1rem 8rem; /* Agregar padding horizontal */
 
   @media only screen and (max-width: 1024px) {
-    padding: 4rem 0 4rem;
+    padding: 4rem 1rem 4rem; /* Ajustar padding en pantallas pequeñas */
   }
 `;
 

@@ -6,6 +6,7 @@ export const HeroWrapper = styled.section`
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  padding: 0 1rem; /* Agregar padding horizontal */
 `;
 
 export const HeroBackground = styled.div`
