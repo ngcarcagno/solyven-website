@@ -3,20 +3,20 @@ import { createGlobalStyle } from "styled-components";
 export const Styles = createGlobalStyle`
 
      @font-face {
-        font-family: "ArchivoBlack Regular";
-        src: url("/fonts/ArchivoBlack-Regular.ttf") format("truetype");
+        font-family: "ArchivoBlack";
+        src: url("${process.env.PUBLIC_URL}/fonts/ArchivoBlack-Regular.ttf") format("truetype");
         font-style: normal;
     }
 
      @font-face {
         font-family: "Montserrat Medium";
-        src: url("/fonts/Montserrat-Medium.ttf") format("truetype");
+        src: url("${process.env.PUBLIC_URL}/fonts/Montserrat-Medium.ttf") format("truetype");
         font-style: normal;
     }
 
      @font-face {
         font-family: "Montserrat Regular";
-        src: url("/fonts/Montserrat-Regular.ttf") format("truetype");
+        src: url("${process.env.PUBLIC_URL}/fonts/Montserrat-Regular.ttf") format("truetype");
         font-style: normal;
     }
 
@@ -77,7 +77,7 @@ export const Styles = createGlobalStyle`
     h4,
     h5,
     h6 {
-        font-family: 'ArchivoBlack Regular', serif;
+        font-family: 'ArchivoBlack', serif;
         color: var(--color-text-primary);
         font-size: 56px;
         line-height: 1.18;
