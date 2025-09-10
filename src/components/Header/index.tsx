@@ -36,10 +36,10 @@ const Header = () => {
           <Span>Nosotros</Span>
         </CustomNavLinkSmall>
         <CustomNavLinkSmall onClick={() => scrollTo("mission")}>
-          <Span>"Mision"</Span>
+          <Span>Misión</Span>
         </CustomNavLinkSmall>
         <CustomNavLinkSmall onClick={() => scrollTo("product")}>
-          <Span>"Servicios"</Span>
+          <Span>Servicios</Span>
         </CustomNavLinkSmall>
         <CustomNavLinkSmall style={{ width: "180px" }} onClick={() => scrollTo("contact")}>
           <Span>
