@@ -4,7 +4,6 @@ import { ContactProps, ValidationTypeProps } from "./types";
 import { useForm } from "../../common/utils/useForm";
 import validate from "../../common/utils/validationRules";
 import { Button } from "../../common/Button";
-import Block from "../Block";
 import Input from "../../common/Input";
 import TextArea from "../../common/TextArea";
 import { ContactContainer, FormGroup, Span, ButtonContainer } from "./styles";
@@ -19,20 +18,21 @@ const Contact = ({ title, content, id }: ContactProps) => {
 
   return (
     <ContactContainer id={id}>
-      <Row justify="space-between" align="middle">
-        <Col lg={12} md={11} sm={24} xs={24}>
-          <Slide direction="left" triggerOnce>
-            <Block title={title} content={content} />
-          </Slide>
-        </Col>
-        <Col lg={12} md={12} sm={24} xs={24}>
-          <Slide direction="right" triggerOnce>
+      <Slide direction="up" triggerOnce>
+        <Row justify="center" align="middle">
+          <Col lg={24} md={24} sm={24} xs={24}>
+            <h6>{title}</h6>
+            <p>{content}</p>
+          </Col>
+        </Row>
+        <Row justify="center" align="middle">
+          <Col lg={24} md={24} sm={24} xs={24}>
             <FormGroup autoComplete="off" onSubmit={handleSubmit}>
               <Col span={24}>
                 <Input
                   type="text"
-                  name="name"
-                  placeholder="Your Name"
+                  name="Nombre"
+                  placeholder="Tu Nombre"
                   value={values.name || ""}
                   onChange={handleChange}
                 />
@@ -41,8 +41,8 @@ const Contact = ({ title, content, id }: ContactProps) => {
               <Col span={24}>
                 <Input
                   type="text"
-                  name="email"
-                  placeholder="Your Email"
+                  name="Email"
+                  placeholder="Tu Correo Electrónico"
                   value={values.email || ""}
                   onChange={handleChange}
                 />
@@ -50,7 +50,7 @@ const Contact = ({ title, content, id }: ContactProps) => {
               </Col>
               <Col span={24}>
                 <TextArea
-                  placeholder="Your Message"
+                  placeholder="Tu Mensaje"
                   value={values.message || ""}
                   name="message"
                   onChange={handleChange}
@@ -61,9 +61,9 @@ const Contact = ({ title, content, id }: ContactProps) => {
                 <Button name="submit">Submit</Button>
               </ButtonContainer>
             </FormGroup>
-          </Slide>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      </Slide>
     </ContactContainer>
   );
 };
