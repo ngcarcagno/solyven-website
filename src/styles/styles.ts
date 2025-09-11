@@ -150,4 +150,25 @@ export const Styles = createGlobalStyle`
     .ant-drawer-content-wrapper {
         width: 300px !important;
     }
+    /* SVG icons: use currentColor so CSS controls fill/stroke via color property */
+    .svg-icon {
+        color: var(--color-text-primary);
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    /* In case an <img> or inline <svg> exists with explicit svg-icon class */
+    img.svg-icon {
+        filter: none; /* reset any previous filters */
+    }
+
+    /* Hover/focus/active states for links and interactive elements containing SVGs */
+    a:hover .svg-icon,
+    a:focus .svg-icon,
+    a:active .svg-icon,
+    .svg-icon:hover,
+    .svg-icon:active,
+    .svg-icon:focus {
+        color: var(--color-secondary);
+    }
         `;

@@ -12,8 +12,11 @@ export interface ButtonProps {
 
 export interface SvgIconProps {
   src: string;
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
+  className?: string;
+  preserveColor?: boolean; // true = keep original colors, false = force currentColor
+  [key: string]: any;
 }
 
 export interface InputProps {
