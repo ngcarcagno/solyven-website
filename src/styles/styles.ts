@@ -47,6 +47,13 @@ export const Styles = createGlobalStyle`
     --content-padding: 10rem 1rem 8rem;
     --content-padding-mobile: 4rem 1rem 4rem;
     --content-wrapper-max-width: 540px;
+    
+    /* Glassy UI variables (shared) */
+    --glass-bg: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04));
+    --glass-border: rgba(255,255,255,0.12);
+    --glass-blur: 10px;
+    --glass-shadow: 0 14px 34px rgba(0,0,0,0.65);
+    --glass-radius: 24px;
     }
 
     body,

@@ -9,7 +9,7 @@ export const FooterSection = styled("footer")`
 export const Title = styled("h4")`
   font-size: 22px;
   text-transform: capitalize;
-  color: #18216d;
+  color: var(--color-detail);
 
   @media screen and (max-width: 414px) {
     padding: 1.5rem 0;
@@ -25,12 +25,17 @@ export const NavLink = styled(Link)`
   &:hover,
   &:active,
   &:focus {
-    color: #15418e;
+    color: var(--color-secondary);
   }
 `;
 
 export const Extra = styled("section")`
-  background: rgb(241, 242, 243);
+  scroll-snap-align: none;
+  min-height: auto;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--glass-shadow);
   position: relative;
   width: 100%;
   margin-right: auto;
@@ -44,14 +49,14 @@ export const LogoContainer = styled("div")`
 `;
 
 export const Para = styled("div")`
-  color: #18216d;
+  color: var(--color-text-secondary);
   font-size: 14px;
   width: 70%;
 `;
 
 export const Large = styled(Link)`
   font-size: 16px;
-  color: #000;
+  color: var(--color-text-secondary);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-transform: capitalize;
@@ -62,23 +67,25 @@ export const Large = styled(Link)`
   max-width: max-content;
 
   &:hover {
-    color: rgb(255, 130, 92);
+    color: var(--color-secondary);
     text-underline-position: under;
-    text-decoration: rgb(255, 130, 92) wavy underline;
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: var(--color-secondary);
   }
 `;
 
 export const Chat = styled("p")`
-  color: #18216d;
+  color: var(--color-detail);
   max-width: fit-content;
-  border-bottom: 1px solid #18216d;
+  border-bottom: 1px solid var(--color-detail);
   cursor: pointer;
   margin-top: 1rem;
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    border-bottom: 1px solid rgb(255, 130, 92);
-    color: rgb(255, 130, 92);
+    border-bottom: 1px solid var(--color-secondary);
+    color: var(--color-secondary);
   }
 `;
 
@@ -121,7 +128,7 @@ export const FooterContainer = styled("div")`
     height: 25px;
 
     &:hover {
-      fill: rgb(255, 130, 92);
+      fill: var(--color-secondary);
     }
   }
 `;
@@ -129,7 +136,7 @@ export const FooterContainer = styled("div")`
 export const Language = styled("h4")`
   font-size: 22px;
   text-transform: capitalize;
-  color: #18216d;
+  color: var(--color-detail);
 
   @media screen and (max-width: 414px) {
     padding: 1.5rem 0;
@@ -139,7 +146,7 @@ export const Language = styled("h4")`
 export const Label = styled("label")`
   font-size: 22px;
   text-transform: capitalize;
-  color: #18216d;
+  color: var(--color-detail);
   display: block;
   margin-bottom: 2rem;
   font-family: "ArchivoBlack Regular", serif;
@@ -167,4 +174,34 @@ export const LanguageSwitchContainer = styled("div")`
   display: flex;
   justify-content: space-between;
   width: 85px;
+`;
+
+export const AddressCard = styled("div")`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+`;
+
+export const AddressLines = styled("div")`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const MapLink = styled("a")`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-detail);
+  text-decoration: none;
+  font-weight: 600;
+
+  svg {
+    width: 28px;
+    height: 28px;
+    display: block;
+  }
+
+  &:hover {
+    color: var(--color-secondary);
+  }
 `;

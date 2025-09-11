@@ -2,22 +2,7 @@ import { Row, Col } from "antd";
 import { SvgIcon } from "../../common/SvgIcon";
 import Container from "../../common/Container";
 
-import {
-  FooterSection,
-  Title,
-  NavLink,
-  Extra,
-  LogoContainer,
-  Para,
-  Large,
-  Chat,
-  Empty,
-  FooterContainer,
-  Language,
-  Label,
-  LanguageSwitch,
-  LanguageSwitchContainer,
-} from "./styles";
+import { NavLink, Extra, LogoContainer, Para, FooterContainer, AddressCard, AddressLines, MapLink } from "./styles";
 
 interface SocialLinkProps {
   href: string;
@@ -35,61 +20,32 @@ const Footer = () => {
 
   return (
     <>
-      <FooterSection>
-        <Container>
-          <Row justify="space-between">
-            <Col lg={10} md={10} sm={12} xs={12}>
-              <Language>Contacto</Language>
-              <Large to="/">Cuéntanos todo</Large>
-              <Para>¿Tienes alguna pregunta? No dudes en escribirnos.</Para>
-              <a href="mailto:contacto@solyven.com">
-                <Chat>Hablemos</Chat>
-              </a>
-            </Col>
-            <Col lg={8} md={8} sm={12} xs={12}>
-              <Title>Políticas</Title>
-              <Large to="/">Seguridad de Aplicaciones</Large>
-              <Large to="/">Principios de Software</Large>
-            </Col>
-            <Col lg={6} md={6} sm={12} xs={12}>
-              <Empty />
-              <Large to="/">Centro de Soporte</Large>
-              <Large to="/">Atención al Cliente</Large>
-            </Col>
-          </Row>
-          <Row justify="space-between">
-            <Col lg={10} md={10} sm={12} xs={12}>
-              <Empty />
-              <Language>Dirección</Language>
-              <Para>3 de febrero 1676</Para>
-              <Para>Zárate, Buenos Aires</Para>
-            </Col>
-            <Col lg={8} md={8} sm={12} xs={12}>
-              <Title>Empresa</Title>
-              <Large to="/">Nosotros</Large>
-              <Large to="/">Blog</Large>
-              <Large to="/">Prensa</Large>
-              <Large to="/">Carreras</Large>
-            </Col>
-            <Col lg={6} md={6} sm={12} xs={12}>
-              <Label htmlFor="select-lang">Idioma</Label>
-              <LanguageSwitchContainer>
-                <LanguageSwitch>
-                  <SvgIcon src="spain.svg" aria-label="Español" width="30px" height="30px" />
-                </LanguageSwitch>
-              </LanguageSwitchContainer>
-            </Col>
-          </Row>
-        </Container>
-      </FooterSection>
       <Extra>
         <Container border={true}>
           <Row justify="space-between" align="middle" style={{ paddingTop: "3rem" }}>
             <NavLink to="/">
               <LogoContainer>
-                <SvgIcon src="logo.svg" aria-label="homepage" width="100px" height="30px" />
+                <SvgIcon src="logo.svg" aria-label="homepage" width="101px" height="64px" />
               </LogoContainer>
             </NavLink>
+            <FooterContainer>
+              <SocialLink href="https://github.com/Adrinlol/create-react-app-adrinlol" src="github.svg" />
+              <SocialLink href="https://twitter.com/Adrinlolx" src="twitter.svg" />
+              <SocialLink href="https://www.linkedin.com/in/lasha-kakabadze/" src="linkedin.svg" />
+              <SocialLink href="https://medium.com/@lashakakabadze/" src="medium.svg" />
+            </FooterContainer>
+            <AddressCard>
+              <SvgIcon src="map-pin.svg" width="28px" height="28px" />
+              <AddressLines>
+                <Para>Zárate, Buenos Aires</Para>
+                <MapLink
+                  href="https://www.google.com/maps/search/?api=1&query=3+de+febrero+1676+Zarate+Buenos+Aires"
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  3 de febrero 1676
+                </MapLink>
+              </AddressLines>
+            </AddressCard>
           </Row>
         </Container>
       </Extra>

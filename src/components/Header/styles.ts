@@ -10,12 +10,12 @@ export const HeaderSection = styled("header")`
   width: 90vw;
   max-width: 1200px;
   padding: 0.4rem 1.5rem; /* reduced vertical padding */
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.04));
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65);
+  background: var(--glass-bg);
+  border-radius: var(--glass-radius);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--glass-shadow);
   z-index: 1000;
   display: flex;
   align-items: center; /* ensure vertical centering */
