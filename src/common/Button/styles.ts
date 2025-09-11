@@ -9,13 +9,13 @@ export const StyledButton = styled("button")<{
   fontFamily?: string;
   focusColor?: string;
 }>`
-  background: ${(p) => p.backgroundColor || "#2e186a"};
-  color: ${(p) => p.normalTextColor || "#fff"};
+  background: ${(p) => p.backgroundColor || "var(--color-primary)"};
+  color: ${(p) => p.normalTextColor || "var(--color-text-primary)"};
   font-size: ${(p) => p.fontSize || "1rem"};
-  font-family: ${(p) => p.fontFamily || "Arial, sans-serif"};
+  font-family: ${(p) => p.fontFamily || "var(--font-button)"};
   font-weight: 700;
   width: 100%;
-  border: 1px solid ${(p) => p.borderColor || "#edf3f5"};
+  border: 1px solid ${(p) => p.borderColor || "var(--color-text-secondary)"};
   border-radius: 4px;
   padding: 13px 0;
   cursor: pointer;
@@ -28,7 +28,7 @@ export const StyledButton = styled("button")<{
   &:active,
   &:focus {
     color: ${(p) => p.focusTextColor || "#fff"};
-    border: 1px solid ${(p) => p.focusColor || "rgb(255, 130, 92)"};
-    background-color: ${(p) => p.focusColor || "rgb(255, 130, 92)"};
+    border: 1px solid ${(p) => p.focusColor || "var(--color-text-secondary)"};
+    background-color: ${(p) => p.focusColor || "var(--color-secondary)"};
   }
 `;

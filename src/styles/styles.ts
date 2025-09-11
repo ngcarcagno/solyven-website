@@ -21,18 +21,38 @@ export const Styles = createGlobalStyle`
     }
 
     :root {
-      --color-primary: #5F0807;      
-      --color-secondary: #F75800;       
-      --color-detail: #00357a;         
-      --color-bg: #000000ff;         
-      --color-text-primary: #FFFFFF;
-      --color-text-secondary: #333333;
+    --color-primary: #5F0807;
+    --color-secondary: #F75800;
+    --color-detail: #00357a;
+    --color-bg: #000000ff;
+    --color-text-primary: #FFFFFF;
+    --color-text-secondary: #333333;
+
+    /* Font variables */
+    --font-base: 'Montserrat Medium', sans-serif; /* body, paragraphs, default UI */
+    --font-title: 'ArchivoBlack', serif; /* large titles and headers */
+    --font-subtitle: 'Montserrat Regular', sans-serif; /* subtitles and smaller headings */
+    --font-button: 'Montserrat Medium', sans-serif; /* buttons and CTAs */
+
+    /* Text size variables (easy global control) */
+    --size-h1: 48px; /* a bit smaller than before */
+    --size-h1-sm: 42px;
+    --size-h1-xs: 32px;
+    --size-body: 19px;
+    --size-min-title: 14px;
+    --size-min-para: 12px;
+
+    /* Content block layout */
+    --content-min-height: 100vh;
+    --content-padding: 10rem 1rem 8rem;
+    --content-padding-mobile: 4rem 1rem 4rem;
+    --content-wrapper-max-width: 540px;
     }
 
     body,
     html,
     a {
-        font-family: 'Montserrat Medium', sans-serif;
+        font-family: var(--font-base);
     }
 
     body {
@@ -42,7 +62,11 @@ export const Styles = createGlobalStyle`
         outline: 0;
         background: var(--color-bg);
         color: var(--color-text-secondary);
-        overflow-x: hidden;
+    overflow-x: hidden;
+    /* Let the body be the primary scroll container so footer scrolls naturally */
+    overflow-y: auto;
+    /* Enable scroll snapping for full-height sections */
+    scroll-snap-type: y mandatory;
     }
 
     a {
@@ -71,25 +95,25 @@ export const Styles = createGlobalStyle`
         }
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-family: 'ArchivoBlack', serif;
-        color: var(--color-text-primary);
-        font-size: 56px;
-        line-height: 1.18;
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+                font-family: var(--font-title);
+                color: var(--color-text-primary);
+                font-size: var(--size-h1);
+                line-height: 1.18;
 
-        @media only screen and (max-width: 890px) {
-          font-size: 47px;
-        }
+                @media only screen and (max-width: 890px) {
+                    font-size: var(--size-h1-sm);
+                }
       
-        @media only screen and (max-width: 414px) {
-          font-size: 32px;
+                @media only screen and (max-width: 414px) {
+                    font-size: var(--size-h1-xs);
+                }
         }
-    }
 
     p {
         color: var(--color-text-primary);

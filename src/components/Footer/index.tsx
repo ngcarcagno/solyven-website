@@ -87,7 +87,7 @@ const Footer = () => {
           <Row justify="space-between" align="middle" style={{ paddingTop: "3rem" }}>
             <NavLink to="/">
               <LogoContainer>
-                <SvgIcon src="logo.svg" aria-label="homepage" width="101px" height="64px" />
+                <SvgIcon src="logo.svg" aria-label="homepage" width="100px" height="30px" />
               </LogoContainer>
             </NavLink>
           </Row>

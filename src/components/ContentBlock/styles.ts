@@ -17,20 +17,22 @@ export const ScrollSnapContainer = styled("div")`
 
 export const ContentSection = styled("section")`
   position: relative;
-  min-height: 100vh;
+  min-height: var(--content-min-height);
   scroll-snap-align: start;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10rem 1rem 8rem; /* Agregar padding horizontal */
+  padding: var(--content-padding);
 
   @media only screen and (max-width: 1024px) {
-    padding: 4rem 1rem 4rem; /* Ajustar padding en pantallas pequeñas */
+    padding: var(--content-padding-mobile);
   }
 `;
 
 export const Content = styled("p")`
   margin: 1.5rem 0 2rem 0;
+  font-size: var(--size-body);
+  color: var(--color-text-primary);
 `;
 
 export const StyledRow = styled(Row)`
@@ -39,7 +41,7 @@ export const StyledRow = styled(Row)`
 
 export const ContentWrapper = styled("div")`
   position: relative;
-  max-width: 540px;
+  max-width: var(--content-wrapper-max-width);
 
   @media only screen and (max-width: 575px) {
     padding-top: 4rem;
@@ -53,16 +55,17 @@ export const ServiceWrapper = styled("div")`
 `;
 
 export const MinTitle = styled("h6")`
-  font-size: 15px;
+  font-size: var(--size-min-title);
   line-height: 1rem;
   padding: 0.5rem 0;
   text-transform: uppercase;
-  color: #000;
-  font-family: "Montserrat Medium", sans-serif;
+  color: var(--color-text-primary);
+  font-family: var(--font-base);
 `;
 
 export const MinPara = styled("p")`
-  font-size: 13px;
+  font-size: var(--size-min-para);
+  color: var(--color-text-primary);
 `;
 
 export const ButtonWrapper = styled("div")`
