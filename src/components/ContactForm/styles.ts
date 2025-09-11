@@ -11,14 +11,30 @@ export const ContactContainer = styled("div")`
   align-items: center;
   justify-content: center;
 
+  h6 {
+    text-align: center; /* center the title text */
+    margin: 0 0 1rem 0;
+    font-size: 2rem;
+  }
+
+  p {
+    text-align: center; /* center the subtitle */
+    max-width: 720px;
+    margin: 0 0 1.5rem 0;
+  }
+
   @media only screen and (max-width: 1024px) {
     padding: 3rem 1rem; /* Ajustar padding en pantallas pequeñas */
+    h6 {
+      font-size: 1.6rem;
+    }
   }
 `;
 
 export const FormGroup = styled("form")`
   width: 100vh;
-  max-width: 900px; /* allow form to grow wider */
+  max-width: 600px; /* allow form to grow wider */
+  max-height: 600px;
   box-sizing: border-box; /* include padding in width calculations */
   margin: 0 auto; /* center inside the container */
   display: flex;
