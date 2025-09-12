@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/solyven-website/static/css/main.37ddbf14.css",
-    "main.js": "/solyven-website/static/js/main.63f418a5.js",
-    "static/css/976.c401d0d2.chunk.css": "/solyven-website/static/css/976.c401d0d2.chunk.css",
-    "static/js/976.d060b724.chunk.js": "/solyven-website/static/js/976.d060b724.chunk.js",
+    "main.js": "/solyven-website/static/js/main.40e74a32.js",
+    "static/css/476.4d01192f.chunk.css": "/solyven-website/static/css/476.4d01192f.chunk.css",
+    "static/js/476.228b9b9e.chunk.js": "/solyven-website/static/js/476.228b9b9e.chunk.js",
     "static/js/147.bfaf282a.chunk.js": "/solyven-website/static/js/147.bfaf282a.chunk.js",
     "static/js/416.bec5af28.chunk.js": "/solyven-website/static/js/416.bec5af28.chunk.js",
     "static/js/538.22ef4976.chunk.js": "/solyven-website/static/js/538.22ef4976.chunk.js",
@@ -13,9 +13,9 @@
     "static/js/783.7f8e6493.chunk.js": "/solyven-website/static/js/783.7f8e6493.chunk.js",
     "index.html": "/solyven-website/index.html",
     "main.37ddbf14.css.map": "/solyven-website/static/css/main.37ddbf14.css.map",
-    "main.63f418a5.js.map": "/solyven-website/static/js/main.63f418a5.js.map",
-    "976.c401d0d2.chunk.css.map": "/solyven-website/static/css/976.c401d0d2.chunk.css.map",
-    "976.d060b724.chunk.js.map": "/solyven-website/static/js/976.d060b724.chunk.js.map",
+    "main.40e74a32.js.map": "/solyven-website/static/js/main.40e74a32.js.map",
+    "476.4d01192f.chunk.css.map": "/solyven-website/static/css/476.4d01192f.chunk.css.map",
+    "476.228b9b9e.chunk.js.map": "/solyven-website/static/js/476.228b9b9e.chunk.js.map",
     "147.bfaf282a.chunk.js.map": "/solyven-website/static/js/147.bfaf282a.chunk.js.map",
     "416.bec5af28.chunk.js.map": "/solyven-website/static/js/416.bec5af28.chunk.js.map",
     "538.22ef4976.chunk.js.map": "/solyven-website/static/js/538.22ef4976.chunk.js.map",
@@ -26,6 +26,6 @@
   },
   "entrypoints": [
     "static/css/main.37ddbf14.css",
-    "static/js/main.63f418a5.js"
+    "static/js/main.40e74a32.js"
   ]
 }
