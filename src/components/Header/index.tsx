@@ -14,9 +14,7 @@ import {
   Label,
   Outline,
   Span,
-  CTAButton,
   MobileMenuItem,
-  MobileCTAButton,
 } from "./styles";
 
 const Header = () => {
@@ -45,7 +43,11 @@ const Header = () => {
         <MobileMenuItem onClick={() => scrollTo("product")}>
           <span>Servicios</span>
         </MobileMenuItem>
-        <MobileCTAButton onClick={() => scrollTo("contact")}>Contacto</MobileCTAButton>
+                <div style={{ marginTop: '1rem' }}>
+          <Button variant="header" onClick={() => scrollTo("contact")}>
+            Contacto
+          </Button>
+        </div>
       </>
     );
   };
@@ -62,7 +64,9 @@ const Header = () => {
         <Span onClick={() => scrollTo("about")}>Nosotros</Span>
         <Span onClick={() => scrollTo("mission")}>Misión</Span>
         <Span onClick={() => scrollTo("product")}>Servicios</Span>
-        <CTAButton onClick={() => scrollTo("contact")}>Contacto</CTAButton>
+        <Button variant="header" onClick={() => scrollTo("contact")}>
+          Contacto
+        </Button>
       </NavContainer>
 
       {/* Burger Menu Mobile */}

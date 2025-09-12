@@ -240,53 +240,7 @@ export const Span = styled("span")`
   }
 `;
 
-export const CTAButton = styled("button")`
-  background: linear-gradient(135deg, rgba(95, 8, 7, 0.8), rgba(75, 6, 5, 0.9));
-  color: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(95, 8, 7, 0.4);
-  padding: 0.6rem 1.2rem;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 15px rgba(95, 8, 7, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 
-  /* Efecto brillante tech */
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-    transition: left 0.6s ease;
-  }
-
-  &:hover {
-    transform: translateY(-2px);
-    background: linear-gradient(135deg, var(--color-secondary), rgba(212, 68, 28, 0.9));
-    border-color: rgba(255, 130, 92, 0.5);
-    color: white;
-    box-shadow: 0 8px 25px rgba(255, 130, 92, 0.4), 0 0 20px rgba(255, 130, 92, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-  }
-
-  &:hover::before {
-    left: 100%;
-  }
-
-  &:active {
-    transform: translateY(-1px);
-  }
-`;
 
 /* Mobile Menu Items - Styled like desktop but adapted for mobile */
 export const MobileMenuItem = styled("div")`
@@ -338,10 +292,4 @@ export const MobileMenuItem = styled("div")`
   }
 `;
 
-export const MobileCTAButton = styled(CTAButton)`
-  width: 100%;
-  margin-top: 1rem;
-  padding: 1rem 1.5rem;
-  font-size: 0.9rem;
-  border-radius: 8px;
-`;
+
