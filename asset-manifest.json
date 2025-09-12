@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/solyven-website/static/css/main.37ddbf14.css",
-    "main.js": "/solyven-website/static/js/main.ac1d69d1.js",
+    "main.js": "/solyven-website/static/js/main.1c7da903.js",
     "static/css/855.4fa13c6a.chunk.css": "/solyven-website/static/css/855.4fa13c6a.chunk.css",
     "static/js/855.0883b548.chunk.js": "/solyven-website/static/js/855.0883b548.chunk.js",
-    "static/js/147.9179e7f9.chunk.js": "/solyven-website/static/js/147.9179e7f9.chunk.js",
+    "static/js/147.273118a9.chunk.js": "/solyven-website/static/js/147.273118a9.chunk.js",
     "static/js/416.0eb47ad6.chunk.js": "/solyven-website/static/js/416.0eb47ad6.chunk.js",
     "static/js/538.22ef4976.chunk.js": "/solyven-website/static/js/538.22ef4976.chunk.js",
     "static/js/282.010a5d73.chunk.js": "/solyven-website/static/js/282.010a5d73.chunk.js",
@@ -13,10 +13,10 @@
     "static/js/783.7f8e6493.chunk.js": "/solyven-website/static/js/783.7f8e6493.chunk.js",
     "index.html": "/solyven-website/index.html",
     "main.37ddbf14.css.map": "/solyven-website/static/css/main.37ddbf14.css.map",
-    "main.ac1d69d1.js.map": "/solyven-website/static/js/main.ac1d69d1.js.map",
+    "main.1c7da903.js.map": "/solyven-website/static/js/main.1c7da903.js.map",
     "855.4fa13c6a.chunk.css.map": "/solyven-website/static/css/855.4fa13c6a.chunk.css.map",
     "855.0883b548.chunk.js.map": "/solyven-website/static/js/855.0883b548.chunk.js.map",
-    "147.9179e7f9.chunk.js.map": "/solyven-website/static/js/147.9179e7f9.chunk.js.map",
+    "147.273118a9.chunk.js.map": "/solyven-website/static/js/147.273118a9.chunk.js.map",
     "416.0eb47ad6.chunk.js.map": "/solyven-website/static/js/416.0eb47ad6.chunk.js.map",
     "538.22ef4976.chunk.js.map": "/solyven-website/static/js/538.22ef4976.chunk.js.map",
     "282.010a5d73.chunk.js.map": "/solyven-website/static/js/282.010a5d73.chunk.js.map",
@@ -26,6 +26,6 @@
   },
   "entrypoints": [
     "static/css/main.37ddbf14.css",
-    "static/js/main.ac1d69d1.js"
+    "static/js/main.1c7da903.js"
   ]
 }
