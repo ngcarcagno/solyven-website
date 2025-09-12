@@ -24,7 +24,7 @@ export const Styles = createGlobalStyle`
     --color-primary: #5F0807;
     --color-secondary: #F75800;
     --color-detail: #00357a;
-    --color-bg: #000000ff;
+    --color-bg: linear-gradient(135deg, #181818 0%, #1f1f1f 30%, #2f2f2f 70%, #4a4a4a 100%);
     --color-text-primary: #FFFFFF;
     --color-text-secondary: #333333;
 
@@ -49,7 +49,7 @@ export const Styles = createGlobalStyle`
     --content-wrapper-max-width: 540px;
     
     /* Glassy UI variables (shared) */
-    --glass-bg: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04));
+    --glass-bg: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.008));
     --glass-border: rgba(255,255,255,0.12);
     --glass-blur: 10px;
     --glass-shadow: 0 14px 34px rgba(0,0,0,0.65);

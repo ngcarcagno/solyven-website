@@ -8,6 +8,8 @@ import ContactContent from "../../content/ContactContent.json";
 import { ScrollSnapContainer } from "../../components/ContentBlock/styles";
 import { HeroSectionFaultyTerminal, HeroSectionDotGrid } from "../../components/HeroSection";
 import DomeCamera from "../../components/Elements/SecurityCamera/DomeCamera";
+import { WhatsAppWidget } from "react-whatsapp-widget";
+import "react-whatsapp-widget/dist/index.css";
 
 const Contact = lazy(() => import("../../components/ContactForm"));
 const MiddleBlock = lazy(() => import("../../components/MiddleBlock"));
@@ -22,7 +24,7 @@ const Home = () => {
   return (
     <ScrollSnapContainer>
       <ScrollToTop />
-      // Intro Section
+      {/* Intro Section */}
       <HeroSectionFaultyTerminal>
         <ContentBlock
           direction="right"
@@ -42,7 +44,8 @@ const Home = () => {
           id="intro"
         />
       </HeroSectionFaultyTerminal>
-      // Middle Block Section
+
+      {/* Middle Block Section */}
       <HeroSectionDotGrid>
         <MiddleBlock
           title={MiddleBlockContent.title}
@@ -50,7 +53,8 @@ const Home = () => {
           button={MiddleBlockContent.button}
         />
       </HeroSectionDotGrid>
-      // About Section
+
+      {/* About Section */}
       <HeroSectionDotGrid>
         <ContentBlock
           direction="left"
@@ -61,7 +65,8 @@ const Home = () => {
           id="about"
         />
       </HeroSectionDotGrid>
-      // Mission Section
+
+      {/* Mission Section */}
       <HeroSectionDotGrid>
         <ContentBlock
           direction="right"
@@ -71,7 +76,8 @@ const Home = () => {
           id="mission"
         />
       </HeroSectionDotGrid>
-      // Product Section
+
+      {/* Product Section */}
       <HeroSectionDotGrid>
         <ContentBlock
           direction="left"
@@ -81,10 +87,17 @@ const Home = () => {
           id="product"
         />
       </HeroSectionDotGrid>
-      // Contact Section
-      <HeroSectionDotGrid>
-        <Contact title={ContactContent.title} content={ContactContent.text} id="contact" />
-      </HeroSectionDotGrid>
+
+      {/* Contact Section */}
+
+      <Contact title={ContactContent.title} content={ContactContent.text} id="contact" />
+
+      {/* WhatsApp Widget */}
+      <WhatsAppWidget
+        phoneNumber="+5491172327772"
+        companyName="Solyven Seguridad"
+        message="Hola 👋 ¿Necesitás un presupuesto?"
+      />
     </ScrollSnapContainer>
   );
 };
