@@ -15,6 +15,8 @@ import {
   Outline,
   Span,
   CTAButton,
+  MobileMenuItem,
+  MobileCTAButton,
 } from "./styles";
 
 const Header = () => {
@@ -34,20 +36,16 @@ const Header = () => {
     };
     return (
       <>
-        <CustomNavLinkSmall onClick={() => scrollTo("about")}>
-          <Span>Nosotros</Span>
-        </CustomNavLinkSmall>
-        <CustomNavLinkSmall onClick={() => scrollTo("mission")}>
-          <Span>Misión</Span>
-        </CustomNavLinkSmall>
-        <CustomNavLinkSmall onClick={() => scrollTo("product")}>
-          <Span>Servicios</Span>
-        </CustomNavLinkSmall>
-        {/*  <CustomNavLinkSmall style={{ width: "180px" }} onClick={() => scrollTo("contact")}>
-          <Button color="var(--color-secondary)" variant="header">
-            Contactanos
-          </Button>
-        </CustomNavLinkSmall> */}
+        <MobileMenuItem onClick={() => scrollTo("about")}>
+          <span>Nosotros</span>
+        </MobileMenuItem>
+        <MobileMenuItem onClick={() => scrollTo("mission")}>
+          <span>Misión</span>
+        </MobileMenuItem>
+        <MobileMenuItem onClick={() => scrollTo("product")}>
+          <span>Servicios</span>
+        </MobileMenuItem>
+        <MobileCTAButton onClick={() => scrollTo("contact")}>Contacto</MobileCTAButton>
       </>
     );
   };
@@ -68,14 +66,14 @@ const Header = () => {
       </NavContainer>
 
       {/* Burger Menu Mobile */}
-      <Burger onClick={toggleButton}>
+      <Burger onClick={toggleButton} className="burger-icon">
         <Outline />
       </Burger>
 
       {/* Drawer Mobile */}
       <Drawer closable={false} open={visible} onClose={toggleButton} className="modern-drawer">
         <Col style={{ marginBottom: "2.5rem" }}>
-          <Label onClick={toggleButton}>
+          <Label onClick={toggleButton} className="drawer-header">
             <Col span={12}>
               <Menu>Menu</Menu>
             </Col>

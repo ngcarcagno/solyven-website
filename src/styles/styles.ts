@@ -217,18 +217,36 @@ export const Styles = createGlobalStyle`
 
     /* Estilos para el Drawer moderno del Header */
     .modern-drawer .ant-drawer-content-wrapper {
-        background: rgba(15, 15, 15, 0.98) !important;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+        background: linear-gradient(
+            135deg,
+            rgba(15, 15, 15, 0.75) 0%,
+            rgba(20, 20, 20, 0.65) 100%
+        ) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border-left: 1px solid rgba(0, 53, 122, 0.25) !important;
+        box-shadow: 
+            -8px 0 32px rgba(0, 0, 0, 0.4),
+            inset 1px 0 0 rgba(255, 255, 255, 0.05),
+            0 0 20px rgba(0, 53, 122, 0.1) !important;
     }
 
     .modern-drawer .ant-drawer-body {
         background: transparent !important;
         padding: 2rem !important;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
 
     .modern-drawer .ant-drawer-content {
         background: transparent !important;
+    }
+
+    /* Mask con blur matching */
+    .modern-drawer .ant-drawer-mask {
+        background: rgba(0, 0, 0, 0.3) !important;
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
     }
         `;

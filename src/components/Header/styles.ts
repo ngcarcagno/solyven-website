@@ -75,13 +75,44 @@ export const CustomNavLink = styled("div")`
 
 export const Burger = styled("div")`
   @media only screen and (max-width: 890px) {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   display: none;
 
+  /* Contenedor con mismo estilo que NavContainer */
+  background: linear-gradient(135deg, rgba(15, 15, 15, 0.65) 0%, rgba(20, 20, 20, 0.55) 100%);
+  border: 1px solid rgba(0, 53, 122, 0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  padding: 0.75rem;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.75) 0%, rgba(25, 25, 25, 0.65) 100%);
+    border-color: rgba(0, 53, 122, 0.35);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 20px rgba(0, 53, 122, 0.15);
+    transform: translateY(-1px);
+  }
+
   svg {
-    fill: var(--color-primary);
+    fill: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+  }
+
+  &:hover svg {
+    fill: var(--color-secondary);
+    transform: scale(1.1);
   }
 `;
 
@@ -121,9 +152,13 @@ export const NavContainer = styled("nav")`
   }
 `;
 export const Menu = styled("h5")`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  text-align: center;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
 `;
 
 export const CustomNavLinkSmall = styled(NavLink)`
@@ -143,11 +178,31 @@ export const Label = styled("span")`
   text-align: right;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0, 53, 122, 0.2);
+  margin-bottom: 1rem;
 `;
 
 export const Outline = styled(MenuOutlined)`
-  font-size: 22px;
+  font-size: 24px;
+  color: inherit;
+  transition: all 0.3s ease;
+
+  /* En el burger, mantiene los estilos del contenedor padre */
+  .burger-icon & {
+    font-size: 24px;
+  }
+
+  /* En el drawer, tiene efectos especiales */
+  .drawer-header & {
+    color: rgba(255, 255, 255, 0.8);
+
+    &:hover {
+      color: var(--color-secondary);
+      transform: rotate(90deg);
+    }
+  }
 `;
 
 export const Span = styled("span")`
@@ -231,4 +286,62 @@ export const CTAButton = styled("button")`
   &:active {
     transform: translateY(-1px);
   }
+`;
+
+/* Mobile Menu Items - Styled like desktop but adapted for mobile */
+export const MobileMenuItem = styled("div")`
+  cursor: pointer;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0, 53, 122, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: rgba(0, 53, 122, 0.08);
+    border-bottom-color: rgba(0, 53, 122, 0.3);
+    padding-left: 0.5rem;
+  }
+
+  span {
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:hover span {
+    color: var(--color-secondary);
+    text-shadow: 0 0 8px rgba(255, 130, 92, 0.3);
+  }
+
+  /* Línea lateral tech */
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background: linear-gradient(180deg, transparent, var(--color-secondary), transparent);
+    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:hover::before {
+    height: 60%;
+  }
+`;
+
+export const MobileCTAButton = styled(CTAButton)`
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem 1.5rem;
+  font-size: 0.9rem;
+  border-radius: 8px;
 `;
