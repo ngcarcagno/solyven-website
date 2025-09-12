@@ -1,13 +1,13 @@
 import FaultyTerminalBackground from "../Backgrounds/FaultyTerminal/faultyTerminal";
 import DotGridBackground from "../Backgrounds/DotGrid/DotGrid";
-import { BackgroundWrapper, BackgroundContainer, BackgroundContent } from "./BackgroundSection";
+import { BackgroundWrapper, BackgroundContainer, BackgroundContent } from "./BackgroundWrapper";
 import { ReactNode } from "react";
 
-interface BackgroundSectionProps {
+interface BackgroundWrapperProps {
   children: ReactNode;
 }
 
-export const BackgroundSectionFaultyTerminal = ({ children }: BackgroundSectionProps) => (
+export const BackgroundFaultyTerminal = ({ children }: BackgroundWrapperProps) => (
   <BackgroundWrapper>
     <BackgroundContainer>
       <FaultyTerminalBackground
@@ -32,7 +32,7 @@ export const BackgroundSectionFaultyTerminal = ({ children }: BackgroundSectionP
   </BackgroundWrapper>
 );
 
-export const BackgroundSectionDotGrid = ({ children }: BackgroundSectionProps) => (
+export const BackgroundDotGrid = ({ children }: BackgroundWrapperProps) => (
   <BackgroundWrapper>
     <BackgroundContainer>
       <DotGridBackground

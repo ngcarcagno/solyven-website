@@ -6,7 +6,7 @@ import MissionContent from "../../content/MissionContent.json";
 import ProductContent from "../../content/ProductContent.json";
 import ContactContent from "../../content/ContactContent.json";
 import { ScrollSnapContainer } from "../../components/ContentBlock/styles";
-import { BackgroundSectionFaultyTerminal, BackgroundSectionDotGrid } from "../../components/BackgroundSection";
+import { BackgroundFaultyTerminal, BackgroundDotGrid } from "../../components/BackgroundWrapper";
 import DomeCamera from "../../components/Elements/SecurityCamera/DomeCamera";
 import { WhatsAppWidget } from "react-whatsapp-widget";
 import "react-whatsapp-widget/dist/index.css";
@@ -25,7 +25,7 @@ const Home = () => {
     <ScrollSnapContainer>
       <ScrollToTop />
       {/* Intro Section */}
-      <BackgroundSectionFaultyTerminal>
+      <BackgroundFaultyTerminal>
         <ContentBlock
           direction="right"
           title={IntroContent.title}
@@ -43,19 +43,19 @@ const Home = () => {
           }
           id="intro"
         />
-      </BackgroundSectionFaultyTerminal>
+      </BackgroundFaultyTerminal>
 
       {/* Middle Block Section */}
-      <BackgroundSectionDotGrid>
+      <BackgroundDotGrid>
         <MiddleBlock
           title={MiddleBlockContent.title}
           content={MiddleBlockContent.text}
           button={MiddleBlockContent.button}
         />
-      </BackgroundSectionDotGrid>
+      </BackgroundDotGrid>
 
       {/* About Section */}
-      <BackgroundSectionDotGrid>
+      <BackgroundDotGrid>
         <ContentBlock
           direction="left"
           title={AboutContent.title}
@@ -64,10 +64,10 @@ const Home = () => {
           icon="graphs.svg"
           id="about"
         />
-      </BackgroundSectionDotGrid>
+      </BackgroundDotGrid>
 
       {/* Mission Section */}
-      <BackgroundSectionDotGrid>
+      <BackgroundDotGrid>
         <ContentBlock
           direction="right"
           title={MissionContent.title}
@@ -75,10 +75,10 @@ const Home = () => {
           icon="product-launch.svg"
           id="mission"
         />
-      </BackgroundSectionDotGrid>
+      </BackgroundDotGrid>
 
       {/* Product Section */}
-      <BackgroundSectionDotGrid>
+      <BackgroundDotGrid>
         <ContentBlock
           direction="left"
           title={ProductContent.title}
@@ -86,7 +86,7 @@ const Home = () => {
           icon="waving.svg"
           id="product"
         />
-      </BackgroundSectionDotGrid>
+      </BackgroundDotGrid>
 
       {/* Contact Section */}
 
