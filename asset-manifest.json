@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/solyven-website/static/css/main.37ddbf14.css",
-    "main.js": "/solyven-website/static/js/main.66ce7494.js",
+    "main.js": "/solyven-website/static/js/main.888806e7.js",
     "static/css/756.957f7b8d.chunk.css": "/solyven-website/static/css/756.957f7b8d.chunk.css",
     "static/js/756.69f9070b.chunk.js": "/solyven-website/static/js/756.69f9070b.chunk.js",
-    "static/js/147.b394c694.chunk.js": "/solyven-website/static/js/147.b394c694.chunk.js",
+    "static/js/147.e30809bf.chunk.js": "/solyven-website/static/js/147.e30809bf.chunk.js",
     "static/js/416.d90b9dc3.chunk.js": "/solyven-website/static/js/416.d90b9dc3.chunk.js",
     "static/js/538.22ef4976.chunk.js": "/solyven-website/static/js/538.22ef4976.chunk.js",
     "static/js/282.af848a2f.chunk.js": "/solyven-website/static/js/282.af848a2f.chunk.js",
@@ -13,10 +13,10 @@
     "static/js/293.8b4dae8c.chunk.js": "/solyven-website/static/js/293.8b4dae8c.chunk.js",
     "index.html": "/solyven-website/index.html",
     "main.37ddbf14.css.map": "/solyven-website/static/css/main.37ddbf14.css.map",
-    "main.66ce7494.js.map": "/solyven-website/static/js/main.66ce7494.js.map",
+    "main.888806e7.js.map": "/solyven-website/static/js/main.888806e7.js.map",
     "756.957f7b8d.chunk.css.map": "/solyven-website/static/css/756.957f7b8d.chunk.css.map",
     "756.69f9070b.chunk.js.map": "/solyven-website/static/js/756.69f9070b.chunk.js.map",
-    "147.b394c694.chunk.js.map": "/solyven-website/static/js/147.b394c694.chunk.js.map",
+    "147.e30809bf.chunk.js.map": "/solyven-website/static/js/147.e30809bf.chunk.js.map",
     "416.d90b9dc3.chunk.js.map": "/solyven-website/static/js/416.d90b9dc3.chunk.js.map",
     "538.22ef4976.chunk.js.map": "/solyven-website/static/js/538.22ef4976.chunk.js.map",
     "282.af848a2f.chunk.js.map": "/solyven-website/static/js/282.af848a2f.chunk.js.map",
@@ -26,6 +26,6 @@
   },
   "entrypoints": [
     "static/css/main.37ddbf14.css",
-    "static/js/main.66ce7494.js"
+    "static/js/main.888806e7.js"
   ]
 }
