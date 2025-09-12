@@ -8,13 +8,10 @@ import ContactContent from "../../content/ContactContent.json";
 import Footer from "../../components/Footer";
 import { ScrollSnapContainer } from "../../components/ContentBlock/styles";
 import {
-  BackgroundFaultyTerminal,
   BackgroundDotGrid,
   BackgroundGridDistortion,
 } from "../../components/BackgroundWrapper";
-import DomeCamera from "../../components/Elements/SecurityCamera/DomeCamera";
-import { WhatsAppWidget } from "react-whatsapp-widget";
-import "react-whatsapp-widget/dist/index.css";
+import CustomWhatsAppWidget from "../../components/WhatsAppWidget";
 
 const Contact = lazy(() => import("../../components/ContactForm"));
 const MiddleBlock = lazy(() => import("../../components/MiddleBlock"));
@@ -95,16 +92,14 @@ const Home = () => {
         </div>
       </ScrollSnapContainer>
 
-      {/* WhatsApp Widget - Outside ScrollSnapContainer to avoid z-index issues */}
-      <div style={{ position: "fixed", bottom: "20px", right: "20px", zIndex: 9999, pointerEvents: "all" }}>
-        <WhatsAppWidget
-          phoneNumber="+5491169369090"
-          companyName="Solyven Seguridad"
-          replyTimeText="Usualmente responde en minutos"
-          message="Hola 👋 ¿Necesitás un presupuesto?"
-          sendButtonText="Enviar"
-        />
-      </div>
+      {/* Custom WhatsApp Widget - Outside ScrollSnapContainer to avoid z-index issues */}
+      <CustomWhatsAppWidget
+        phoneNumber="5491169369090"
+        companyName="Solyven Seguridad"
+        replyTimeText="Respuesta inmediata"
+        message="¡Hola! 👋 ¿Necesitás un presupuesto personalizado para tu empresa?"
+        context="homepage"
+      />
     </>
   );
 };

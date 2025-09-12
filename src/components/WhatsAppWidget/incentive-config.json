@@ -1,0 +1,80 @@
+{
+  "enabled": true,
+  "config": {
+    "displayInterval": 12000,
+    "displayDuration": 5000,
+    "maxDisplaysPerSession": 5,
+    "delayAfterPageLoad": 5000,
+    "pauseAfterInteraction": 20000
+  },
+  "messages": [
+    {
+      "id": "security_consultation",
+      "text": "💡 ¿Necesitás |seguridad empresarial|? ¡Consultá gratis!",
+      "priority": 1,
+      "contexts": ["homepage", "services"],
+      "enabled": true
+    },
+    {
+      "id": "camera_pricing",
+      "text": "🔒 |Cámaras de seguridad| desde $15.000 - ¡Preguntá!",
+      "priority": 2,
+      "contexts": ["homepage", "products"],
+      "enabled": true
+    },
+    {
+      "id": "immediate_response",
+      "text": "⚡ |Respuesta inmediata| para tu consulta",
+      "priority": 3,
+      "contexts": ["contact", "homepage"],
+      "enabled": true
+    },
+    {
+      "id": "custom_quote",
+      "text": "🎯 |Presupuesto personalizado| sin compromiso",
+      "priority": 1,
+      "contexts": ["homepage", "services"],
+      "enabled": true
+    },
+    {
+      "id": "corporate_security",
+      "text": "🏢 Especialistas en |seguridad corporativa|",
+      "priority": 2,
+      "contexts": ["services"],
+      "enabled": true
+    },
+    {
+      "id": "free_assessment",
+      "text": "🔍 |Evaluación gratuita| de seguridad para tu empresa",
+      "priority": 1,
+      "contexts": ["homepage"],
+      "enabled": true
+    },
+    {
+      "id": "emergency_support",
+      "text": "🚨 |Soporte 24/7| para emergencias de seguridad",
+      "priority": 3,
+      "contexts": ["contact", "services"],
+      "enabled": false
+    },
+    {
+      "id": "installation_service",
+      "text": "⚙️ |Instalación profesional| incluida en todos los paquetes",
+      "priority": 2,
+      "contexts": ["products", "services"],
+      "enabled": true
+    }
+  ],
+  "settings": {
+    "respectUserPreferences": true,
+    "showOnMobile": true,
+    "showOnDesktop": true,
+    "pauseOnChatOpen": true,
+    "resumeAfterChatClose": true,
+    "analytics": {
+      "trackViews": true,
+      "trackClicks": true,
+      "trackDismissals": true
+    }
+  }
+}
