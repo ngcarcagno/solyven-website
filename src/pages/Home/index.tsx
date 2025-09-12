@@ -22,6 +22,7 @@ const Home = () => {
   return (
     <ScrollSnapContainer>
       <ScrollToTop />
+      // Intro Section
       <HeroSectionFaultyTerminal>
         <ContentBlock
           direction="right"
@@ -41,6 +42,7 @@ const Home = () => {
           id="intro"
         />
       </HeroSectionFaultyTerminal>
+      // Middle Block Section
       <HeroSectionDotGrid>
         <MiddleBlock
           title={MiddleBlockContent.title}
@@ -48,7 +50,7 @@ const Home = () => {
           button={MiddleBlockContent.button}
         />
       </HeroSectionDotGrid>
-
+      // About Section
       <HeroSectionDotGrid>
         <ContentBlock
           direction="left"
@@ -59,21 +61,30 @@ const Home = () => {
           id="about"
         />
       </HeroSectionDotGrid>
-      <ContentBlock
-        direction="right"
-        title={MissionContent.title}
-        content={MissionContent.text}
-        icon="product-launch.svg"
-        id="mission"
-      />
-      <ContentBlock
-        direction="left"
-        title={ProductContent.title}
-        content={ProductContent.text}
-        icon="waving.svg"
-        id="product"
-      />
-      <Contact title={ContactContent.title} content={ContactContent.text} id="contact" />
+      // Mission Section
+      <HeroSectionDotGrid>
+        <ContentBlock
+          direction="right"
+          title={MissionContent.title}
+          content={MissionContent.text}
+          icon="product-launch.svg"
+          id="mission"
+        />
+      </HeroSectionDotGrid>
+      // Product Section
+      <HeroSectionDotGrid>
+        <ContentBlock
+          direction="left"
+          title={ProductContent.title}
+          content={ProductContent.text}
+          icon="waving.svg"
+          id="product"
+        />
+      </HeroSectionDotGrid>
+      // Contact Section
+      <HeroSectionDotGrid>
+        <Contact title={ContactContent.title} content={ContactContent.text} id="contact" />
+      </HeroSectionDotGrid>
     </ScrollSnapContainer>
   );
 };

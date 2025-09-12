@@ -1,4 +1,4 @@
-import { Row, Col } from "antd";
+import { Row } from "antd";
 import { SvgIcon } from "../../common/SvgIcon";
 import Container from "../../common/Container";
 
