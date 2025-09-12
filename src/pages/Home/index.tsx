@@ -5,6 +5,7 @@ import AboutContent from "../../content/AboutContent.json";
 import MissionContent from "../../content/MissionContent.json";
 import ProductContent from "../../content/ProductContent.json";
 import ContactContent from "../../content/ContactContent.json";
+import Footer from "../../components/Footer";
 import { ScrollSnapContainer } from "../../components/ContentBlock/styles";
 import {
   BackgroundFaultyTerminal,
@@ -40,15 +41,6 @@ const Home = () => {
           />
         </BackgroundGridDistortion>
 
-        {/* Middle Block Section */}
-        <BackgroundDotGrid>
-          <MiddleBlock
-            title={MiddleBlockContent.title}
-            content={MiddleBlockContent.text}
-            button={MiddleBlockContent.button}
-          />
-        </BackgroundDotGrid>
-
         {/* About Section */}
         <BackgroundDotGrid>
           <ContentBlock
@@ -83,10 +75,24 @@ const Home = () => {
           />
         </BackgroundDotGrid>
 
+        {/* Middle Block Section */}
+        <BackgroundDotGrid>
+          <MiddleBlock
+            title={MiddleBlockContent.title}
+            content={MiddleBlockContent.text}
+            button={MiddleBlockContent.button}
+          />
+        </BackgroundDotGrid>
+
         {/* Contact Section */}
         <BackgroundDotGrid>
           <Contact title={ContactContent.title} content={ContactContent.text} id="contact" />
         </BackgroundDotGrid>
+
+        {/* Footer Section */}
+        <div style={{ scrollSnapAlign: "end" }}>
+          <Footer />
+        </div>
       </ScrollSnapContainer>
 
       {/* WhatsApp Widget - Outside ScrollSnapContainer to avoid z-index issues */}

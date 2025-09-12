@@ -11,14 +11,19 @@ export const HeaderSection = styled("header")`
   max-width: 1200px;
   height: var(--header-height);
   padding: 0 1.5rem; /* remove vertical padding, let height control it */
-  background: var(--glass-bg);
+
+  /* Glassmorphism mejorado */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--glass-radius);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
   z-index: 1000;
   display: flex;
   align-items: center; /* ensure vertical centering */
+  transition: all 0.3s ease;
 
   .ant-row-space-between {
     align-items: center;
@@ -31,9 +36,16 @@ export const LogoContainer = styled(Link)`
   display: flex;
   align-items: center;
 
-  /* Contorno blanco para el logo SVG */
+  /* Logo con sombra sutil para mejor contraste */
   .logo-with-outline {
-    filter: drop-shadow(0 0 0.5px white) drop-shadow(0 0 0.5px white);
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 0.5px rgba(255, 255, 255, 0.4));
+    transition: filter 0.3s ease;
+  }
+
+  /* Hover effect para mayor interactividad */
+  &:hover .logo-with-outline {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 1px rgba(255, 255, 255, 0.6))
+      drop-shadow(0 0 8px rgba(255, 130, 92, 0.2));
   }
 `;
 
