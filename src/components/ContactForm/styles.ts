@@ -2,12 +2,14 @@ import styled from "styled-components";
 
 export const ContactContainer = styled("div")`
   width: 100%;
-  padding: 5rem 2rem; /* desktop horizontal padding */
+  max-width: 1200px; /* Contenedor más ancho */
+  margin: 0 auto; /* Centrar el contenedor */
+  padding: 5rem 3rem; /* Más padding horizontal */
   position: relative;
   min-height: 100vh;
   scroll-snap-align: start;
   display: flex;
-  flex-direction: column; /* stack title above form */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 
@@ -24,14 +26,23 @@ export const ContactContainer = styled("div")`
   }
 
   @media only screen and (max-width: 1024px) {
-    padding: 3rem 1.25rem; /* Adjust padding on medium screens */
+    padding: 3rem 2rem; /* Mantener buen padding en tablets */
+    max-width: 900px;
     h6 {
       font-size: 1.6rem;
     }
   }
 
+  @media only screen and (max-width: 768px) {
+    padding: 2.5rem 1.5rem; /* Mejor balance en móviles */
+    max-width: 600px;
+    h6 {
+      font-size: 1.5rem;
+    }
+  }
+
   @media only screen and (max-width: 480px) {
-    padding: 2rem 1rem; /* tighter padding on small screens */
+    padding: 2rem 1rem; /* Mínimo padding en pantallas muy pequeñas */
     h6 {
       font-size: 1.4rem;
     }
@@ -39,15 +50,41 @@ export const ContactContainer = styled("div")`
 `;
 
 export const FormGroup = styled("form")`
-  /* Modern glassy card (slightly lighter) */
+  /* Modern glassy card - optimizado para ser más ancho y corto */
   width: 100%;
-  max-width: none;
-  align-self: stretch;
+  max-width: 900px; /* Ancho máximo más generoso */
+  min-width: 320px; /* Ancho mínimo para móviles */
   box-sizing: border-box;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dos columnas por defecto */
+  grid-gap: 1.5rem;
+  align-items: start;
+
+  /* El textarea y botón ocupan toda la fila */
+  & > div:nth-child(3), /* TextArea */
+  & > div:last-child {
+    /* ButtonContainer */
+    grid-column: 1 / -1;
+  }
+
+  /* En tablets: mantener dos columnas pero más espacio */
+  @media only screen and (max-width: 1024px) {
+    max-width: 750px;
+    grid-gap: 1.25rem;
+  }
+
+  /* En móviles: una sola columna */
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    grid-gap: 1rem;
+
+    & > div:nth-child(3),
+    & > div:last-child {
+      grid-column: 1;
+    }
+  }
 
   /* glass effect*/
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.04));
