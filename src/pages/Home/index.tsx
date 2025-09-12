@@ -9,7 +9,6 @@ import { ScrollSnapContainer } from "../../components/ContentBlock/styles";
 import {
   BackgroundFaultyTerminal,
   BackgroundDotGrid,
-  BackgroundSecurity,
   BackgroundGridDistortion,
 } from "../../components/BackgroundWrapper";
 import DomeCamera from "../../components/Elements/SecurityCamera/DomeCamera";

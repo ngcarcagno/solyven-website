@@ -4,8 +4,7 @@ import GridDistortionBackground from "../Backgrounds/GridDistortion/GridDistorti
 import { BackgroundWrapper, BackgroundContainer, BackgroundContent } from "./BackgroundWrapper";
 import { ReactNode } from "react";
 
-// Export del nuevo background de seguridad
-export { BackgroundSecurity } from "./BackgroundSecurity";
+// BackgroundSecurity ahora está integrado en BackgroundGridDistortion con className="security-distortion"
 
 interface BackgroundWrapperProps {
   children: ReactNode;
@@ -65,13 +64,13 @@ export const BackgroundGridDistortion = ({ children }: BackgroundWrapperProps) =
     <BackgroundContainer>
       <GridDistortionBackground
         imageSrc={`${process.env.PUBLIC_URL}/img/png/HeroBackground.png`}
-        grid={10}
-        mouse={0.15}
-        strength={0.1}
+        grid={30}
+        mouse={0.1}
+        strength={0.4}
         relaxation={0.9}
-        className=""
+        className="security-distortion"
       />
     </BackgroundContainer>
-    <BackgroundContent>{children}</BackgroundContent>
+    <BackgroundContent className="security-background">{children}</BackgroundContent>
   </BackgroundWrapper>
 );

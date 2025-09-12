@@ -1,5 +1,91 @@
+/* ========================================
+   VARIABLES CSS PARA CONTROL DE BLUR
+   ======================================== */
+.distortion-container.security-distortion {
+  /* Multiplicador de blur - Cambia este valor para ajustar toda la intensidad */
+  --blur-multiplier: 2; /* Valores sugeridos: 0.5 (sutil), 1.0 (normal), 1.5 (intenso), 2.0 (muy intenso) */
+}
+
+/* ========================================
+   CONTENEDOR BASE GRIDDISTORTION
+   ======================================== */
 .distortion-container {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  position: relative;
+}
+
+/* ========================================
+   FILTRO BLANCO Y NEGRO PARA SEGURIDAD
+   ======================================== */
+.distortion-container.security-distortion canvas {
+  filter: grayscale(100%) contrast(1.1) brightness(0.9);
+  -webkit-filter: grayscale(100%) contrast(1.1) brightness(0.9);
+}
+
+/* ========================================
+   OVERLAYS ARTÍSTICOS PARA INTRO
+   Aplicado cuando se usa con className="security-distortion"
+   ======================================== */
+.distortion-container.security-distortion::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(40, 40, 40, 0.7) 0%,
+    rgba(20, 20, 20, 0.8) 25%,
+    rgba(7, 31, 95, 0.2) 50%,
+    rgba(60, 60, 60, 0.6) 75%,
+    rgba(30, 30, 30, 0.8) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* .distortion-container.security-distortion::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center, transparent 20%, rgba(0, 0, 0, 0.3) 70%, rgba(0, 0, 0, 0.6) 100%);
+  z-index: 3;
+  pointer-events: none;
+}*/
+
+/* ========================================
+   ESTELA DE BLUR SUTIL PARA TEXTO
+   Efecto de sombra degradada sin formas definidas
+   Usa --blur-multiplier para ajustar intensidad
+   ======================================== */
+.security-distortion ~ * h6,
+.security-background h6 {
+  text-shadow: 
+    /* Estela principal - más intensa en el centro */ 0 0 calc(20px * var(--blur-multiplier))
+      rgba(0, 0, 0, 0.8),
+    0 0 calc(40px * var(--blur-multiplier)) rgba(0, 0, 0, 0.6),
+    0 0 calc(60px * var(--blur-multiplier)) rgba(0, 0, 0, 0.4),
+    /* Extensión de la estela - más suave */ 0 0 calc(80px * var(--blur-multiplier)) rgba(0, 0, 0, 0.3),
+    0 0 calc(100px * var(--blur-multiplier)) rgba(0, 0, 0, 0.2),
+    0 0 calc(120px * var(--blur-multiplier)) rgba(0, 0, 0, 0.1),
+    /* Sombra de legibilidad básica */ 2px 2px calc(8px * var(--blur-multiplier)) rgba(0, 0, 0, 0.9) !important;
+}
+
+.security-distortion ~ * p,
+.security-background p {
+  text-shadow: 
+    /* Estela principal para párrafos - más sutil */ 0 0 calc(15px * var(--blur-multiplier))
+      rgba(0, 0, 0, 0.7),
+    0 0 calc(30px * var(--blur-multiplier)) rgba(0, 0, 0, 0.5),
+    0 0 calc(45px * var(--blur-multiplier)) rgba(0, 0, 0, 0.3),
+    /* Extensión de la estela */ 0 0 calc(60px * var(--blur-multiplier)) rgba(0, 0, 0, 0.25),
+    0 0 calc(75px * var(--blur-multiplier)) rgba(0, 0, 0, 0.15),
+    0 0 calc(90px * var(--blur-multiplier)) rgba(0, 0, 0, 0.1),
+    /* Sombra de legibilidad básica */ 1px 1px calc(6px * var(--blur-multiplier)) rgba(0, 0, 0, 0.9) !important;
 }

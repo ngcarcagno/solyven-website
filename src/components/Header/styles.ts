@@ -11,11 +11,11 @@ export const HeaderSection = styled("header")`
   max-width: 1200px;
   height: var(--header-height);
   padding: 0 1.5rem; /* remove vertical padding, let height control it */
-  background: var(--glass-bg-v2);
+  background: var(--glass-bg);
   border-radius: var(--glass-radius);
-  backdrop-filter: blur(var(--glass-blur-v2));
-  -webkit-backdrop-filter: blur(var(--glass-blur-v2));
-  box-shadow: var(--glass-shadow-v2);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--glass-shadow);
   z-index: 1000;
   display: flex;
   align-items: center; /* ensure vertical centering */
@@ -30,6 +30,11 @@ export const HeaderSection = styled("header")`
 export const LogoContainer = styled(Link)`
   display: flex;
   align-items: center;
+
+  /* Contorno blanco para el logo SVG */
+  .logo-with-outline {
+    filter: drop-shadow(0 0 0.5px white) drop-shadow(0 0 0.5px white);
+  }
 `;
 
 export const NavLink = styled("div")`
