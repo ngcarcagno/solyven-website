@@ -214,4 +214,21 @@ export const Styles = createGlobalStyle`
     .svg-icon:focus {
         color: var(--color-secondary);
     }
+
+    /* Estilos para el Drawer moderno del Header */
+    .modern-drawer .ant-drawer-content-wrapper {
+        background: rgba(15, 15, 15, 0.98) !important;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+
+    .modern-drawer .ant-drawer-body {
+        background: transparent !important;
+        padding: 2rem !important;
+    }
+
+    .modern-drawer .ant-drawer-content {
+        background: transparent !important;
+    }
         `;

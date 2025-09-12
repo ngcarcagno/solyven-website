@@ -8,11 +8,13 @@ import {
   LogoContainer,
   Burger,
   NotHidden,
+  NavContainer,
   Menu,
   CustomNavLinkSmall,
   Label,
   Outline,
   Span,
+  CTAButton,
 } from "./styles";
 
 const Header = () => {
@@ -52,34 +54,48 @@ const Header = () => {
 
   return (
     <HeaderSection>
-      <Container>
-        <Row justify="space-between">
-          <LogoContainer to="/" aria-label="homepage">
-            <SvgIcon src="logo.svg" width="150px" height="50px" className="logo-with-outline" />
-          </LogoContainer>
-          <NotHidden>
-            <MenuItem />
-          </NotHidden>
-          <Burger onClick={toggleButton}>
-            <Outline />
-          </Burger>
-        </Row>
-        <Drawer closable={false} open={visible} onClose={toggleButton}>
-          <Col style={{ marginBottom: "2.5rem" }}>
-            <Label onClick={toggleButton}>
-              <Col span={12}>
-                <Menu>Menu</Menu>
-              </Col>
-              <Col span={12}>
-                <Outline />
-              </Col>
-            </Label>
-          </Col>
-          <MenuItem />
-        </Drawer>
-      </Container>
+      {/* Logo */}
+      <LogoContainer to="/" aria-label="homepage">
+        <SvgIcon src="logo.svg" width="180px" height="48px" className="logo-with-outline" />
+      </LogoContainer>
+
+      {/* Navegación Desktop */}
+      <NavContainer>
+        <Span onClick={() => scrollTo("about")}>Nosotros</Span>
+        <Span onClick={() => scrollTo("mission")}>Misión</Span>
+        <Span onClick={() => scrollTo("product")}>Servicios</Span>
+        <CTAButton onClick={() => scrollTo("contact")}>Contacto</CTAButton>
+      </NavContainer>
+
+      {/* Burger Menu Mobile */}
+      <Burger onClick={toggleButton}>
+        <Outline />
+      </Burger>
+
+      {/* Drawer Mobile */}
+      <Drawer closable={false} open={visible} onClose={toggleButton} className="modern-drawer">
+        <Col style={{ marginBottom: "2.5rem" }}>
+          <Label onClick={toggleButton}>
+            <Col span={12}>
+              <Menu>Menu</Menu>
+            </Col>
+            <Col span={12}>
+              <Outline />
+            </Col>
+          </Label>
+        </Col>
+        <MenuItem />
+      </Drawer>
     </HeaderSection>
   );
+
+  function scrollTo(id: string) {
+    const element = document.getElementById(id) as HTMLDivElement;
+    element.scrollIntoView({
+      behavior: "smooth",
+    });
+    setVisibility(false);
+  }
 };
 
 export default Header;

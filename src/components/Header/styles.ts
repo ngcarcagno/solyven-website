@@ -4,48 +4,54 @@ import { MenuOutlined } from "@ant-design/icons";
 
 export const HeaderSection = styled("header")`
   position: fixed;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90vw;
-  max-width: 1200px;
+  top: 8px;
+  left: 0;
+  right: 0;
+  width: 100%;
   height: var(--header-height);
-  padding: 0 1.5rem; /* remove vertical padding, let height control it */
+  padding: 0 2.5rem;
 
-  /* Glassmorphism mejorado */
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: var(--glass-radius);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  /* Sin fondo - completamente transparente */
+  background: transparent;
+  border: none;
 
   z-index: 1000;
   display: flex;
-  align-items: center; /* ensure vertical centering */
-  transition: all 0.3s ease;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-  .ant-row-space-between {
-    align-items: center;
-    text-align: center;
-    width: 100%;
+  @media (max-width: 768px) {
+    padding: 0 1rem;
   }
 `;
 
 export const LogoContainer = styled(Link)`
   display: flex;
   align-items: center;
+  height: 100%;
+  padding-left: 0.5rem;
+  transition: all 0.3s ease;
 
-  /* Logo con sombra sutil para mejor contraste */
   .logo-with-outline {
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 0.5px rgba(255, 255, 255, 0.4));
-    transition: filter 0.3s ease;
+    height: 48px;
+    width: auto;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 0 2px rgba(0, 53, 122, 0.5)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
   }
 
-  /* Hover effect para mayor interactividad */
   &:hover .logo-with-outline {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 1px rgba(255, 255, 255, 0.6))
-      drop-shadow(0 0 8px rgba(255, 130, 92, 0.2));
+    transform: translateY(-1px) scale(1.05);
+    filter: drop-shadow(0 0 3px rgba(0, 53, 122, 0.7)) drop-shadow(0 0 12px rgba(0, 53, 122, 0.3))
+      drop-shadow(0 3px 8px rgba(0, 0, 0, 0.5));
+  }
+
+  @media (max-width: 768px) {
+    padding-left: 0;
+
+    .logo-with-outline {
+      height: 42px;
+    }
   }
 `;
 
@@ -85,6 +91,35 @@ export const NotHidden = styled("div")`
   }
 `;
 
+export const NavContainer = styled("nav")`
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+
+  /* Fondo tecnológico más sutil y moderno */
+  background: linear-gradient(135deg, rgba(15, 15, 15, 0.65) 0%, rgba(20, 20, 20, 0.55) 100%);
+  border: 1px solid rgba(0, 53, 122, 0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  padding: 0.75rem 2rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Efecto hover tecnológico */
+  &:hover {
+    background: linear-gradient(135deg, rgba(15, 15, 15, 0.75) 0%, rgba(25, 25, 25, 0.65) 100%);
+    border-color: rgba(0, 53, 122, 0.35);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 20px rgba(0, 53, 122, 0.15);
+  }
+
+  @media (max-width: 890px) {
+    display: none;
+  }
+`;
 export const Menu = styled("h5")`
   font-size: 1.5rem;
   font-weight: 600;
@@ -117,34 +152,83 @@ export const Outline = styled(MenuOutlined)`
 
 export const Span = styled("span")`
   cursor: pointer;
-  transition: color 0.25s ease, transform 0.25s ease;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  padding: 0.5rem 0;
 
-  &:hover,
-  &:active,
-  &:focus {
+  &:hover {
     color: var(--color-secondary);
+    transform: translateY(-1px);
+    text-shadow: 0 0 8px rgba(255, 130, 92, 0.3);
   }
 
-  /* modern animated underline as a fallback / enhancement */
+  /* Línea inferior minimalista */
   &::after {
     content: "";
     position: absolute;
     left: 0;
-    bottom: -6px;
+    right: 0;
+    bottom: -2px;
     height: 2px;
-    width: 100%;
-    background: var(--color-secondary);
+    background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
     transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 220ms ease;
-    pointer-events: none;
-    opacity: 0.6;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  &:hover::after,
-  &:focus::after,
-  &:active::after {
+  &:hover::after {
     transform: scaleX(1);
+  }
+`;
+
+export const CTAButton = styled("button")`
+  background: linear-gradient(135deg, rgba(95, 8, 7, 0.8), rgba(75, 6, 5, 0.9));
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(95, 8, 7, 0.4);
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(95, 8, 7, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  /* Efecto brillante tech */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.6s ease;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, var(--color-secondary), rgba(212, 68, 28, 0.9));
+    border-color: rgba(255, 130, 92, 0.5);
+    color: white;
+    box-shadow: 0 8px 25px rgba(255, 130, 92, 0.4), 0 0 20px rgba(255, 130, 92, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
+
+  &:active {
+    transform: translateY(-1px);
   }
 `;
