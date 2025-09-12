@@ -6,7 +6,12 @@ import MissionContent from "../../content/MissionContent.json";
 import ProductContent from "../../content/ProductContent.json";
 import ContactContent from "../../content/ContactContent.json";
 import { ScrollSnapContainer } from "../../components/ContentBlock/styles";
-import { BackgroundFaultyTerminal, BackgroundDotGrid } from "../../components/BackgroundWrapper";
+import {
+  BackgroundFaultyTerminal,
+  BackgroundDotGrid,
+  BackgroundSecurity,
+  BackgroundGridDistortion,
+} from "../../components/BackgroundWrapper";
 import DomeCamera from "../../components/Elements/SecurityCamera/DomeCamera";
 import { WhatsAppWidget } from "react-whatsapp-widget";
 import "react-whatsapp-widget/dist/index.css";
@@ -25,25 +30,16 @@ const Home = () => {
     <>
       <ScrollSnapContainer>
         <ScrollToTop />
-        {/* Intro Section */}
-
-        <ContentBlock
-          direction="right"
-          title={IntroContent.title}
-          content={IntroContent.text}
-          button={IntroContent.button}
-          icon={
-            <DomeCamera
-              cameraColor="#333333"
-              lensColor="#000000ff"
-              statusColor="#00ff40"
-              label=""
-              showLaser={false}
-              mounted={false}
-            />
-          }
-          id="intro"
-        />
+        {/* Intro Section - Security Control Room Background */}
+        <BackgroundGridDistortion>
+          <ContentBlock
+            direction="center"
+            title={IntroContent.title}
+            content={IntroContent.text}
+            button={IntroContent.button}
+            id="intro"
+          />
+        </BackgroundGridDistortion>
 
         {/* Middle Block Section */}
         <BackgroundDotGrid>

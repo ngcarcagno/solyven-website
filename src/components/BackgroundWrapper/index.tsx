@@ -1,7 +1,11 @@
 import FaultyTerminalBackground from "../Backgrounds/FaultyTerminal/faultyTerminal";
 import DotGridBackground from "../Backgrounds/DotGrid/DotGrid";
+import GridDistortionBackground from "../Backgrounds/GridDistortion/GridDistortion";
 import { BackgroundWrapper, BackgroundContainer, BackgroundContent } from "./BackgroundWrapper";
 import { ReactNode } from "react";
+
+// Export del nuevo background de seguridad
+export { BackgroundSecurity } from "./BackgroundSecurity";
 
 interface BackgroundWrapperProps {
   children: ReactNode;
@@ -50,6 +54,22 @@ export const BackgroundDotGrid = ({ children }: BackgroundWrapperProps) => (
           width: "100%",
           height: "100%",
         }}
+      />
+    </BackgroundContainer>
+    <BackgroundContent>{children}</BackgroundContent>
+  </BackgroundWrapper>
+);
+
+export const BackgroundGridDistortion = ({ children }: BackgroundWrapperProps) => (
+  <BackgroundWrapper>
+    <BackgroundContainer>
+      <GridDistortionBackground
+        imageSrc={`${process.env.PUBLIC_URL}/img/png/HeroBackground.png`}
+        grid={10}
+        mouse={0.15}
+        strength={0.1}
+        relaxation={0.9}
+        className=""
       />
     </BackgroundContainer>
     <BackgroundContent>{children}</BackgroundContent>

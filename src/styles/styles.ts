@@ -59,10 +59,10 @@ export const Styles = createGlobalStyle`
     --glass-border: rgba(255,255,255,0.12);
     --glass-border-v2: 1px solid rgba(255, 255, 255, 0.2);
     --glass-blur: 10px;
-    --glass-blur-v2: 20px;
+    --glass-blur-v2: 10px;
     --glass-shadow: 0 14px 34px rgba(0,0,0,0.65);
     --glass-shadow-v2: 0 8px 32px rgba(0, 0, 0, 0.1);
-    --glass-radius: 24px;
+    --glass-radius: 12px;
     }
 
     body,
@@ -118,6 +118,7 @@ export const Styles = createGlobalStyle`
         h5,
         h6 {
                 font-family: var(--font-title);
+                text-transform: uppercase;
                 color: var(--color-text-primary);
                 font-size: var(--size-h1);
                 line-height: 1.18;
