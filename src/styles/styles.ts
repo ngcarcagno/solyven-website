@@ -24,7 +24,8 @@ export const Styles = createGlobalStyle`
     --color-primary: #5F0807;
     --color-secondary: #F75800;
     --color-detail: #00357a;
-    --color-bg: linear-gradient(135deg, #181818 0%, #1f1f1f 30%, #2f2f2f 70%, #4a4a4a 100%);
+    --color-bg-gradient: linear-gradient(135deg, #181818 0%, #1f1f1f 30%, #2f2f2f 70%, #4a4a4a 100%);
+    --color-bg-solid: #333333;
     --color-text-primary: #FFFFFF;
     --color-text-secondary: #333333;
 
@@ -39,9 +40,13 @@ export const Styles = createGlobalStyle`
     --size-h1-sm: 42px;
     --size-h1-xs: 32px;
     --size-body: 19px;
+    --size-header-nav: 1.2rem; /* header navigation and button text */
     --size-min-title: 14px;
     --size-min-para: 12px;
 
+    /* Header layout */
+    --header-height: 60px;
+    
     /* Content block layout */
     --content-min-height: 100vh;
     --content-padding: 10rem 1rem 8rem;
@@ -50,9 +55,13 @@ export const Styles = createGlobalStyle`
     
     /* Glassy UI variables (shared) */
     --glass-bg: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.008));
+    --glass-bg-v2: rgba(255, 255, 255, 0.15);
     --glass-border: rgba(255,255,255,0.12);
+    --glass-border-v2: 1px solid rgba(255, 255, 255, 0.2);
     --glass-blur: 10px;
+    --glass-blur-v2: 20px;
     --glass-shadow: 0 14px 34px rgba(0,0,0,0.65);
+    --glass-shadow-v2: 0 8px 32px rgba(0, 0, 0, 0.1);
     --glass-radius: 24px;
     }
 
@@ -67,7 +76,7 @@ export const Styles = createGlobalStyle`
         padding:0;
         border: 0;
         outline: 0;
-        background: var(--color-bg);
+        background: var(--color-bg-gradient);
         color: var(--color-text-secondary);
     overflow-x: hidden;
     /* Let the body be the primary scroll container so footer scrolls naturally */
@@ -145,10 +154,43 @@ export const Styles = createGlobalStyle`
         flex-direction: column;
         text-align: left;
         padding-top: 1.5rem;
+        background: var(--glass-bg) !important;
+        backdrop-filter: blur(var(--glass-blur));
+        -webkit-backdrop-filter: blur(var(--glass-blur));
+        border: var(--glass-border-v2);
+        color: var(--color-text-primary);
     }
 
     .ant-drawer-content-wrapper {
         width: 300px !important;
+        background: transparent !important;
+    }
+
+    .ant-drawer-content {
+        background: var(--glass-bg) !important;
+        backdrop-filter: blur(var(--glass-blur-v2));
+        -webkit-backdrop-filter: blur(var(--glass-blur-v2));
+        border-left: var(--glass-border-v2);
+        box-shadow: var(--glass-shadow-v2);
+    }
+
+    .ant-drawer-mask {
+        background: rgba(0, 0, 0, 0.4) !important;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+
+    /* Drawer menu items styling */
+    .ant-drawer-body .ant-col {
+        color: var(--color-text-primary) !important;
+    }
+
+    .ant-drawer-body span {
+        color: var(--color-text-primary) !important;
+    }
+
+    .ant-drawer-body a {
+        color: var(--color-text-primary) !important;
     }
     /* SVG icons: use currentColor so CSS controls fill/stroke via color property */
     .svg-icon {

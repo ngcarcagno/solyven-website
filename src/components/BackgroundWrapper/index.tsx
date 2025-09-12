@@ -37,13 +37,13 @@ export const BackgroundDotGrid = ({ children }: BackgroundWrapperProps) => (
     <BackgroundContainer>
       <DotGridBackground
         className=""
-        dotSize={10}
-        gap={15}
+        dotSize={5}
+        gap={50}
         baseColor="#333333"
-        activeColor="#5F0807"
+        activeColor="#F75800"
         proximity={120}
         shockRadius={250}
-        shockStrength={5}
+        shockStrength={7}
         resistance={750}
         returnDuration={1.5}
         style={{

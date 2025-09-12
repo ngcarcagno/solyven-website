@@ -32,10 +32,10 @@ export const NavLink = styled(Link)`
 export const Extra = styled("section")`
   scroll-snap-align: none;
   min-height: auto;
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  box-shadow: var(--glass-shadow);
+  background: var(--glass-bg-v2);
+  backdrop-filter: blur(var(--glass-blur-v2));
+  -webkit-backdrop-filter: blur(var(--glass-blur-v2));
+  box-shadow: var(--glass-shadow-v2);
   position: relative;
   width: 100%;
   margin-right: auto;

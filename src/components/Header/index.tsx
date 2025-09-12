@@ -42,7 +42,9 @@ const Header = () => {
           <Span>Servicios</Span>
         </CustomNavLinkSmall>
         <CustomNavLinkSmall style={{ width: "180px" }} onClick={() => scrollTo("contact")}>
-          <Button color="var(--color-secondary)">Contactanos</Button>
+          <Button color="var(--color-secondary)" variant="header">
+            Contactanos
+          </Button>
         </CustomNavLinkSmall>
       </>
     );
@@ -53,7 +55,7 @@ const Header = () => {
       <Container>
         <Row justify="space-between">
           <LogoContainer to="/" aria-label="homepage">
-            <SvgIcon src="logo.svg" width="200px" height="62px" />
+            <SvgIcon src="logo.svg" width="150px" height="50px" />
           </LogoContainer>
           <NotHidden>
             <MenuItem />

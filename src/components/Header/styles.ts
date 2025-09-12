@@ -9,13 +9,13 @@ export const HeaderSection = styled("header")`
   transform: translateX(-50%);
   width: 90vw;
   max-width: 1200px;
-  padding: 0.4rem 1.5rem; /* reduced vertical padding */
-  background: var(--glass-bg);
+  height: var(--header-height);
+  padding: 0 1.5rem; /* remove vertical padding, let height control it */
+  background: var(--glass-bg-v2);
   border-radius: var(--glass-radius);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur-v2));
+  -webkit-backdrop-filter: blur(var(--glass-blur-v2));
+  box-shadow: var(--glass-shadow-v2);
   z-index: 1000;
   display: flex;
   align-items: center; /* ensure vertical centering */
@@ -75,7 +75,7 @@ export const Menu = styled("h5")`
 `;
 
 export const CustomNavLinkSmall = styled(NavLink)`
-  font-size: 1.2rem;
+  font-size: var(--size-header-nav);
   color: var(--color-text-primary);
   transition: color 0.2s ease-in;
   margin: 0.5rem 2rem;
@@ -87,7 +87,7 @@ export const CustomNavLinkSmall = styled(NavLink)`
 
 export const Label = styled("span")`
   font-weight: 500;
-  color: #404041;
+  color: var(--color-text-primary);
   text-align: right;
   display: flex;
   justify-content: space-between;

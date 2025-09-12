@@ -8,6 +8,8 @@ export interface ButtonProps {
   name?: string;
   children: React.ReactNode;
   onClick?: () => void;
+  variant?: "default" | "compact" | "header";
+  style?: React.CSSProperties;
 }
 
 export interface SvgIconProps {

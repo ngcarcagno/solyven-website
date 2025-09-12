@@ -22,10 +22,11 @@ const ContentBlock = lazy(() =>
 
 const Home = () => {
   return (
-    <ScrollSnapContainer>
-      <ScrollToTop />
-      {/* Intro Section */}
-      <BackgroundFaultyTerminal>
+    <>
+      <ScrollSnapContainer>
+        <ScrollToTop />
+        {/* Intro Section */}
+
         <ContentBlock
           direction="right"
           title={IntroContent.title}
@@ -43,62 +44,67 @@ const Home = () => {
           }
           id="intro"
         />
-      </BackgroundFaultyTerminal>
 
-      {/* Middle Block Section */}
-      <BackgroundDotGrid>
-        <MiddleBlock
-          title={MiddleBlockContent.title}
-          content={MiddleBlockContent.text}
-          button={MiddleBlockContent.button}
+        {/* Middle Block Section */}
+        <BackgroundDotGrid>
+          <MiddleBlock
+            title={MiddleBlockContent.title}
+            content={MiddleBlockContent.text}
+            button={MiddleBlockContent.button}
+          />
+        </BackgroundDotGrid>
+
+        {/* About Section */}
+        <BackgroundDotGrid>
+          <ContentBlock
+            direction="left"
+            title={AboutContent.title}
+            content={AboutContent.text}
+            section={AboutContent.section}
+            icon="graphs.svg"
+            id="about"
+          />
+        </BackgroundDotGrid>
+
+        {/* Mission Section */}
+        <BackgroundDotGrid>
+          <ContentBlock
+            direction="right"
+            title={MissionContent.title}
+            content={MissionContent.text}
+            icon="product-launch.svg"
+            id="mission"
+          />
+        </BackgroundDotGrid>
+
+        {/* Product Section */}
+        <BackgroundDotGrid>
+          <ContentBlock
+            direction="left"
+            title={ProductContent.title}
+            content={ProductContent.text}
+            icon="waving.svg"
+            id="product"
+          />
+        </BackgroundDotGrid>
+
+        {/* Contact Section */}
+        <BackgroundDotGrid>
+          <Contact title={ContactContent.title} content={ContactContent.text} id="contact" />
+        </BackgroundDotGrid>
+      </ScrollSnapContainer>
+
+      {/* WhatsApp Widget - Outside ScrollSnapContainer to avoid z-index issues */}
+      <div style={{ position: "fixed", bottom: "20px", right: "20px", zIndex: 9999, pointerEvents: "all" }}>
+        <WhatsAppWidget
+          phoneNumber="+5491169369090"
+          companyName="Solyven Seguridad"
+          replyTimeText="Usualmente responde en minutos"
+          message="Hola 👋 ¿Necesitás un presupuesto?"
+          sendButtonText="Enviar"
         />
-      </BackgroundDotGrid>
-
-      {/* About Section */}
-      <BackgroundDotGrid>
-        <ContentBlock
-          direction="left"
-          title={AboutContent.title}
-          content={AboutContent.text}
-          section={AboutContent.section}
-          icon="graphs.svg"
-          id="about"
-        />
-      </BackgroundDotGrid>
-
-      {/* Mission Section */}
-      <BackgroundDotGrid>
-        <ContentBlock
-          direction="right"
-          title={MissionContent.title}
-          content={MissionContent.text}
-          icon="product-launch.svg"
-          id="mission"
-        />
-      </BackgroundDotGrid>
-
-      {/* Product Section */}
-      <BackgroundDotGrid>
-        <ContentBlock
-          direction="left"
-          title={ProductContent.title}
-          content={ProductContent.text}
-          icon="waving.svg"
-          id="product"
-        />
-      </BackgroundDotGrid>
-
-      {/* Contact Section */}
-
-      <Contact title={ContactContent.title} content={ContactContent.text} id="contact" />
-
-      {/* WhatsApp Widget */}
-      <WhatsAppWidget
-        phoneNumber="+5491172327772"
-        companyName="Solyven Seguridad"
-        message="Hola 👋 ¿Necesitás un presupuesto?"
-      />
-    </ScrollSnapContainer>
+      </div>
+    </>
   );
 };
 
