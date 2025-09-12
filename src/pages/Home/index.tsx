@@ -7,10 +7,7 @@ import ProductContent from "../../content/ProductContent.json";
 import ContactContent from "../../content/ContactContent.json";
 import Footer from "../../components/Footer";
 import { ScrollSnapContainer } from "../../components/ContentBlock/styles";
-import {
-  BackgroundDotGrid,
-  BackgroundGridDistortion,
-} from "../../components/BackgroundWrapper";
+import { BackgroundDotGrid, BackgroundGridDistortion } from "../../components/BackgroundWrapper";
 import CustomWhatsAppWidget from "../../components/WhatsAppWidget";
 
 const Contact = lazy(() => import("../../components/ContactForm"));

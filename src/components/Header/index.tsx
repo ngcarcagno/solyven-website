@@ -40,7 +40,7 @@ const Header = () => {
         <MobileMenuItem onClick={() => scrollTo("product")}>
           <span>Servicios</span>
         </MobileMenuItem>
-                <div style={{ marginTop: '1rem' }}>
+        <div style={{ marginTop: "1rem" }}>
           <Button variant="header" onClick={() => scrollTo("contact")}>
             Contacto
           </Button>

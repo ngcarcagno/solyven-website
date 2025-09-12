@@ -3,14 +3,15 @@
 ## 🎯 **Características del Sistema Configurable:**
 
 ### **📄 Archivo de Configuración JSON**
+
 ```json
 {
   "enabled": true,
   "config": {
-    "displayInterval": 15000,    // Tiempo entre mensajes (ms)
-    "displayDuration": 4000,     // Duración visible (ms)
-    "maxDisplaysPerSession": 3,  // Máximo por sesión
-    "delayAfterPageLoad": 8000,  // Delay inicial (ms)
+    "displayInterval": 15000, // Tiempo entre mensajes (ms)
+    "displayDuration": 4000, // Duración visible (ms)
+    "maxDisplaysPerSession": 3, // Máximo por sesión
+    "delayAfterPageLoad": 8000, // Delay inicial (ms)
     "pauseAfterInteraction": 30000 // Pausa después de interacción (ms)
   },
   "messages": [
@@ -27,6 +28,7 @@
 ```
 
 ### **🔧 Hook Personalizado: `useIncentiveMessages`**
+
 - **Gestión inteligente** de estado y timing
 - **Filtrado por contexto** (homepage, services, contact, etc.)
 - **Respeto a preferencias** del usuario
@@ -34,8 +36,9 @@
 - **Pausa automática** cuando el chat está abierto
 
 ### **⚙️ Panel de Configuración (Solo Desarrollo)**
+
 - **Toggle de sistema** completo enable/disable
-- **Ajuste de intervalos** en tiempo real  
+- **Ajuste de intervalos** en tiempo real
 - **Gestión de mensajes** individual
 - **Preview de configuración** actual
 - **Solo visible en desarrollo** (no en producción)
@@ -43,6 +46,7 @@
 ## 🚀 **Ventajas del Sistema Configurable:**
 
 ### **📊 Control Total:**
+
 1. **No invasivo**: Límites por sesión y pausas inteligentes
 2. **Contextual**: Mensajes relevantes según la página
 3. **Flexible**: Fácil modificación sin tocar código
@@ -50,6 +54,7 @@
 5. **Performante**: Hook optimizado con memoization
 
 ### **🎨 Personalización Completa:**
+
 - **8 mensajes predefinidos** con diferentes prioridades
 - **Contextos múltiples** por mensaje
 - **Enable/disable individual** por mensaje
@@ -57,6 +62,7 @@
 - **Textos con highlights** usando delimitadores |texto|
 
 ### **📱 Comportamiento Inteligente:**
+
 - **Respeta interacciones**: Pausa después de clicks
 - **Mobile-friendly**: Configuraciones específicas por dispositivo
 - **Session-aware**: No satura al usuario
@@ -65,12 +71,12 @@
 
 ## 📝 **Configuración por Contextos:**
 
-| Contexto | Mensajes Disponibles | Uso |
-|----------|---------------------|-----|
-| `homepage` | 5 mensajes | Página principal |
-| `services` | 4 mensajes | Página de servicios |
-| `contact` | 2 mensajes | Formulario contacto |
-| `products` | 2 mensajes | Catálogo productos |
+| Contexto   | Mensajes Disponibles | Uso                 |
+| ---------- | -------------------- | ------------------- |
+| `homepage` | 5 mensajes           | Página principal    |
+| `services` | 4 mensajes           | Página de servicios |
+| `contact`  | 2 mensajes           | Formulario contacto |
+| `products` | 2 mensajes           | Catálogo productos  |
 
 ## 🔄 **Flujo de Funcionamiento:**
 
@@ -85,6 +91,7 @@
 ## 🎛️ **Configuraciones Anti-Invasivas:**
 
 ### **Pausas Inteligentes:**
+
 - ✅ Pausa cuando chat está abierto
 - ✅ Pausa después de interacciones del usuario
 - ✅ Delay inicial para no molestar inmediatamente
@@ -92,6 +99,7 @@
 - ✅ Respeta preferencias del navegador
 
 ### **Targeting Contextual:**
+
 - ✅ Solo mensajes relevantes a la página actual
 - ✅ Prioridades para mostrar lo más importante primero
 - ✅ Enable/disable granular por mensaje
@@ -100,6 +108,7 @@
 ## 💡 **Ejemplos de Uso:**
 
 ### **Para cambiar intervalos:**
+
 ```json
 "config": {
   "displayInterval": 20000,  // 20 segundos entre mensajes
@@ -109,11 +118,13 @@
 ```
 
 ### **Para desactivar sistema completo:**
+
 ```json
 "enabled": false
 ```
 
 ### **Para agregar nuevo mensaje:**
+
 ```json
 {
   "id": "new_promo",
@@ -127,7 +138,7 @@
 ## 📈 **Impacto Esperado:**
 
 - **+40% engagement** vs mensajes genéricos
-- **-60% tasa de rechazo** por timing inteligente  
+- **-60% tasa de rechazo** por timing inteligente
 - **+25% conversiones** por mensajes contextuales
 - **0% invasividad** por límites y pausas
 - **Fácil mantenimiento** por configuración JSON externa

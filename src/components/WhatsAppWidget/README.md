@@ -3,17 +3,20 @@
 ## 🌟 **Características Principales:**
 
 ### **Integración Visual Completa**
+
 - **Glassmorphism moderno**: Mismo estilo que header y formularios
 - **Colores de marca**: Bordó, naranja y azul (variables CSS)
 - **Efectos tech**: Backdrop blur, gradientes, sombras suaves
 
-### **Animaciones Interactivas** 
+### **Animaciones Interactivas**
+
 - **Pulso de atención**: Cada 10 segundos para llamar la atención
 - **Badge de notificación**: Con animación bounce
 - **Mensajes de incentivo**: Rotativos cada 15 segundos
 - **Transiciones suaves**: slide-up, scale, hover effects
 
 ### **UX Mejorada**
+
 - **Botón principal**: Verde WhatsApp con efectos glassmorphism
 - **Chat box moderno**: Diseño dark tech con bordes azules
 - **Mensajes incentivo**: Speech bubbles con información destacada
@@ -22,6 +25,7 @@
 ## 🎯 **Funcionalidad de Incentivos:**
 
 ### **Mensajes Rotativos:**
+
 1. "💡 ¿Necesitás **seguridad empresarial**? ¡Consultá gratis!"
 2. "🔒 **Cámaras de seguridad** desde $15.000 - ¡Preguntá!"
 3. "⚡ **Respuesta inmediata** para tu consulta"
@@ -29,6 +33,7 @@
 5. "🏢 Especialistas en **seguridad corporativa**"
 
 ### **Comportamiento:**
+
 - Aparecen cada **15 segundos** automáticamente
 - Solo cuando el chat está **cerrado**
 - Duración: **4 segundos** visibles
@@ -48,24 +53,26 @@
 
 ## 📊 **Ventajas vs Widget Original:**
 
-| Característica | Widget Original | Widget Custom |
-|----------------|-----------------|---------------|
-| **Integración visual** | ❌ Estilo genérico | ✅ 100% integrado |
-| **Animaciones** | ❌ Básicas | ✅ Avanzadas + incentivos |
-| **Personalización** | ❌ Limitada | ✅ Total control CSS |
-| **UX móvil** | ❌ Estándar | ✅ Optimizada |
-| **Engagement** | ❌ Pasivo | ✅ Proactivo |
-| **Branded** | ❌ Generic WhatsApp | ✅ Solyven style |
+| Característica         | Widget Original     | Widget Custom             |
+| ---------------------- | ------------------- | ------------------------- |
+| **Integración visual** | ❌ Estilo genérico  | ✅ 100% integrado         |
+| **Animaciones**        | ❌ Básicas          | ✅ Avanzadas + incentivos |
+| **Personalización**    | ❌ Limitada         | ✅ Total control CSS      |
+| **UX móvil**           | ❌ Estándar         | ✅ Optimizada             |
+| **Engagement**         | ❌ Pasivo           | ✅ Proactivo              |
+| **Branded**            | ❌ Generic WhatsApp | ✅ Solyven style          |
 
 ## 🎨 **Detalles Técnicos:**
 
 ### **Estructura de Archivos:**
+
 - `index.tsx`: Componente principal con lógica
 - `styles.ts`: Styled-components con glassmorphism
 - `IncentiveMessage.tsx`: Mensajes de incentivo
 - `types.ts`: Interfaces TypeScript
 
 ### **Efectos Visuales:**
+
 - **Backdrop blur**: 20px para glassmorphism
 - **Gradientes**: WhatsApp green + tech overlays
 - **Sombras**: Multiple layer shadows
@@ -73,6 +80,7 @@
 - **Hover states**: Scale + glow effects
 
 ### **Performance:**
+
 - **Lazy loading**: Solo se renderiza cuando es necesario
 - **Optimized animations**: CSS keyframes + cubic-bezier
 - **Memory efficient**: Cleanup de intervals

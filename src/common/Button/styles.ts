@@ -11,10 +11,7 @@ export const StyledButton = styled("button")<{
   variant?: "default" | "compact" | "header";
 }>`
   /* Base modern button styling */
-  background: linear-gradient(135deg, 
-    ${(p) => p.backgroundColor || "rgba(95, 8, 7, 0.8)"}, 
-    rgba(75, 6, 5, 0.9)
-  );
+  background: linear-gradient(135deg, ${(p) => p.backgroundColor || "rgba(95, 8, 7, 0.8)"}, rgba(75, 6, 5, 0.9));
   color: ${(p) => p.normalTextColor || "rgba(255, 255, 255, 0.9)"};
   font-size: ${(p) => p.fontSize || "0.8rem"};
   font-family: ${(p) => p.fontFamily || "var(--font-button)"};
@@ -29,9 +26,7 @@ export const StyledButton = styled("button")<{
   text-transform: uppercase;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(8px);
-  box-shadow: 
-    0 4px 15px rgba(95, 8, 7, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 15px rgba(95, 8, 7, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 
   align-items: center;
   justify-content: center;
@@ -44,11 +39,7 @@ export const StyledButton = styled("button")<{
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, 
-      transparent, 
-      rgba(255, 255, 255, 0.15), 
-      transparent
-    );
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
     transition: left 0.6s ease;
   }
 
@@ -88,15 +79,10 @@ export const StyledButton = styled("button")<{
   &:active,
   &:focus {
     transform: translateY(-2px);
-    background: linear-gradient(135deg, 
-      ${(p) => p.focusColor || "var(--color-secondary)"}, 
-      rgba(212, 68, 28, 0.9)
-    );
+    background: linear-gradient(135deg, ${(p) => p.focusColor || "var(--color-secondary)"}, rgba(212, 68, 28, 0.9));
     border-color: rgba(255, 130, 92, 0.5);
     color: ${(p) => p.focusTextColor || "white"};
-    box-shadow: 
-      0 8px 25px rgba(255, 130, 92, 0.4),
-      0 0 20px rgba(255, 130, 92, 0.2),
+    box-shadow: 0 8px 25px rgba(255, 130, 92, 0.4), 0 0 20px rgba(255, 130, 92, 0.2),
       inset 0 1px 0 rgba(255, 255, 255, 0.3);
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
   }

@@ -240,8 +240,6 @@ export const Span = styled("span")`
   }
 `;
 
-
-
 /* Mobile Menu Items - Styled like desktop but adapted for mobile */
 export const MobileMenuItem = styled("div")`
   cursor: pointer;
@@ -291,5 +289,3 @@ export const MobileMenuItem = styled("div")`
     height: 60%;
   }
 `;
-
-

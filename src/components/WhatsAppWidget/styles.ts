@@ -59,39 +59,31 @@ export const WhatsAppButton = styled.button<{
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  
+
   /* Glassmorphism effect similar to header */
-  background: linear-gradient(135deg, 
-    rgba(37, 211, 102, 0.9) 0%, 
-    rgba(25, 180, 85, 0.95) 100%
-  );
-  
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.9) 0%, rgba(25, 180, 85, 0.95) 100%);
+
   /* WhatsApp green with tech overlay */
-  box-shadow: 
-    0 8px 32px rgba(37, 211, 102, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.1),
+  box-shadow: 0 8px 32px rgba(37, 211, 102, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  
+
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  
+
   color: white;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   &:hover {
     transform: translateY(-2px) scale(1.05);
-    background: linear-gradient(135deg, 
-      rgba(37, 211, 102, 1) 0%, 
-      rgba(25, 180, 85, 1) 100%
-    );
-    box-shadow: 
-      0 12px 40px rgba(37, 211, 102, 0.4),
-      0 0 0 1px rgba(255, 255, 255, 0.15),
+    background: linear-gradient(135deg, rgba(37, 211, 102, 1) 0%, rgba(25, 180, 85, 1) 100%);
+    box-shadow: 0 12px 40px rgba(37, 211, 102, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.15),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 
   /* Rotation effect when chat is open */
-  ${({ isOpen }) => isOpen && `
+  ${({ isOpen }) =>
+    isOpen &&
+    `
     transform: rotate(45deg);
     background: linear-gradient(135deg, 
       rgba(239, 68, 68, 0.9) 0%, 
@@ -116,7 +108,7 @@ export const WhatsAppButton = styled.button<{
     height: 56px;
     bottom: 16px;
     right: 16px;
-    
+
     svg {
       width: 28px;
       height: 28px;
@@ -138,7 +130,7 @@ export const NotificationBadge = styled.div`
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 1);
   animation: ${bounce} 2s infinite;
   z-index: 2;
-  
+
   span {
     color: white;
     font-size: 11px;
@@ -168,27 +160,22 @@ export const ChatBox = styled.div`
   max-height: 500px;
   border-radius: 16px;
   overflow: hidden;
-  
+
   /* Modern glassmorphism similar to contact form */
-  background: linear-gradient(180deg, 
-    rgba(15, 15, 15, 0.95) 0%, 
-    rgba(10, 10, 10, 0.98) 100%
-  );
+  background: linear-gradient(180deg, rgba(15, 15, 15, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
   border: 1px solid rgba(0, 53, 122, 0.2);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: 
-    0 16px 40px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.05),
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    
+
   animation: ${slideUp} 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   @media (max-width: 768px) {
     width: 300px;
     bottom: 75px;
   }
-  
+
   @media (max-width: 480px) {
     width: calc(100vw - 40px);
     right: -20px;
@@ -197,15 +184,12 @@ export const ChatBox = styled.div`
 
 export const Header = styled.div`
   padding: 1rem 1.25rem;
-  background: linear-gradient(135deg, 
-    rgba(37, 211, 102, 0.9) 0%, 
-    rgba(25, 180, 85, 0.95) 100%
-  );
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.9) 0%, rgba(25, 180, 85, 0.95) 100%);
   display: flex;
   align-items: center;
   gap: 0.75rem;
   position: relative;
-  
+
   .avatar {
     width: 40px;
     height: 40px;
@@ -216,32 +200,32 @@ export const Header = styled.div`
     justify-content: center;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    
+
     svg {
       width: 20px;
       height: 20px;
       color: white;
     }
   }
-  
+
   .info {
     flex: 1;
     color: white;
-    
+
     h4 {
       margin: 0;
       font-size: 1rem;
       font-weight: 600;
       line-height: 1.2;
     }
-    
+
     span {
       font-size: 0.8rem;
       opacity: 0.9;
       line-height: 1;
     }
   }
-  
+
   .close {
     width: 32px;
     height: 32px;
@@ -254,12 +238,12 @@ export const Header = styled.div`
     cursor: pointer;
     transition: all 0.2s ease;
     backdrop-filter: blur(10px);
-    
+
     &:hover {
       background: rgba(255, 255, 255, 0.25);
       transform: scale(1.1);
     }
-    
+
     svg {
       color: white;
     }
@@ -275,15 +259,15 @@ export const MessageBubble = styled.div`
   position: relative;
   backdrop-filter: blur(10px);
   transition: all 0.2s ease;
-  
+
   &:hover {
     background: rgba(255, 255, 255, 0.08);
     border-color: rgba(0, 53, 122, 0.2);
   }
-  
+
   /* WhatsApp-style tail */
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: -6px;
@@ -293,7 +277,7 @@ export const MessageBubble = styled.div`
     border-width: 0 0 12px 12px;
     border-color: transparent transparent rgba(255, 255, 255, 0.05) transparent;
   }
-  
+
   p {
     margin: 0 0 0.5rem 0;
     color: rgba(255, 255, 255, 0.9);
@@ -301,7 +285,7 @@ export const MessageBubble = styled.div`
     line-height: 1.4;
     white-space: pre-wrap;
   }
-  
+
   .time {
     font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.6);
@@ -323,12 +307,12 @@ export const SendButton = styled.button`
   justify-content: center;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 12px rgba(247, 88, 0, 0.3);
-  
+
   &:hover {
     transform: scale(1.1);
     box-shadow: 0 6px 16px rgba(247, 88, 0, 0.4);
   }
-  
+
   &:active {
     transform: scale(0.95);
   }
@@ -339,26 +323,26 @@ export const ChatBoxExtended = styled(ChatBox)`
   .messages {
     max-height: 300px;
     overflow-y: auto;
-    
+
     /* Custom scrollbar */
     &::-webkit-scrollbar {
       width: 4px;
     }
-    
+
     &::-webkit-scrollbar-track {
       background: rgba(255, 255, 255, 0.05);
     }
-    
+
     &::-webkit-scrollbar-thumb {
       background: rgba(0, 53, 122, 0.3);
       border-radius: 2px;
     }
-    
+
     &::-webkit-scrollbar-thumb:hover {
       background: rgba(0, 53, 122, 0.5);
     }
   }
-  
+
   .send-section {
     padding: 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -366,7 +350,7 @@ export const ChatBoxExtended = styled(ChatBox)`
     gap: 0.75rem;
     align-items: center;
     background: rgba(0, 0, 0, 0.2);
-    
+
     input {
       flex: 1;
       background: rgba(255, 255, 255, 0.05);
@@ -377,11 +361,11 @@ export const ChatBoxExtended = styled(ChatBox)`
       font-size: 0.9rem;
       outline: none;
       transition: all 0.2s ease;
-      
+
       &::placeholder {
         color: rgba(255, 255, 255, 0.4);
       }
-      
+
       &:focus {
         background: rgba(255, 255, 255, 0.08);
         border-color: rgba(0, 53, 122, 0.3);

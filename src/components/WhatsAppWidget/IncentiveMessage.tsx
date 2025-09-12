@@ -5,26 +5,21 @@ const IncentiveContainer = styled.div`
   position: absolute;
   bottom: 90px;
   right: 80px;
-  background: linear-gradient(135deg, 
-    rgba(15, 15, 15, 0.95) 0%, 
-    rgba(10, 10, 10, 0.98) 100%
-  );
+  background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
   border: 1px solid rgba(0, 53, 122, 0.2);
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
   backdrop-filter: blur(20px);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.05);
-  
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
+
   max-width: 320px;
   min-width: 280px;
   animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 9998;
-  
+
   /* Speech bubble arrow */
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 25px;
     right: -8px;
@@ -34,7 +29,7 @@ const IncentiveContainer = styled.div`
     border-width: 8px 0 8px 16px;
     border-color: transparent transparent transparent rgba(15, 15, 15, 0.95);
   }
-  
+
   @keyframes slideInRight {
     from {
       opacity: 0;
@@ -45,7 +40,7 @@ const IncentiveContainer = styled.div`
       transform: translateX(0) scale(1);
     }
   }
-  
+
   /* Mobile - posición sobre el botón sin bloquear scroll */
   @media (max-width: 768px) {
     bottom: 90px;
@@ -55,7 +50,7 @@ const IncentiveContainer = styled.div`
     min-width: auto;
     width: calc(100% - 90px); /* Deja espacio para el botón */
     padding: 1rem 1.25rem;
-    
+
     &::after {
       bottom: -8px;
       right: 20px;
@@ -64,7 +59,7 @@ const IncentiveContainer = styled.div`
       border-color: rgba(15, 15, 15, 0.95) transparent transparent transparent;
     }
   }
-  
+
   @media (max-width: 480px) {
     width: calc(100% - 80px);
     padding: 0.875rem 1rem;
@@ -77,7 +72,7 @@ const IncentiveText = styled.p`
   font-size: 0.85rem;
   line-height: 1.4;
   font-weight: 500;
-  
+
   .highlight {
     color: var(--color-secondary);
     font-weight: 600;
@@ -100,7 +95,7 @@ const CloseIncentive = styled.button`
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
-  
+
   &:hover {
     background: rgba(239, 68, 68, 1);
     transform: scale(1.1);
@@ -112,18 +107,19 @@ interface IncentiveMessageProps {
   message: string;
 }
 
-const IncentiveMessage: React.FC<IncentiveMessageProps> = ({ 
-  onClose, 
-  message 
-}) => {
+const IncentiveMessage: React.FC<IncentiveMessageProps> = ({ onClose, message }) => {
   return (
     <IncentiveContainer>
       <CloseIncentive onClick={onClose}>×</CloseIncentive>
       <IncentiveText>
-        {message.split('|').map((part, index) => 
-          index % 2 === 1 ? 
-            <span key={index} className="highlight">{part}</span> : 
+        {message.split("|").map((part, index) =>
+          index % 2 === 1 ? (
+            <span key={index} className="highlight">
+              {part}
+            </span>
+          ) : (
             part
+          )
         )}
       </IncentiveText>
     </IncentiveContainer>
