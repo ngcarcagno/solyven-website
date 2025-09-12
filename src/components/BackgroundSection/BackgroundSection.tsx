@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HeroWrapper = styled.section`
+export const BackgroundWrapper = styled.section`
   position: relative;
   scroll-snap-align: start;
   width: 100%;
@@ -9,7 +9,7 @@ export const HeroWrapper = styled.section`
   padding: 0 1rem; /* Agregar padding horizontal */
 `;
 
-export const HeroBackground = styled.div`
+export const BackgroundContainer = styled.div`
   position: absolute;
   inset: 0;
   width: 100%;
@@ -18,7 +18,7 @@ export const HeroBackground = styled.div`
   pointer-events: none;
 `;
 
-export const HeroContent = styled.div`
+export const BackgroundContent = styled.div`
   position: relative;
   z-index: 1;
   width: 100%;
