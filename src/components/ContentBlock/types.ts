@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export interface ContentBlockProps {
-  icon: string | ReactNode;
+  icon?: string | ReactNode; // Ahora opcional
   title: string;
   content: string;
   section?: {
@@ -21,4 +21,5 @@ export interface ContentBlockProps {
   )[];
   id: string;
   direction: "left" | "right" | "center";
+  customContent?: ReactNode; // Nueva prop para contenido personalizado
 }

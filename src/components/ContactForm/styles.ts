@@ -1,120 +1,67 @@
 import styled from "styled-components";
 
-export const ContactContainer = styled("div")`
-  width: 100%;
-  max-width: 1200px; /* Contenedor más ancho */
-  margin: 0 auto; /* Centrar el contenedor */
-  padding: 5rem 3rem; /* Más padding horizontal */
-  position: relative;
-  min-height: 100vh;
-  scroll-snap-align: start;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  h6 {
-    text-align: center; /* center the title text */
-    margin: 0 0 1rem 0;
-    font-size: 2rem;
-  }
-
-  p {
-    text-align: center; /* center the subtitle */
-    max-width: 720px;
-    margin: 0 0 1.5rem 0;
-  }
-
-  @media only screen and (max-width: 1024px) {
-    padding: 3rem 2rem; /* Mantener buen padding en tablets */
-    max-width: 900px;
-    h6 {
-      font-size: 1.6rem;
-    }
-  }
-
-  @media only screen and (max-width: 768px) {
-    padding: 2.5rem 1.5rem; /* Mejor balance en móviles */
-    max-width: 600px;
-    h6 {
-      font-size: 1.5rem;
-    }
-  }
-
-  @media only screen and (max-width: 480px) {
-    padding: 2rem 1rem; /* Mínimo padding en pantallas muy pequeñas */
-    h6 {
-      font-size: 1.4rem;
-    }
-  }
-`;
+/* Solo estilos específicos del formulario - ContentBlock maneja el layout */
 
 export const FormGroup = styled("form")`
-  /* Modern glassy card - optimizado para ser más ancho y corto */
+  /* Formulario limpio que funciona dentro de ContentBlock */
   width: 100%;
-  max-width: 900px; /* Ancho máximo más generoso */
-  min-width: 320px; /* Ancho mínimo para móviles */
+  max-width: 600px; /* Límite máximo razonable */
+  margin: 1.5em auto 0; /* Separación del texto superior, centrado horizontal */
   box-sizing: border-box;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Dos columnas por defecto */
-  grid-gap: 1.5rem;
-  align-items: start;
 
-  /* El textarea y botón ocupan toda la fila */
-  & > div:nth-child(3), /* TextArea */
-  & > div:last-child {
-    /* ButtonContainer */
-    grid-column: 1 / -1;
-  }
+  /* Layout interno del formulario */
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 
-  /* En tablets: mantener dos columnas pero más espacio */
-  @media only screen and (max-width: 1024px) {
-    max-width: 750px;
-    grid-gap: 1.25rem;
-  }
-
-  /* En móviles: una sola columna */
-  @media only screen and (max-width: 768px) {
-    grid-template-columns: 1fr;
-    max-width: 500px;
-    grid-gap: 1rem;
-
-    & > div:nth-child(3),
-    & > div:last-child {
-      grid-column: 1;
-    }
-  }
-
-  /* glass effect*/
+  /* glass effect */
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.04));
-  border-radius: 16px;
+  border-radius: 1em;
   border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65);
-  padding: 2rem;
+  box-shadow: 0 0.875em 2.125em rgba(0, 0, 0, 0.65);
+  padding: 1.25em;
   transition: transform 240ms ease, box-shadow 240ms ease;
 
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.7);
+  /* Mobile: más compacto */
+  @media only screen and (max-width: 768px) {
+    padding: 1em;
+    gap: 0.75em;
+    max-width: 90vw;
   }
 
-  /* ensure Ant Col and inputs take full width */
+  /* Efecto hover */
+  &:hover {
+    transform: translateY(-0.25em);
+    box-shadow: 0 1.25em 3em rgba(0, 0, 0, 0.7);
+  }
+
+  @media only screen and (max-width: 480px) {
+    max-width: 95vw;
+    padding: 1em;
+    gap: 1em;
+  }
+
+  &:hover {
+    transform: translateY(-0.25em);
+    box-shadow: 0 1.25em 3em rgba(0, 0, 0, 0.7);
+  }
+
+  /* Ant Col takes full width */
   & > div {
     width: 100%;
   }
 
-  /* style native inputs/textarea inside the form to match glass card */
+  /* Input styles */
   input,
   textarea {
     width: 100%;
     box-sizing: border-box;
-    background: rgba(255, 255, 255, 0.03); /* lighter input bg */
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 0.5em;
     border: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 0.85rem 1rem;
+    padding: 0.75em 1em;
     color: var(--color-text-primary);
     outline: none;
     transition: box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
@@ -128,25 +75,15 @@ export const FormGroup = styled("form")`
   input:focus,
   textarea:focus {
     border-color: rgba(255, 130, 92, 0.95);
-    box-shadow: 0 6px 18px rgba(255, 130, 92, 0.1);
+    box-shadow: 0 0.375em 1.125em rgba(255, 130, 92, 0.1);
     background: rgba(255, 255, 255, 0.04);
   }
 
   label {
     display: block;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.25em;
     color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
-  }
-
-  /* Responsive adjustments */
-  @media only screen and (max-width: 1024px) {
-    padding: 1.25rem;
-  }
-
-  @media only screen and (max-width: 480px) {
-    padding: 0.75rem; /* reduce inner padding on very small screens */
-    border-radius: 12px;
   }
 `;
 
@@ -154,19 +91,26 @@ export const Span = styled("span")`
   display: block;
   font-weight: 600;
   color: var(--color-secondary);
-  height: 0.775rem;
-  padding: 0 0.675rem;
+  height: 1em;
+  padding: 0 0.5em;
+  font-size: 0.875em;
 `;
 
 export const ButtonContainer = styled("div")`
   text-align: end;
   position: relative;
+  margin-top: 0.5em;
 
   button {
-    border-radius: 8px;
+    border-radius: 0.5em;
   }
 
-  @media only screen and (max-width: 414px) {
-    padding-top: 0.75rem;
+  @media only screen and (max-width: 768px) {
+    text-align: center;
+
+    button {
+      width: 100%;
+      padding: 0.875em 1em;
+    }
   }
 `;

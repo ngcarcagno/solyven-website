@@ -3,23 +3,23 @@ import { Link } from "react-router-dom";
 
 export const FooterSection = styled("footer")`
   background: rgb(241, 242, 243);
-  padding: 2.5rem 0;
+  padding: 2em 0; /* Proportional vertical padding */
 `;
 
 export const Title = styled("h4")`
-  font-size: 22px;
+  font-size: 1.375em; /* Proportional font size */
   text-transform: capitalize;
   color: var(--color-detail);
 
   @media screen and (max-width: 414px) {
-    padding: 1.5rem 0;
+    padding: 1.2em 0; /* Proportional mobile padding */
   }
 `;
 
 export const NavLink = styled(Link)`
   display: block;
-  font-size: 1rem;
-  margin-bottom: 0.625rem;
+  font-size: 1em; /* Proportional font size */
+  margin-bottom: 0.5em; /* Proportional margin */
   transition: all 0.2s ease-in-out;
 
   &:hover,
@@ -50,8 +50,8 @@ export const LogoContainer = styled("div")`
 
 export const Para = styled("div")`
   color: var(--color-text-secondary);
-  font-size: 14px;
-  width: 70%;
+  font-size: clamp(0.8rem, 1.5vw, 0.875rem); /* Fluid font size 12.8px to 14px */
+  width: clamp(60%, 70%, 80%); /* Fluid width */
 `;
 
 export const Large = styled(Link)`

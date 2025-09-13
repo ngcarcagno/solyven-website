@@ -4,12 +4,12 @@ import { MenuOutlined } from "@ant-design/icons";
 
 export const HeaderSection = styled("header")`
   position: fixed;
-  top: 8px;
+  top: 0.5em; /* Proportional top spacing */
   left: 0;
   right: 0;
   width: 100%;
   height: var(--header-height);
-  padding: 0 2.5rem;
+  padding: 0 2em; /* Proportional horizontal padding */
 
   /* Sin fondo - completamente transparente */
   background: transparent;
@@ -22,7 +22,7 @@ export const HeaderSection = styled("header")`
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   @media (max-width: 768px) {
-    padding: 0 1rem;
+    padding: 0 1em; /* Proportional mobile padding */
   }
 `;
 
@@ -34,10 +34,10 @@ export const LogoContainer = styled(Link)`
   transition: all 0.3s ease;
 
   .logo-with-outline {
-    height: 48px;
+    height: 3em; /* Proportional logo size */
     width: auto;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    filter: drop-shadow(0 0 2px rgba(0, 53, 122, 0.5)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(0 0 0.125em rgba(0, 53, 122, 0.5)) drop-shadow(0 0.125em 0.375em rgba(0, 0, 0, 0.4));
   }
 
   &:hover .logo-with-outline {
@@ -46,8 +46,7 @@ export const LogoContainer = styled(Link)`
       drop-shadow(0 3px 8px rgba(0, 0, 0, 0.5));
   }
 
-  @media (max-width: 768px) {
-    padding-left: 0;
+  /* Removed media query - now handled by clamp() padding in HeaderSection */
 
     .logo-with-outline {
       height: 42px;
@@ -125,18 +124,17 @@ export const NotHidden = styled("div")`
 export const NavContainer = styled("nav")`
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 2em; /* Proportional gap between nav items */
 
   /* Fondo tecnológico más sutil y moderno */
   background: linear-gradient(135deg, rgba(15, 15, 15, 0.65) 0%, rgba(20, 20, 20, 0.55) 100%);
   border: 1px solid rgba(0, 53, 122, 0.2);
-  border-radius: 12px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.03),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border-radius: var(--glass-radius); /* Uses proportional glass radius */
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--glass-shadow), 0 0 0 1px rgba(255, 255, 255, 0.03), inset 0 0.0625em 0 rgba(255, 255, 255, 0.05);
 
-  padding: 0.75rem 2rem;
+  padding: 0.75em 2em; /* Proportional padding */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Efecto hover tecnológico */
@@ -207,19 +205,19 @@ export const Outline = styled(MenuOutlined)`
 
 export const Span = styled("span")`
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: var(--size-header-nav); /* Proportional font size */
   font-weight: 500;
   color: rgba(255, 255, 255, 0.8);
-  letter-spacing: 1px;
+  letter-spacing: 0.05em; /* Proportional letter spacing */
   text-transform: uppercase;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  padding: 0.5rem 0;
+  padding: 0.5em 0; /* Proportional padding */
 
   &:hover {
     color: var(--color-secondary);
-    transform: translateY(-1px);
-    text-shadow: 0 0 8px rgba(255, 130, 92, 0.3);
+    transform: translateY(-0.0625em); /* Proportional transform */
+    text-shadow: 0 0 0.5em rgba(255, 130, 92, 0.3);
   }
 
   /* Línea inferior minimalista */

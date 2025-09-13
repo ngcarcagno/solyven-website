@@ -6,7 +6,7 @@ export const BackgroundWrapper = styled.section`
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  padding: 0 1rem; /* Agregar padding horizontal */
+  padding: 0 2em; /* Proportional horizontal padding */
 `;
 
 export const BackgroundContainer = styled.div`

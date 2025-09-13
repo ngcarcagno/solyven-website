@@ -15,7 +15,7 @@ import {
   ButtonWrapper,
 } from "./styles";
 
-const ContentBlock = ({ icon, title, content, section, button, id, direction }: ContentBlockProps) => {
+const ContentBlock = ({ icon, title, content, section, button, id, direction, customContent }: ContentBlockProps) => {
   const scrollTo = (id: string) => {
     const element = document.getElementById(id) as HTMLDivElement;
     element.scrollIntoView({
@@ -23,8 +23,10 @@ const ContentBlock = ({ icon, title, content, section, button, id, direction }: 
     });
   };
 
+  const isContactSection = id === "contact";
+
   return (
-    <ContentSection>
+    <ContentSection $isContact={isContactSection}>
       <Fade direction={direction === "center" ? "up" : direction} triggerOnce>
         <StyledRow
           justify={direction === "center" ? "center" : "space-between"}
@@ -40,6 +42,7 @@ const ContentBlock = ({ icon, title, content, section, button, id, direction }: 
                 <ContentWrapper $centered={true}>
                   <h6>{title}</h6>
                   <Content>{content}</Content>
+                  {customContent}
                   <ButtonWrapper $centered={true}>
                     {typeof button === "object" &&
                       button.map(
@@ -94,6 +97,7 @@ const ContentBlock = ({ icon, title, content, section, button, id, direction }: 
                 <ContentWrapper>
                   <h6>{title}</h6>
                   <Content>{content}</Content>
+                  {customContent}
                   {direction === "right" ? (
                     <ButtonWrapper>
                       {typeof button === "object" &&

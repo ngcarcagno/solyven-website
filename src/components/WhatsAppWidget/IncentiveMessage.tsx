@@ -3,17 +3,17 @@ import styled from "styled-components";
 
 const IncentiveContainer = styled.div`
   position: absolute;
-  bottom: 90px;
-  right: 80px;
+  bottom: clamp(5rem, 12vh, 7rem); /* Fluid bottom spacing */
+  right: clamp(4rem, 8vw, 6rem); /* Fluid right spacing */
   background: linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
   border: 1px solid rgba(0, 53, 122, 0.2);
-  border-radius: 12px;
-  padding: 1.25rem 1.5rem;
+  border-radius: clamp(0.75rem, 1.5vw, 1rem); /* Fluid border radius */
+  padding: clamp(1rem, 2vh, 1.25rem) clamp(1.25rem, 3vw, 1.5rem); /* Fluid padding */
   backdrop-filter: blur(20px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
 
-  max-width: 320px;
-  min-width: 280px;
+  max-width: clamp(18rem, 35vw, 22rem); /* Fluid max width 288px to 352px */
+  min-width: clamp(16rem, 30vw, 20rem); /* Fluid min width 256px to 320px */
   animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 9998;
 
@@ -43,9 +43,9 @@ const IncentiveContainer = styled.div`
 
   /* Mobile - posición sobre el botón sin bloquear scroll */
   @media (max-width: 768px) {
-    bottom: 90px;
-    right: 10px;
-    left: 10px;
+    bottom: clamp(5.5rem, 12vh, 7.5rem); /* Fluid mobile bottom */
+    right: clamp(0.5rem, 2vw, 1rem); /* Fluid mobile right */
+    left: clamp(0.5rem, 2vw, 1rem); /* Fluid mobile left */
     max-width: none;
     min-width: auto;
     width: calc(100% - 90px); /* Deja espacio para el botón */
@@ -69,8 +69,8 @@ const IncentiveContainer = styled.div`
 const IncentiveText = styled.p`
   margin: 0;
   color: rgba(255, 255, 255, 0.9);
-  font-size: 0.85rem;
-  line-height: 1.4;
+  font-size: clamp(0.75rem, 1.5vw, 0.9rem); /* Fluid font size */
+  line-height: clamp(1.3, 0.2vw + 1.2, 1.5); /* Fluid line height */
   font-weight: 500;
 
   .highlight {
@@ -81,15 +81,15 @@ const IncentiveText = styled.p`
 
 const CloseIncentive = styled.button`
   position: absolute;
-  top: -4px;
-  right: -4px;
-  width: 20px;
-  height: 20px;
+  top: clamp(-0.25rem, -0.5vh, -0.2rem); /* Fluid top position */
+  right: clamp(-0.25rem, -0.5vw, -0.2rem); /* Fluid right position */
+  width: clamp(1.125rem, 2.5vw, 1.5rem); /* Fluid width */
+  height: clamp(1.125rem, 2.5vw, 1.5rem); /* Fluid height */
   border: none;
   background: rgba(239, 68, 68, 0.9);
   border-radius: 50%;
   color: white;
-  font-size: 12px;
+  font-size: clamp(0.65rem, 1.2vw, 0.8rem); /* Fluid font size */
   cursor: pointer;
   display: flex;
   align-items: center;

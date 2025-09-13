@@ -10,23 +10,23 @@ export const StyledButton = styled("button")<{
   focusColor?: string;
   variant?: "default" | "compact" | "header";
 }>`
-  /* Base modern button styling */
+  /* Base modern button styling - proportional */
   background: linear-gradient(135deg, ${(p) => p.backgroundColor || "rgba(95, 8, 7, 0.8)"}, rgba(75, 6, 5, 0.9));
   color: ${(p) => p.normalTextColor || "rgba(255, 255, 255, 0.9)"};
-  font-size: ${(p) => p.fontSize || "0.8rem"};
+  font-size: ${(p) => p.fontSize || "0.8em"}; /* Proportional font size */
   font-family: ${(p) => p.fontFamily || "var(--font-button)"};
   font-weight: 600;
   width: 100%;
   border: 1px solid ${(p) => p.borderColor || "rgba(95, 8, 7, 0.4)"};
-  border-radius: 6px;
+  border-radius: 0.375em; /* Proportional border radius */
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  letter-spacing: 1px;
+  letter-spacing: 0.0625em; /* Proportional letter spacing */
   text-transform: uppercase;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 15px rgba(95, 8, 7, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(0.5em); /* Proportional blur */
+  box-shadow: 0 0.25em 0.9375em rgba(95, 8, 7, 0.3), inset 0 0.0625em 0 rgba(255, 255, 255, 0.1);
 
   align-items: center;
   justify-content: center;
@@ -48,9 +48,9 @@ export const StyledButton = styled("button")<{
     switch (p.variant) {
       case "header":
         return `
-          padding: 0.6rem 1.2rem;
+          padding: 0.6em 1.2em;
           height: auto;
-          font-size: 0.8rem;
+          font-size: 0.8em;
           margin-top: 0;
           max-width: none;
           width: auto;
@@ -59,18 +59,18 @@ export const StyledButton = styled("button")<{
         `;
       case "compact":
         return `
-          padding: 0.5rem 1rem;
+          padding: 0.5em 1em;
           height: auto;
-          font-size: 0.75rem;
-          margin-top: 0.25rem;
-          max-width: 140px;
+          font-size: 0.75em;
+          margin-top: 0.25em;
+          max-width: 8.75em;
         `;
       default:
         return `
-          padding: 1rem 1.5rem;
-          margin-top: 0.625rem;
-          max-width: 180px;
-          font-size: 0.9rem;
+          padding: 1em 1.5em;
+          margin-top: 0.625em;
+          max-width: 11.25em;
+          font-size: 0.9em;
         `;
     }
   }}
@@ -78,13 +78,13 @@ export const StyledButton = styled("button")<{
   &:hover,
   &:active,
   &:focus {
-    transform: translateY(-2px);
+    transform: translateY(-0.125em); /* Proportional transform */
     background: linear-gradient(135deg, ${(p) => p.focusColor || "var(--color-secondary)"}, rgba(212, 68, 28, 0.9));
     border-color: rgba(255, 130, 92, 0.5);
     color: ${(p) => p.focusTextColor || "white"};
-    box-shadow: 0 8px 25px rgba(255, 130, 92, 0.4), 0 0 20px rgba(255, 130, 92, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0.5em 1.5625em rgba(255, 130, 92, 0.4), 0 0 1.25em rgba(255, 130, 92, 0.2),
+      inset 0 0.0625em 0 rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 0.5em rgba(255, 255, 255, 0.5);
   }
 
   &:hover::before {
@@ -92,6 +92,6 @@ export const StyledButton = styled("button")<{
   }
 
   &:active {
-    transform: translateY(-1px);
+    transform: translateY(-0.0625em); /* Proportional transform */
   }
 `;

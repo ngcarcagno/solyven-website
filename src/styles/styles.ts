@@ -35,34 +35,38 @@ export const Styles = createGlobalStyle`
     --font-subtitle: 'Montserrat Regular', sans-serif; /* subtitles and smaller headings */
     --font-button: 'Montserrat Medium', sans-serif; /* buttons and CTAs */
 
-    /* Text size variables (easy global control) */
-    --size-h1: 48px; /* a bit smaller than before */
-    --size-h1-sm: 42px;
-    --size-h1-xs: 32px;
-    --size-body: 19px;
-    --size-header-nav: 1.2rem; /* header navigation and button text */
-    --size-min-title: 14px;
-    --size-min-para: 12px;
+    /* Text size variables - PROPORTIONAL SCALING (always same ratios) */
+    --size-base: 1rem; /* Base size for proportional calculations */
+    --size-h1: 2.5em; /* Reduced from 3em for better proportion */
+    --size-h1-sm: 2.2em; /* Reduced from 2.6em */
+    --size-h1-xs: 1.9em; /* Reduced from 2.2em */
+    --size-body: 1.1em; /* Reduced from 1.2em for better readability */
+    --size-header-nav: 0.95em; /* Slightly smaller for better header proportion */
+    --size-min-title: 0.85em; /* Reduced from 0.9em */
+    --size-min-para: 0.75em; /* Reduced from 0.8em */
 
-    /* Header layout */
-    --header-height: 60px;
+    /* Header layout - PROPORTIONAL (scales with root font-size) */
+    --header-height: 4em; /* Always 4x the root font size */
     
-    /* Content block layout */
+    /* Content block layout - PROPORTIONAL */
     --content-min-height: 100vh;
-    --content-padding: 10rem 1rem 8rem;
-    --content-padding-mobile: 4rem 1rem 4rem;
-    --content-wrapper-max-width: 540px;
+    --content-padding: 6em 2em 5em; /* Reduced vertical padding for better mobile */
+    --content-padding-mobile: 3em 1.5em 3em; /* Reduced mobile padding */
+    --content-wrapper-max-width: min(90vw, 36em); /* Slightly wider max-width */
     
-    /* Glassy UI variables (shared) */
+    /* Glassy UI variables - PROPORTIONAL SCALING */
     --glass-bg: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.008));
     --glass-bg-v2: rgba(255, 255, 255, 0.15);
     --glass-border: rgba(255,255,255,0.12);
     --glass-border-v2: 1px solid rgba(255, 255, 255, 0.2);
-    --glass-blur: 10px;
-    --glass-blur-v2: 10px;
-    --glass-shadow: 0 14px 34px rgba(0,0,0,0.65);
-    --glass-shadow-v2: 0 8px 32px rgba(0, 0, 0, 0.1);
-    --glass-radius: 12px;
+    --glass-blur: 0.625em; /* Proportional blur (10px at 16px root) */
+    --glass-blur-v2: 0.625em;
+    --glass-shadow: 0 0.875em 2.125em rgba(0,0,0,0.65); /* Proportional shadows */
+    --glass-shadow-v2: 0 0.5em 2em rgba(0, 0, 0, 0.1);
+    --glass-radius: 0.75em; /* Proportional border radius */
+    
+    /* Touch targets - proportional with minimum */
+    --min-touch-target: max(2.75em, 44px); /* Proportional but never smaller than 44px */
     }
 
     body,
@@ -83,6 +87,14 @@ export const Styles = createGlobalStyle`
     overflow-y: auto;
     /* Enable scroll snapping for full-height sections */
     scroll-snap-type: y mandatory;
+    
+    /* PROPORTIONAL SCALING - Root font size scales with viewport */
+    font-size: clamp(12px, 1.5vw, 16px); /* Reduced range for better mobile adaptation */
+    
+    /* Zoom optimization */
+    -webkit-text-size-adjust: 100%; /* Prevents text scaling on iOS zoom */
+    -ms-text-size-adjust: 100%; /* Prevents text scaling on Windows */
+    text-size-adjust: 100%; /* Standard property */
     }
 
     a {
@@ -120,22 +132,14 @@ export const Styles = createGlobalStyle`
                 font-family: var(--font-title);
                 text-transform: uppercase;
                 color: var(--color-text-primary);
-                font-size: var(--size-h1);
-                line-height: 1.18;
-
-                @media only screen and (max-width: 890px) {
-                    font-size: var(--size-h1-sm);
-                }
-      
-                @media only screen and (max-width: 414px) {
-                    font-size: var(--size-h1-xs);
-                }
+                font-size: var(--size-h1); /* Proportional to root font-size */
+                line-height: 1.2; /* Fixed ratio - always proportional */
         }
 
     p {
         color: var(--color-text-primary);
-        font-size: 21px;        
-        line-height: 1.41;
+        font-size: var(--size-body); /* Proportional to root font-size */
+        line-height: 1.4; /* Fixed ratio - always proportional */
     }
 
     h1 {
@@ -144,6 +148,29 @@ export const Styles = createGlobalStyle`
     
     *:focus {
         outline: none;
+    }
+    
+    /* Zoom-responsive optimization for all elements */
+    * {
+        /* Prevent text inflation on mobile browsers */
+        -webkit-text-size-adjust: none;
+        -moz-text-size-adjust: none;
+        -ms-text-size-adjust: none;
+        text-size-adjust: none;
+    }
+    
+    /* Smooth scaling for images and media */
+    img, video, iframe {
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+    
+    /* Ensure smooth font rendering at all zoom levels */
+    * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
     }
 
     .about-block-image svg {
@@ -248,5 +275,41 @@ export const Styles = createGlobalStyle`
         background: rgba(0, 0, 0, 0.3) !important;
         backdrop-filter: blur(8px) !important;
         -webkit-backdrop-filter: blur(8px) !important;
+    }
+
+    /* RESPONSIVE FONT SIZE OPTIMIZATION */
+    /* Extra small mobile devices */
+    @media screen and (max-width: 375px) {
+        body {
+            font-size: clamp(11px, 4vw, 14px);
+        }
+    }
+
+    /* Small mobile devices */
+    @media screen and (max-width: 480px) {
+        body {
+            font-size: clamp(12px, 3.5vw, 15px);
+        }
+    }
+
+    /* Large mobile devices / small tablets */
+    @media screen and (max-width: 768px) {
+        body {
+            font-size: clamp(13px, 2.5vw, 16px);
+        }
+    }
+
+    /* Tablets */
+    @media screen and (max-width: 1024px) {
+        body {
+            font-size: clamp(14px, 2vw, 17px);
+        }
+    }
+
+    /* Large screens - prevent text from getting too big */
+    @media screen and (min-width: 1400px) {
+        body {
+            font-size: clamp(15px, 1.2vw, 18px);
+        }
     }
         `;

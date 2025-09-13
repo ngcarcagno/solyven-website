@@ -43,8 +43,8 @@ const bounce = keyframes`
 
 export const WhatsAppContainer = styled.div`
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 1.25em; /* Proportional bottom spacing */
+  right: 1.25em; /* Proportional right spacing */
   z-index: 9999;
   font-family: var(--font-button);
 `;
@@ -54,8 +54,8 @@ export const WhatsAppButton = styled.button<{
   showNotification: boolean;
 }>`
   position: relative;
-  width: 64px;
-  height: 64px;
+  width: 4em; /* Proportional size */
+  height: 4em; /* Matching width for circle */
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -321,12 +321,12 @@ export const SendButton = styled.button`
 /* Extended styling for chat elements */
 export const ChatBoxExtended = styled(ChatBox)`
   .messages {
-    max-height: 300px;
+    max-height: clamp(15rem, 25vh, 20rem); /* Fluid max height */
     overflow-y: auto;
 
     /* Custom scrollbar */
     &::-webkit-scrollbar {
-      width: 4px;
+      width: clamp(2px, 0.5vw, 4px); /* Fluid scrollbar width */
     }
 
     &::-webkit-scrollbar-track {
@@ -344,10 +344,10 @@ export const ChatBoxExtended = styled(ChatBox)`
   }
 
   .send-section {
-    padding: 1rem;
+    padding: clamp(0.75rem, 2vh, 1rem); /* Fluid padding */
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
-    gap: 0.75rem;
+    gap: clamp(0.5rem, 1vw, 0.75rem); /* Fluid gap */
     align-items: center;
     background: rgba(0, 0, 0, 0.2);
 
@@ -355,10 +355,10 @@ export const ChatBoxExtended = styled(ChatBox)`
       flex: 1;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 0.75rem 1rem;
+      border-radius: clamp(1rem, 2vw, 1.25rem); /* Fluid border radius */
+      padding: clamp(0.5rem, 1vh, 0.75rem) clamp(0.75rem, 2vw, 1rem); /* Fluid padding */
       color: rgba(255, 255, 255, 0.9);
-      font-size: 0.9rem;
+      font-size: clamp(0.8rem, 1.5vw, 0.9rem); /* Fluid font size */
       outline: none;
       transition: all 0.2s ease;
 
