@@ -8,6 +8,8 @@ export const FormGroup = styled("form")`
   max-width: 600px; /* Límite máximo razonable */
   margin: 1.5em auto 0; /* Separación del texto superior, centrado horizontal */
   box-sizing: border-box;
+  flex: 1;
+  min-height: 0; /* Permite que se comprima si es necesario */
 
   /* Layout interno del formulario */
   display: flex;
@@ -41,6 +43,26 @@ export const FormGroup = styled("form")`
     max-width: 95vw;
     padding: 1em;
     gap: 1em;
+  }
+
+  /* Para pantallas como iPhone SE portrait (667px) */
+  @media only screen and (max-height: 700px) {
+    padding: 1em;
+    gap: 0.75em;
+    margin: 0.75em auto 0; /* Menos margen superior */
+  }
+
+  /* Para pantallas muy pequeñas de altura */
+  @media only screen and (max-height: 500px) {
+    padding: 0.75em;
+    gap: 0.5em;
+    margin: 0.5em auto 0;
+  }
+
+  @media only screen and (max-height: 400px) {
+    padding: 0.5em;
+    gap: 0.25em;
+    margin: 0.25em auto 0;
   }
 
   &:hover {

@@ -40,6 +40,25 @@ export const LogoContainer = styled(Link)`
     filter: drop-shadow(0 0 0.125em rgba(0, 53, 122, 0.5)) drop-shadow(0 0.125em 0.375em rgba(0, 0, 0, 0.4));
   }
 
+  /* Para pantallas muy pequeñas de altura */
+  @media only screen and (max-height: 500px) {
+    .logo-with-outline {
+      height: 2.5em;
+    }
+  }
+
+  @media only screen and (max-height: 400px) {
+    .logo-with-outline {
+      height: 2em;
+    }
+  }
+
+  @media only screen and (max-height: 375px) {
+    .logo-with-outline {
+      height: 1.5em;
+    }
+  }
+
   &:hover .logo-with-outline {
     transform: translateY(-1px) scale(1.05);
     filter: drop-shadow(0 0 3px rgba(0, 53, 122, 0.7)) drop-shadow(0 0 12px rgba(0, 53, 122, 0.3))

@@ -23,10 +23,8 @@ const ContentBlock = ({ icon, title, content, section, button, id, direction, cu
     });
   };
 
-  const isContactSection = id === "contact";
-
   return (
-    <ContentSection $isContact={isContactSection}>
+    <ContentSection>
       <Fade direction={direction === "center" ? "up" : direction} triggerOnce>
         <StyledRow
           justify={direction === "center" ? "center" : "space-between"}
@@ -35,10 +33,14 @@ const ContentBlock = ({ icon, title, content, section, button, id, direction, cu
           direction={direction}>
           {direction === "center" ? (
             <>
-              <Col span={24}>
-                {typeof icon === "string" ? <SvgIcon src={icon} width="200px" height="200px" /> : icon}
+              <Col span={24} style={{ flex: "0 0 auto" }}>
+                {typeof icon === "string" ? (
+                  <SvgIcon src={icon} width="min(200px, 25vh)" height="min(200px, 25vh)" />
+                ) : (
+                  icon
+                )}
               </Col>
-              <Col span={24}>
+              <Col span={24} style={{ flex: "1", minHeight: 0 }}>
                 <ContentWrapper $centered={true}>
                   <h6>{title}</h6>
                   <Content>{content}</Content>
@@ -90,11 +92,15 @@ const ContentBlock = ({ icon, title, content, section, button, id, direction, cu
             </>
           ) : (
             <>
-              <Col lg={11} md={11} sm={12} xs={24}>
-                {typeof icon === "string" ? <SvgIcon src={icon} width="100%" height="100%" /> : icon}
+              <Col lg={11} md={11} sm={12} xs={24} style={{ display: "flex", alignItems: "center" }}>
+                {typeof icon === "string" ? (
+                  <SvgIcon src={icon} width="min(100%, 40vh)" height="min(100%, 40vh)" />
+                ) : (
+                  icon
+                )}
               </Col>
-              <Col lg={11} md={11} sm={11} xs={24}>
-                <ContentWrapper>
+              <Col lg={11} md={11} sm={11} xs={24} style={{ display: "flex", flexDirection: "column" }}>
+                <ContentWrapper style={{ flex: "1", display: "flex", flexDirection: "column" }}>
                   <h6>{title}</h6>
                   <Content>{content}</Content>
                   {customContent}

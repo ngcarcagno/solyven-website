@@ -312,4 +312,55 @@ export const Styles = createGlobalStyle`
             font-size: clamp(15px, 1.2vw, 18px);
         }
     }
+
+    /* Para pantallas de altura limitada como iPhone SE portrait (667px) */
+    @media only screen and (max-height: 700px) {
+        :root {
+            --header-height: 3.5em; /* Reducir un poco el header */
+        }
+    }
+
+    /* Pantallas con altura muy pequeña - ajustar variables CSS */
+    @media only screen and (max-height: 500px) {
+        :root {
+            --header-height: 3em; /* Reducir altura del header */
+            --size-h1: 2.2em; /* Títulos más pequeños */
+            --size-body: 1em; /* Texto más pequeño */
+        }
+        body {
+            font-size: clamp(11px, 1.2vw, 14px); /* Texto más pequeño */
+        }
+    }
+
+    @media only screen and (max-height: 400px) {
+        :root {
+            --header-height: 2.5em; /* Aún más pequeño para pantallas muy bajas */
+            --size-h1: 2em; /* Títulos reducidos */
+            --size-body: 0.95em; /* Texto más pequeño */
+        }
+        body {
+            font-size: clamp(10px, 1vw, 13px); /* Texto aún más pequeño */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            line-height: 1.15; /* Interlineado más compacto */
+        }
+    }
+
+    /* iPhone SE landscape y similares */
+    @media only screen and (max-height: 375px) {
+        :root {
+            --header-height: 2em; /* Mínimo absoluto */
+            --size-h1: 1.8em; /* Títulos más pequeños */
+            --size-body: 0.9em; /* Texto más pequeño */
+        }
+        body {
+            font-size: clamp(9px, 0.8vw, 12px);
+        }
+        h1, h2, h3, h4, h5, h6 {
+            line-height: 1.1; /* Interlineado más compacto */
+        }
+        p {
+            line-height: 1.3; /* Interlineado más compacto para párrafos */
+        }
+    }
         `;

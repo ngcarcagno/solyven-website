@@ -15,49 +15,50 @@ export const ScrollSnapContainer = styled("div")`
   }
 `;
 
-export const ContentSection = styled("section")<{ $isContact?: boolean }>`
+export const ContentSection = styled("section")`
   position: relative;
-  min-height: var(--content-min-height);
+  min-height: 100vh; /* Altura completa para que funcione el padding */
+  height: 100vh; /* Altura fija para controlar el desbordamiento */
   scroll-snap-align: start;
   display: flex;
-  align-items: center;
+  align-items: center; /* Volver al centrado normal */
   justify-content: center;
-  padding: var(--content-padding);
 
-  /* Estilos específicos para la sección de contacto */
-  ${({ $isContact }) =>
-    $isContact &&
-    `
-    height: 100vh;
-    padding: 100px 2rem 20px; /* Padding fijo superior para el header */
-    align-items: stretch;
-    justify-content: flex-start;
-    box-sizing: border-box;
-    overflow: hidden; /* Evita desbordamiento */
-  `}
+  /* Padding universal basado en la altura del header */
+  padding: var(--header-height) 2rem var(--header-height);
+  box-sizing: border-box;
+  overflow: hidden; /* Evita desbordamiento */
 
   @media only screen and (max-width: 1024px) {
-    padding: var(--content-padding-mobile);
-
-    ${({ $isContact }) =>
-      $isContact &&
-      `
-      padding: 80px 1rem 15px; /* Menos padding en móviles */
-    `}
+    padding: var(--header-height) 1rem var(--header-height);
   }
 
   @media only screen and (max-height: 700px) {
-    ${({ $isContact }) =>
-      $isContact &&
-      `
-      padding: 60px 1rem 10px; /* Aún menos en pantallas muy bajas */
-    `}
+    height: auto; /* Permitir que crezca si necesita más espacio */
+    min-height: 100vh; /* Mínimo de pantalla completa */
+    padding: calc(var(--header-height) * 1.5) 1rem calc(var(--header-height) * 1.5);
+  }
+
+  /* Para pantallas muy pequeñas de altura (iPhone SE landscape, etc) */
+  @media only screen and (max-height: 500px) {
+    padding: calc(var(--header-height) * 0.5) 1rem calc(var(--header-height) * 0.5);
+    min-height: 100vh;
+  }
+
+  @media only screen and (max-height: 400px) {
+    padding: calc(var(--header-height) * 0.3) 0.5rem calc(var(--header-height) * 0.3);
+    min-height: 100vh;
   }
 `;
 
 export const StyledRow = styled(Row)`
   flex-direction: ${({ direction }: { direction: string }) =>
     direction === "left" ? "row" : direction === "right" ? "row-reverse" : "column"};
+
+  /* Asegurar que el contenido se adapte al espacio disponible */
+  height: 100%;
+  width: 100%;
+  max-height: 100%; /* No exceder el contenedor padre */
 
   ${({ direction }: { direction: string }) =>
     direction === "center" &&
@@ -78,12 +79,40 @@ export const ContentWrapper = styled("div")<{ $centered?: boolean }>`
   position: relative;
   max-width: ${({ $centered }) => ($centered ? "min(85vw, 570px)" : "var(--content-wrapper-max-width)")};
 
+  /* Asegurar que el contenido se comprima dentro del área disponible */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto; /* Scroll si el contenido es muy alto */
+
+  ${(p) =>
+    p.$centered &&
+    `
+    text-align: center;
+    align-items: center;
+  `}
+
   @media only screen and (max-width: 575px) {
-    padding-top: 3em; /* Proportional mobile padding */
+    padding-top: 0; /* Eliminar padding extra ya que tenemos el del contenedor */
   }
 
   @media only screen and (max-width: 768px) {
     max-width: ${({ $centered }) => ($centered ? "95vw" : "var(--content-wrapper-max-width)")};
+  }
+
+  /* Para pantallas muy pequeñas de altura */
+  @media only screen and (max-height: 500px) {
+    justify-content: flex-start;
+    padding-top: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  @media only screen and (max-height: 400px) {
+    justify-content: flex-start;
+    padding-top: 0.25rem;
+    gap: 0.25rem;
+    font-size: 0.9em;
   }
 `;
 
