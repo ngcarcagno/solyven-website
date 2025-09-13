@@ -45,11 +45,13 @@ export const FormGroup = styled("form")`
     gap: 1em;
   }
 
-  /* Para pantallas como iPhone SE portrait (667px) */
-  @media only screen and (max-height: 700px) {
-    padding: 1em;
-    gap: 0.75em;
-    margin: 0.75em auto 0; /* Menos margen superior */
+  /* Para pantallas de altura limitada (funciona desde 950px hacia abajo) */
+  @media only screen and (max-height: 950px) {
+    padding: 0.75em;
+    gap: 0.5em;
+    margin: 0.5em auto 0; /* Menos margen superior */
+    max-height: calc(70vh - calc(var(--header-height) * 2)); /* FORZAR compresión del form */
+    overflow-y: auto; /* Scroll interno si es muy necesario */
   }
 
   /* Para pantallas muy pequeñas de altura */
@@ -106,6 +108,18 @@ export const FormGroup = styled("form")`
     margin-bottom: 0.25em;
     color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
+  }
+
+  /* Para pantallas de altura limitada */
+  @media only screen and (max-height: 950px) {
+    input,
+    textarea {
+      padding: 0.5em 0.75em; /* Padding más compacto */
+    }
+
+    label {
+      margin-bottom: 0.15em; /* Menos espacio entre label e input */
+    }
   }
 `;
 

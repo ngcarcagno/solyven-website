@@ -33,10 +33,11 @@ export const ContentSection = styled("section")`
     padding: var(--header-height) 1rem var(--header-height);
   }
 
-  @media only screen and (max-height: 700px) {
-    height: auto; /* Permitir que crezca si necesita más espacio */
-    min-height: 100vh; /* Mínimo de pantalla completa */
+  @media only screen and (max-height: 950px) {
+    height: 100vh; /* Mantener altura fija */
     padding: calc(var(--header-height) * 1.5) 1rem calc(var(--header-height) * 1.5);
+    align-items: center; /* Mantener centrado pero respetando padding */
+    justify-content: center;
   }
 
   /* Para pantallas muy pequeñas de altura (iPhone SE landscape, etc) */
@@ -59,12 +60,22 @@ export const StyledRow = styled(Row)`
   height: 100%;
   width: 100%;
   max-height: 100%; /* No exceder el contenedor padre */
+  display: flex !important; /* Forzar flex para compresión */
 
   ${({ direction }: { direction: string }) =>
     direction === "center" &&
     `
       text-align: center;
+      justify-content: center;
+      align-items: center;
+      min-height: 0; /* Permitir compresión */
     `}
+
+  /* Para pantallas de altura limitada - forzar compresión */
+  @media only screen and (max-height: 950px) {
+    max-height: calc(100vh - calc(var(--header-height) * 3)); /* Espacio disponible sin paddings */
+    overflow: hidden; /* Evitar desbordamiento */
+  }
 `;
 
 /* ========================================
@@ -99,6 +110,14 @@ export const ContentWrapper = styled("div")<{ $centered?: boolean }>`
 
   @media only screen and (max-width: 768px) {
     max-width: ${({ $centered }) => ($centered ? "95vw" : "var(--content-wrapper-max-width)")};
+  }
+
+  /* Para pantallas de altura limitada */
+  @media only screen and (max-height: 950px) {
+    min-height: 0; /* Permitir compresión total */
+    max-height: calc(100vh - calc(var(--header-height) * 3)); /* FORZAR altura máxima */
+    gap: 0.75rem; /* Espaciado más compacto entre elementos */
+    overflow-y: auto; /* Scroll si es necesario */
   }
 
   /* Para pantallas muy pequeñas de altura */

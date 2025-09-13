@@ -12,9 +12,11 @@ export const StyledTextArea = styled("textarea")`
   font-size: 0.875em; /* Proportional font size */
   height: 11.5625em; /* Proportional height */
 
-  /* Para pantallas de altura limitada como iPhone SE portrait */
-  @media only screen and (max-height: 700px) {
-    height: 6em; /* Mucho más compacto */
+  /* Para pantallas de altura limitada (desde 950px hacia abajo) */
+  @media only screen and (max-height: 950px) {
+    height: 3em; /* MUY compacto para forzar que entre */
+    min-height: 3em; /* Mínimo funcional */
+    max-height: 4em; /* Máximo permitido */
     resize: vertical; /* Permitir redimensionamiento manual */
   }
 
