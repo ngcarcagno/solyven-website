@@ -1,16 +1,9 @@
 {
-  "title": "COMPROMISO Y CONFIANZA",
-  "text": "Soluciones integrales en seguridad, adaptadas a tus necesidades.",
-  "section": [
-    {
-      "title": "Control de Accesos",
-      "content": "Gestión eficiente de ingreso y egreso de personas y vehículos.",
-      "icon": "notes.svg"
-    },
-    {
-      "title": "Rondines Perimetrales",
-      "content": "Supervisión constante para garantizar la seguridad.",
-      "icon": "notes.svg"
-    }
+  "title": "QUIÉNES SOMOS",
+  "text": "Solyven es una empresa familiar de Zárate, fundada en 2017. Crecemos paso a paso, brindando seguridad profesional y tecnología con personal certificado.",
+  "bullets": [
+    "Fundada en Zárate, 2017",
+    "Crecimiento sostenido y responsable",
+    "Personal certificado (Ministerio de Seguridad)"
   ]
 }

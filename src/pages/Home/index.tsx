@@ -9,6 +9,8 @@ import Footer from "../../components/Footer";
 import { ScrollSnapContainer } from "../../components/ContentBlock/styles";
 import { BackgroundDotGrid, BackgroundGridDistortion } from "../../components/BackgroundWrapper";
 import CustomWhatsAppWidget from "../../components/WhatsAppWidget";
+import SplitText from "../../components/TexComponents/SplitText/SplitText";
+import AboutUsContent from "../Sections/AboutUs";
 
 const Contact = lazy(() => import("../../components/ContactForm"));
 const MiddleBlock = lazy(() => import("../../components/MiddleBlock"));
@@ -35,15 +37,34 @@ const Home = () => {
           />
         </BackgroundGridDistortion>
 
-        {/* About Section */}
+        {/* About Section - Enhanced with animated components */}
         <BackgroundDotGrid>
           <ContentBlock
-            direction="left"
+            direction="center"
             title={AboutContent.title}
-            content={AboutContent.text}
-            section={AboutContent.section}
-            icon="graphs.svg"
+            content=""
             id="about"
+            icon="Shield.png"
+            customContent={
+              <AboutUsContent
+                titleComponent={
+                  <SplitText
+                    text={AboutContent.title}
+                    className="about-title"
+                    splitType="chars"
+                    delay={100}
+                    duration={0.6}
+                    ease="power3.out"
+                    from={{ opacity: 0, y: 40 }}
+                    to={{ opacity: 1, y: 0 }}
+                    threshold={0.1}
+                    rootMargin="-100px"
+                    tag="div"
+                    onLetterAnimationComplete={() => {}}
+                  />
+                }
+              />
+            }
           />
         </BackgroundDotGrid>
 

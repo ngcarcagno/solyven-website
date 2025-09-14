@@ -35,7 +35,19 @@ const ContentBlock = ({ icon, title, content, section, button, id, direction, cu
             <>
               <Col span={24} style={{ flex: "0 0 auto" }}>
                 {typeof icon === "string" ? (
-                  <SvgIcon src={icon} width="min(200px, 25vh)" height="min(200px, 25vh)" />
+                  icon.endsWith('.png') || icon.endsWith('.jpg') || icon.endsWith('.jpeg') ? (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/img/png/${icon}`}
+                      alt=""
+                      style={{
+                        width: "min(200px, 25vh)",
+                        height: "min(200px, 25vh)",
+                        objectFit: "contain"
+                      }}
+                    />
+                  ) : (
+                    <SvgIcon src={icon} width="min(200px, 25vh)" height="min(200px, 25vh)" />
+                  )
                 ) : (
                   icon
                 )}
@@ -94,7 +106,19 @@ const ContentBlock = ({ icon, title, content, section, button, id, direction, cu
             <>
               <Col lg={11} md={11} sm={12} xs={24} style={{ display: "flex", alignItems: "center" }}>
                 {typeof icon === "string" ? (
-                  <SvgIcon src={icon} width="min(100%, 40vh)" height="min(100%, 40vh)" />
+                  icon.endsWith('.png') || icon.endsWith('.jpg') || icon.endsWith('.jpeg') ? (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/img/png/${icon}`}
+                      alt=""
+                      style={{
+                        width: "min(100%, 40vh)",
+                        height: "min(100%, 40vh)",
+                        objectFit: "contain"
+                      }}
+                    />
+                  ) : (
+                    <SvgIcon src={icon} width="min(100%, 40vh)" height="min(100%, 40vh)" />
+                  )
                 ) : (
                   icon
                 )}
