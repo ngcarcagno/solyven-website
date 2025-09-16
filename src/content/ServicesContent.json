@@ -1,0 +1,22 @@
+{
+  "title": "NUESTROS SERVICIOS",
+  "subtitle": "Soluciones de seguridad adaptadas a empresas y particulares",
+  "description": "Nuestro diferencial está en la rapidez de respuesta y el respaldo de un stock real de equipos.",
+  "services": [
+    {
+      "icon": "ShieldCheck",
+      "title": "Vigilancia Física",
+      "description": "Control de accesos, rondines perimetrales y supervisión profesional, con personal certificado por el Ministerio de Seguridad."
+    },
+    {
+      "icon": "Monitor",
+      "title": "Instalación y Monitoreo",
+      "description": "Sistemas de videovigilancia con instalación profesional y monitoreo remoto 24/7, asegurando cobertura total."
+    },
+    {
+      "icon": "Package",
+      "title": "Venta de Equipos",
+      "description": "Comercialización de accesorios y equipos de seguridad confiables, con stock real y soporte local."
+    }
+  ]
+}

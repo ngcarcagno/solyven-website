@@ -11,6 +11,8 @@ import { BackgroundDotGrid, BackgroundGridDistortion } from "../../components/Ba
 import CustomWhatsAppWidget from "../../components/WhatsAppWidget";
 import SplitText from "../../components/TexComponents/SplitText/SplitText";
 import AboutUsContent from "../Sections/AboutUs";
+import ServicesContent from "../Sections/Services";
+import ServicesContentData from "../../content/ServicesContent.json";
 
 const Contact = lazy(() => import("../../components/ContactForm"));
 const MiddleBlock = lazy(() => import("../../components/MiddleBlock"));
@@ -67,6 +69,36 @@ const Home = () => {
                     duration={0.6}
                     ease="power3.out"
                     from={{ opacity: 0, y: 40 }}
+                    to={{ opacity: 1, y: 0 }}
+                    threshold={0.1}
+                    rootMargin="-100px"
+                    tag="h6"
+                    onLetterAnimationComplete={() => {}}
+                  />
+                }
+              />
+            }
+          />
+        </BackgroundDotGrid>
+
+        {/* Services Section - SpotlightCards */}
+        <BackgroundDotGrid>
+          <ContentBlock
+            direction="center"
+            title=""
+            content=""
+            id="services"
+            customContent={
+              <ServicesContent
+                titleComponent={
+                  <SplitText
+                    text={ServicesContentData.title}
+                    className="services-title"
+                    splitType="chars"
+                    delay={80}
+                    duration={0.5}
+                    ease="power3.out"
+                    from={{ opacity: 0, y: 30 }}
                     to={{ opacity: 1, y: 0 }}
                     threshold={0.1}
                     rootMargin="-100px"

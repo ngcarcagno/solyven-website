@@ -127,14 +127,14 @@ export const StyledRow = styled(Row)`
    ======================================== */
 export const ContentWrapper = styled("div")<{ $centered?: boolean }>`
   position: relative;
-  max-width: ${({ $centered }) => ($centered ? "min(85vw, 570px)" : "var(--content-wrapper-max-width)")};
+  max-width: ${({ $centered }) => ($centered ? "min(95vw, 1200px)" : "var(--content-wrapper-max-width)")};
 
   /* Asegurar que el contenido se comprima dentro del área disponible */
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow-y: auto; /* Scroll si el contenido es muy alto */
+  overflow: hidden; /* Sin scroll visible */
 
   /* Para iPhone SE - usar todo el ancho disponible */
   @media only screen and (max-width: 375px) {
@@ -267,7 +267,7 @@ export const IconWithHalo = styled("div")`
   position: relative;
   display: inline-block;
 
-  /* Halo animado principal - más difuminado */
+  /* Halo animado principal - más difuminado con color detail (azul) */
   &::before {
     content: "";
     position: absolute;
@@ -279,10 +279,10 @@ export const IconWithHalo = styled("div")`
     border-radius: 50%;
     background: radial-gradient(
       ellipse 120% 80% at center,
-      rgba(247, 88, 0, 0.06) 0%,
-      rgba(247, 88, 0, 0.04) 20%,
-      rgba(247, 88, 0, 0.02) 45%,
-      rgba(247, 88, 0, 0.01) 70%,
+      rgba(0, 53, 122, 0.06) 0%,
+      rgba(0, 53, 122, 0.04) 20%,
+      rgba(0, 53, 122, 0.02) 45%,
+      rgba(0, 53, 122, 0.01) 70%,
       transparent 100%
     );
     filter: blur(8px);
@@ -290,7 +290,7 @@ export const IconWithHalo = styled("div")`
     animation: haloAnimation 4s ease-in-out infinite;
   }
 
-  /* Segundo halo más amplio y sutil */
+  /* Segundo halo más amplio y sutil con color detail (azul) */
   &::after {
     content: "";
     position: absolute;
@@ -302,9 +302,9 @@ export const IconWithHalo = styled("div")`
     border-radius: 50%;
     background: radial-gradient(
       ellipse 140% 90% at center,
-      rgba(247, 88, 0, 0.03) 0%,
-      rgba(247, 88, 0, 0.015) 30%,
-      rgba(247, 88, 0, 0.008) 60%,
+      rgba(0, 53, 122, 0.03) 0%,
+      rgba(0, 53, 122, 0.015) 30%,
+      rgba(0, 53, 122, 0.008) 60%,
       transparent 90%
     );
     filter: blur(12px);
@@ -312,10 +312,13 @@ export const IconWithHalo = styled("div")`
     animation: haloAnimation 4s ease-in-out infinite reverse;
   }
 
+  /* Efecto de levitación para el PNG */
   img,
   svg {
     position: relative;
     z-index: 2;
+    animation: levitationFloat 3s ease-in-out infinite;
+    transform-origin: center;
   }
 
   @keyframes haloAnimation {
@@ -327,6 +330,20 @@ export const IconWithHalo = styled("div")`
     50% {
       transform: translate(-50%, -50%) scale(1.08);
       opacity: 0.8;
+    }
+  }
+
+  /* Animación de levitación suave */
+  @keyframes levitationFloat {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    33% {
+      transform: translateY(-8px) rotate(1deg);
+    }
+    66% {
+      transform: translateY(-4px) rotate(-0.5deg);
     }
   }
 `;
