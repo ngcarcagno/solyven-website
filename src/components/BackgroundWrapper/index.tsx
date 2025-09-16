@@ -2,6 +2,7 @@ import FaultyTerminalBackground from "../Backgrounds/FaultyTerminal/faultyTermin
 import DotGridBackground from "../Backgrounds/DotGrid/DotGrid";
 import GridDistortionBackground from "../Backgrounds/GridDistortion/GridDistortion";
 import { BackgroundWrapper, BackgroundContainer, BackgroundContent } from "./BackgroundWrapper";
+import NoiseOverlay from "../NoiseOverlay";
 import { ReactNode } from "react";
 
 // BackgroundSecurity ahora está integrado en BackgroundGridDistortion con className="security-distortion"
@@ -71,6 +72,7 @@ export const BackgroundGridDistortion = ({ children }: BackgroundWrapperProps) =
         className="security-distortion"
       />
     </BackgroundContainer>
+    {/* Noise overlay removed from here — using a global overlay instead */}
     <BackgroundContent className="security-background">{children}</BackgroundContent>
   </BackgroundWrapper>
 );
