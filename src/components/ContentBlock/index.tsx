@@ -4,6 +4,7 @@ import { Fade } from "react-awesome-reveal";
 import { ContentBlockProps } from "./types";
 import { Button } from "../../common/Button";
 import { SvgIcon } from "../../common/SvgIcon";
+import DecryptedText from "../TexComponents/DecryptedText";
 import {
   ContentSection,
   Content,
@@ -55,8 +56,31 @@ const ContentBlock = ({ icon, title, content, section, button, id, direction, cu
                   overflow: "visible",
                 }}>
                 <ContentWrapper $centered={true}>
-                  {title && <h6>{title}</h6>}
-                  {content && <Content>{content}</Content>}
+                  {title && (
+                    <h6>
+                      <DecryptedText
+                        text={title}
+                        animateOn="both"
+                        revealDirection="start"
+                        speed={60}
+                        maxIterations={10}
+                        sequential={true}
+                      />
+                    </h6>
+                  )}
+                  {content && (
+                    <Content>
+                      <DecryptedText
+                        text={content}
+                        animateOn="view"
+                        revealDirection="start"
+                        speed={60}
+                        maxIterations={10}
+                        sequential={true}
+                        useOriginalCharsOnly={true}
+                      />
+                    </Content>
+                  )}
                   {customContent}
                   <ButtonWrapper $centered={true}>
                     {typeof button === "object" &&
@@ -126,8 +150,24 @@ const ContentBlock = ({ icon, title, content, section, button, id, direction, cu
               </Col>
               <Col lg={11} md={11} sm={11} xs={24} style={{ display: "flex", flexDirection: "column" }}>
                 <ContentWrapper style={{ flex: "1", display: "flex", flexDirection: "column" }}>
-                  <h6>{title}</h6>
-                  <Content>{content}</Content>
+                  <h6>
+                    <DecryptedText
+                      text={title}
+                      animateOn="view"
+                      revealDirection="center"
+                      speed={45}
+                      maxIterations={30}
+                    />
+                  </h6>
+                  <Content>
+                    <DecryptedText
+                      text={content}
+                      animateOn="view"
+                      revealDirection="center"
+                      speed={45}
+                      maxIterations={40}
+                    />
+                  </Content>
                   {customContent}
                   {direction === "right" ? (
                     <ButtonWrapper>

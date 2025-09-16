@@ -4,7 +4,7 @@ import "antd/dist/antd.min.css";
 import "./styles/css-variables.css";
 
 import Router from "./router";
-import NoiseOverlay from "./components/NoiseOverlay";
+import NoiseOverlay from "./components/Backgrounds/Overlays/NoiseOverlay";
 
 const App = () => (
   <BrowserRouter basename={process.env.PUBLIC_URL}>
