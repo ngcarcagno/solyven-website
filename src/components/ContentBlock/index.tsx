@@ -55,11 +55,13 @@ const ContentBlock = ({ icon, title, content, section, button, id, direction, cu
                   icon
                 )}
               </Col>
-              <Col span={24} style={{ 
-                flex: "1", 
-                minHeight: 0,
-                overflow: "visible"
-              }}>
+              <Col
+                span={24}
+                style={{
+                  flex: "1",
+                  minHeight: 0,
+                  overflow: "visible",
+                }}>
                 <ContentWrapper $centered={true}>
                   {title && <h6>{title}</h6>}
                   {content && <Content>{content}</Content>}

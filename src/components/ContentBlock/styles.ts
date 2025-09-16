@@ -57,7 +57,7 @@ export const ContentSection = styled("section")`
     min-height: 100vh; /* Mantener altura completa pero flexible */
     height: auto; /* Permitir altura dinámica */
     overflow: visible; /* Asegurar contenido visible */
-    
+
     /* Forzar alineación vertical */
     flex-direction: column !important;
     align-items: center !important;
@@ -74,7 +74,7 @@ export const StyledRow = styled(Row)`
   width: 100%;
   max-height: 100%; /* No exceder el contenedor padre */
   display: flex !important; /* Forzar flex para compresión */
-  
+
   /* Deshabilitar propiedades de Ant Design Row que interfieren */
   && {
     flex-wrap: nowrap !important;
@@ -94,13 +94,13 @@ export const StyledRow = styled(Row)`
     max-height: calc(100vh - (var(--header-height) * 3)); /* Espacio disponible sin paddings */
     overflow: visible; /* Permitir que el contenido se vea */
   }
-  
+
   /* Para iPhone SE y pantallas ultra pequeñas */
   @media only screen and (max-width: 375px) {
     flex-direction: column !important; /* Forzar layout vertical */
     gap: 1rem; /* Espaciado entre icono y contenido */
     padding: 0.5rem;
-    
+
     /* Asegurar que los Col de Ant Design no interfieran */
     .ant-col {
       width: 100% !important;
