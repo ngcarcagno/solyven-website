@@ -278,10 +278,29 @@ export const Styles = createGlobalStyle`
     }
 
     /* RESPONSIVE FONT SIZE OPTIMIZATION */
-    /* Extra small mobile devices */
+    /* Extra small mobile devices - iPhone SE y similares */
     @media screen and (max-width: 375px) {
         body {
             font-size: clamp(11px, 4vw, 14px);
+        }
+        
+        /* Títulos más pequeños en iPhone SE */
+        h1, h2, h3, h4, h5, h6 {
+            font-size: clamp(1.6em, 5.5vw, 2em) !important;
+            line-height: 1.1 !important;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+            max-width: 100%;
+            overflow: visible;
+        }
+        
+        /* SplitText responsive para pantallas ultra pequeñas */
+        .split-responsive {
+            white-space: normal !important;
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+            width: 100% !important;
         }
     }
 

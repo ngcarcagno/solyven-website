@@ -106,8 +106,6 @@ export const WhatsAppButton = styled.button<{
   @media (max-width: 768px) {
     width: 56px;
     height: 56px;
-    bottom: 16px;
-    right: 16px;
 
     svg {
       width: 28px;

@@ -41,28 +41,34 @@ const IncentiveContainer = styled.div`
     }
   }
 
-  /* Mobile - posición sobre el botón sin bloquear scroll */
+  /* Mobile - posición al lado izquierdo del widget */
   @media (max-width: 768px) {
-    bottom: clamp(5.5rem, 12vh, 7.5rem); /* Fluid mobile bottom */
-    right: clamp(0.5rem, 2vw, 1rem); /* Fluid mobile right */
-    left: clamp(0.5rem, 2vw, 1rem); /* Fluid mobile left */
-    max-width: none;
+    bottom: 20px; /* A la misma altura del widget */
+    top: auto;
+    right: 80px; /* A la izquierda del widget (widget tiene ~60px + margen) */
+    left: 0.5rem;
+    max-width: calc(100vw - 90px); /* Dejar espacio para el widget */
     min-width: auto;
     width: calc(100% - 90px); /* Deja espacio para el botón */
     padding: 1rem 1.25rem;
 
     &::after {
-      bottom: -8px;
-      right: 20px;
+      right: -8px; /* Flecha hacia la derecha apuntando al widget */
+      top: 50%;
+      bottom: auto;
       left: auto;
-      border-width: 16px 8px 0 8px;
-      border-color: rgba(15, 15, 15, 0.95) transparent transparent transparent;
+      transform: translateY(-50%);
+      border-width: 8px 0 8px 16px;
+      border-color: transparent transparent transparent rgba(15, 15, 15, 0.95);
     }
   }
 
   @media (max-width: 480px) {
     width: calc(100% - 80px);
     padding: 0.875rem 1rem;
+    max-width: calc(100vw - 2rem); /* Asegurar que no se salga de la pantalla */
+    word-wrap: break-word; /* Evitar texto cortado */
+    hyphens: auto; /* Permitir guiones automáticos */
   }
 `;
 
@@ -72,6 +78,14 @@ const IncentiveText = styled.p`
   font-size: clamp(0.75rem, 1.5vw, 0.9rem); /* Fluid font size */
   line-height: clamp(1.3, 0.2vw + 1.2, 1.5); /* Fluid line height */
   font-weight: 500;
+  word-wrap: break-word; /* Evitar texto cortado */
+  overflow-wrap: break-word; /* Compatibilidad */
+  hyphens: auto; /* Guiones automáticos */
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem; /* Tamaño fijo más pequeño en móviles muy pequeños */
+    line-height: 1.4;
+  }
 
   .highlight {
     color: var(--color-secondary);

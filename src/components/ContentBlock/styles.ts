@@ -27,7 +27,7 @@ export const ContentSection = styled("section")`
   /* Padding universal basado en la altura del header */
   padding: var(--header-height) 2rem var(--header-height);
   box-sizing: border-box;
-  overflow: hidden; /* Evita desbordamiento */
+  overflow: visible; /* Permitir contenido visible */
 
   @media only screen and (max-width: 1024px) {
     padding: var(--header-height) 1rem var(--header-height);
@@ -50,17 +50,35 @@ export const ContentSection = styled("section")`
     padding: calc(var(--header-height) * 0.3) 0.5rem calc(var(--header-height) * 0.3);
     min-height: 100vh;
   }
+
+  /* Para iPhone SE y pantallas ultra pequeñas de ancho */
+  @media only screen and (max-width: 375px) {
+    padding: calc(var(--header-height) * 0.8) 0.25rem calc(var(--header-height) * 0.8);
+    min-height: 100vh; /* Mantener altura completa pero flexible */
+    height: auto; /* Permitir altura dinámica */
+    overflow: visible; /* Asegurar contenido visible */
+    
+    /* Forzar alineación vertical */
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
 `;
 
 export const StyledRow = styled(Row)`
   flex-direction: ${({ direction }: { direction: string }) =>
-    direction === "left" ? "row" : direction === "right" ? "row-reverse" : "column"};
+    direction === "left" ? "row" : direction === "right" ? "row-reverse" : "column"} !important;
 
   /* Asegurar que el contenido se adapte al espacio disponible */
   height: 100%;
   width: 100%;
   max-height: 100%; /* No exceder el contenedor padre */
   display: flex !important; /* Forzar flex para compresión */
+  
+  /* Deshabilitar propiedades de Ant Design Row que interfieren */
+  && {
+    flex-wrap: nowrap !important;
+  }
 
   ${({ direction }: { direction: string }) =>
     direction === "center" &&
@@ -73,8 +91,29 @@ export const StyledRow = styled(Row)`
 
   /* Para pantallas de altura limitada - forzar compresión */
   @media only screen and (max-height: 950px) {
-    max-height: calc(100vh - calc(var(--header-height) * 3)); /* Espacio disponible sin paddings */
-    overflow: hidden; /* Evitar desbordamiento */
+    max-height: calc(100vh - (var(--header-height) * 3)); /* Espacio disponible sin paddings */
+    overflow: visible; /* Permitir que el contenido se vea */
+  }
+  
+  /* Para iPhone SE y pantallas ultra pequeñas */
+  @media only screen and (max-width: 375px) {
+    flex-direction: column !important; /* Forzar layout vertical */
+    gap: 1rem; /* Espaciado entre icono y contenido */
+    padding: 0.5rem;
+    
+    /* Asegurar que los Col de Ant Design no interfieran */
+    .ant-col {
+      width: 100% !important;
+      flex: none !important;
+      max-width: 100% !important;
+    }
+  }
+
+  /* Estilos para las columnas del icono y contenido */
+  .content-block-icon {
+    @media only screen and (max-width: 375px) {
+      margin-bottom: 0.5rem !important;
+    }
   }
 `;
 
@@ -97,6 +136,14 @@ export const ContentWrapper = styled("div")<{ $centered?: boolean }>`
   justify-content: center;
   overflow-y: auto; /* Scroll si el contenido es muy alto */
 
+  /* Para iPhone SE - usar todo el ancho disponible */
+  @media only screen and (max-width: 375px) {
+    max-width: 100% !important;
+    width: 100%;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+  }
+
   ${(p) =>
     p.$centered &&
     `
@@ -112,10 +159,16 @@ export const ContentWrapper = styled("div")<{ $centered?: boolean }>`
     max-width: ${({ $centered }) => ($centered ? "95vw" : "var(--content-wrapper-max-width)")};
   }
 
+  /* Para iPhone SE y pantallas ultra pequeñas */
+  @media only screen and (max-width: 400px) {
+    max-width: ${({ $centered }) => ($centered ? "98vw" : "var(--content-wrapper-max-width)")};
+    padding: 0 0.5rem;
+  }
+
   /* Para pantallas de altura limitada */
   @media only screen and (max-height: 950px) {
     min-height: 0; /* Permitir compresión total */
-    max-height: calc(100vh - calc(var(--header-height) * 3)); /* FORZAR altura máxima */
+    max-height: calc(100vh - (var(--header-height) * 3)); /* FORZAR altura máxima */
     gap: 0.75rem; /* Espaciado más compacto entre elementos */
     overflow-y: auto; /* Scroll si es necesario */
   }
@@ -204,4 +257,76 @@ export const ButtonWrapper = styled("div")<{ $centered?: boolean }>`
     `
     align-items: center;
   `}
+`;
+
+/* ========================================
+   HALO ANIMADO PARA ÍCONOS PNG
+   Efecto de pulsación con color secundario detrás del PNG
+   ======================================== */
+export const IconWithHalo = styled("div")`
+  position: relative;
+  display: inline-block;
+
+  /* Halo animado principal - más difuminado */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(220px, 28vh, 50vw);
+    height: min(220px, 28vh, 50vw);
+    border-radius: 50%;
+    background: radial-gradient(
+      ellipse 120% 80% at center,
+      rgba(247, 88, 0, 0.06) 0%,
+      rgba(247, 88, 0, 0.04) 20%,
+      rgba(247, 88, 0, 0.02) 45%,
+      rgba(247, 88, 0, 0.01) 70%,
+      transparent 100%
+    );
+    filter: blur(8px);
+    z-index: 1;
+    animation: haloAnimation 4s ease-in-out infinite;
+  }
+
+  /* Segundo halo más amplio y sutil */
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(280px, 35vh, 60vw);
+    height: min(280px, 35vh, 60vw);
+    border-radius: 50%;
+    background: radial-gradient(
+      ellipse 140% 90% at center,
+      rgba(247, 88, 0, 0.03) 0%,
+      rgba(247, 88, 0, 0.015) 30%,
+      rgba(247, 88, 0, 0.008) 60%,
+      transparent 90%
+    );
+    filter: blur(12px);
+    z-index: 0;
+    animation: haloAnimation 4s ease-in-out infinite reverse;
+  }
+
+  img,
+  svg {
+    position: relative;
+    z-index: 2;
+  }
+
+  @keyframes haloAnimation {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) scale(0.92);
+      opacity: 0.4;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.08);
+      opacity: 0.8;
+    }
+  }
 `;

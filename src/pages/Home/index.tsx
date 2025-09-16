@@ -37,11 +37,22 @@ const Home = () => {
           />
         </BackgroundGridDistortion>
 
+        {/* Product Section */}
+        <BackgroundDotGrid>
+          <ContentBlock
+            direction="left"
+            title={ProductContent.title}
+            content={ProductContent.text}
+            icon="waving.svg"
+            id="product"
+          />
+        </BackgroundDotGrid>
+
         {/* About Section - Enhanced with animated components */}
         <BackgroundDotGrid>
           <ContentBlock
             direction="center"
-            title={AboutContent.title}
+            title=""
             content=""
             id="about"
             icon="Shield.png"
@@ -59,7 +70,7 @@ const Home = () => {
                     to={{ opacity: 1, y: 0 }}
                     threshold={0.1}
                     rootMargin="-100px"
-                    tag="div"
+                    tag="h6"
                     onLetterAnimationComplete={() => {}}
                   />
                 }
@@ -76,17 +87,6 @@ const Home = () => {
             content={MissionContent.text}
             icon="product-launch.svg"
             id="mission"
-          />
-        </BackgroundDotGrid>
-
-        {/* Product Section */}
-        <BackgroundDotGrid>
-          <ContentBlock
-            direction="left"
-            title={ProductContent.title}
-            content={ProductContent.text}
-            icon="waving.svg"
-            id="product"
           />
         </BackgroundDotGrid>
 
