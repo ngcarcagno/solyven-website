@@ -165,7 +165,7 @@ const ServicesContent = ({ titleComponent }: ServicesContentProps) => {
             <SpotlightCard
               key={index}
               className="service-spotlight-card service-item"
-              spotlightColor="rgba(0, 53, 122, 0.15)">
+              spotlightColor="var(--color-detail)">
               <ServiceCard>
                 <ServiceIcon>{IconComponent && <IconComponent />}</ServiceIcon>
                 <ServiceTitle>{service.title}</ServiceTitle>

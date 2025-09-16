@@ -38,15 +38,7 @@ const ContentBlock = ({ icon, title, content, section, button, id, direction, cu
                 {typeof icon === "string" ? (
                   icon.endsWith(".png") || icon.endsWith(".jpg") || icon.endsWith(".jpeg") ? (
                     <IconWithHalo>
-                      <img
-                        src={`${process.env.PUBLIC_URL}/img/png/${icon}`}
-                        alt=""
-                        style={{
-                          width: "min(150px, 20vh, 35vw)",
-                          height: "min(150px, 20vh, 35vw)",
-                          objectFit: "contain",
-                        }}
-                      />
+                      <img src={`${process.env.PUBLIC_URL}/img/png/${icon}`} alt="" className="responsive-icon-img" />
                     </IconWithHalo>
                   ) : (
                     <SvgIcon src={icon} width="min(200px, 25vh)" height="min(200px, 25vh)" />

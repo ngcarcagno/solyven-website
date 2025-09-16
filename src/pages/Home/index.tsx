@@ -39,14 +39,33 @@ const Home = () => {
           />
         </BackgroundGridDistortion>
 
-        {/* Product Section */}
+        {/* Services Section - SpotlightCards */}
         <BackgroundDotGrid>
           <ContentBlock
-            direction="left"
-            title={ProductContent.title}
-            content={ProductContent.text}
-            icon="waving.svg"
-            id="product"
+            direction="center"
+            title=""
+            content=""
+            id="services"
+            customContent={
+              <ServicesContent
+                titleComponent={
+                  <SplitText
+                    text={ServicesContentData.title}
+                    className="services-title"
+                    splitType="chars"
+                    delay={80}
+                    duration={0.5}
+                    ease="power3.out"
+                    from={{ opacity: 0, y: 30 }}
+                    to={{ opacity: 1, y: 0 }}
+                    threshold={0.1}
+                    rootMargin="-100px"
+                    tag="h6"
+                    onLetterAnimationComplete={() => {}}
+                  />
+                }
+              />
+            }
           />
         </BackgroundDotGrid>
 
@@ -81,33 +100,12 @@ const Home = () => {
           />
         </BackgroundDotGrid>
 
-        {/* Services Section - SpotlightCards */}
+        {/* Middle Block Section */}
         <BackgroundDotGrid>
-          <ContentBlock
-            direction="center"
-            title=""
-            content=""
-            id="services"
-            customContent={
-              <ServicesContent
-                titleComponent={
-                  <SplitText
-                    text={ServicesContentData.title}
-                    className="services-title"
-                    splitType="chars"
-                    delay={80}
-                    duration={0.5}
-                    ease="power3.out"
-                    from={{ opacity: 0, y: 30 }}
-                    to={{ opacity: 1, y: 0 }}
-                    threshold={0.1}
-                    rootMargin="-100px"
-                    tag="h6"
-                    onLetterAnimationComplete={() => {}}
-                  />
-                }
-              />
-            }
+          <MiddleBlock
+            title={MiddleBlockContent.title}
+            content={MiddleBlockContent.text}
+            button={MiddleBlockContent.button}
           />
         </BackgroundDotGrid>
 
@@ -119,15 +117,6 @@ const Home = () => {
             content={MissionContent.text}
             icon="product-launch.svg"
             id="mission"
-          />
-        </BackgroundDotGrid>
-
-        {/* Middle Block Section */}
-        <BackgroundDotGrid>
-          <MiddleBlock
-            title={MiddleBlockContent.title}
-            content={MiddleBlockContent.text}
-            button={MiddleBlockContent.button}
           />
         </BackgroundDotGrid>
 

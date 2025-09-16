@@ -7,13 +7,6 @@
   overflow: hidden;
   --mouse-x: 50%;
   --mouse-y: 50%;
-  --spotlight-color: radial-gradient(
-    circle at var(--mouse-x) var(--mouse-y),
-    rgba(247, 88, 0, 0.2) 0%,
-    rgba(95, 8, 7, 0.12) 30%,
-    rgba(0, 53, 122, 0.08) 60%,
-    transparent 80%
-  );
 }
 
 .card-spotlight::before {
@@ -23,7 +16,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--spotlight-color);
+  background: radial-gradient(
+    circle 220px at var(--mouse-x) var(--mouse-y),
+    rgba(0, 53, 122, 0.3) 0%,
+    rgba(0, 53, 122, 0.2) 30%,
+    rgba(0, 53, 122, 0.1) 60%,
+    rgba(0, 53, 122, 0.05) 80%,
+    transparent 100%
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;

@@ -12,9 +12,19 @@ export const AboutContainer = styled.div`
 
   /* El título h6 usa automáticamente los estilos globales - no necesita override */
 
+  /* Padding superior en mobile - ahora mínimo ya que ContentSection maneja el espaciado */
+  @media (max-width: 768px) {
+    padding-top: 0.5rem; /* Mínimo ya que ContentSection tiene el padding principal */
+  }
+
+  @media (max-width: 480px) {
+    padding-top: 0.25rem;
+  }
+
   /* Para pantallas ultra pequeñas, ajustar el gap entre elementos */
   @media only screen and (max-width: 375px) {
     gap: 0.5rem;
+    padding-top: 0; /* Sin padding adicional para iPhone SE */
   }
 
   /* Estilos para el contenedor del título */
@@ -41,10 +51,34 @@ export const ServicesContainer = styled.div`
   max-height: 100%;
   overflow: visible;
 
+  @media (max-width: 768px) {
+    padding: 0.75rem 0.5rem 0 0.5rem; /* Sin padding bottom, con top pequeño */
+    height: auto;
+    min-height: auto;
+
+    /* Forzar que comience desde arriba */
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem 0.25rem 0 0.25rem;
+  }
+
+  @media (max-width: 375px) {
+    padding: 0.375rem 0.125rem 0 0.125rem;
+  }
+
   /* Estilos para el contenedor del título */
   .services-title-container {
     text-align: center;
     margin-bottom: 1.5rem;
+
+    @media (max-width: 768px) {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      padding-top: 0;
+    }
 
     @media only screen and (max-width: 375px) {
       margin-bottom: 0.75rem;
@@ -73,14 +107,37 @@ export const ServicesContainer = styled.div`
     }
 
     @media (max-width: 768px) {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
 
       .subtitle {
-        font-size: var(--size-min-para);
+        font-size: 1.1rem; /* Más grande que var(--size-min-para) */
+        line-height: 1.4;
       }
 
       .description {
-        font-size: calc(var(--size-min-para) * 0.9);
+        font-size: 0.95rem; /* Más legible en mobile */
+        line-height: 1.4;
+        color: rgba(255, 255, 255, 0.85); /* Mejor contraste */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .subtitle {
+        font-size: 1rem;
+      }
+
+      .description {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 375px) {
+      .subtitle {
+        font-size: 0.95rem;
+      }
+
+      .description {
+        font-size: 0.85rem;
       }
     }
   }
@@ -104,8 +161,9 @@ export const ServicesGrid = styled.div`
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-    max-width: 500px;
+    gap: 1rem;
+    max-width: 350px;
+    padding: 0 0.5rem; /* Padding horizontal para evitar cortes */
 
     /* En mobile todas las cards ocupan todo el ancho */
     .service-item:nth-child(3) {
@@ -115,11 +173,16 @@ export const ServicesGrid = styled.div`
   }
 
   @media (max-width: 480px) {
-    gap: 1.25rem;
-    max-width: 450px;
+    gap: 0.75rem;
+    max-width: 320px;
+    padding: 0 0.25rem;
   }
 
-  /* Estilos para SpotlightCard */
+  @media (max-width: 375px) {
+    gap: 0.5rem;
+    max-width: 300px;
+    padding: 0;
+  } /* Estilos para SpotlightCard */
   .service-spotlight-card {
     height: 100%;
     border-radius: 0.75rem;
@@ -148,15 +211,21 @@ export const ServiceCard = styled.div`
   justify-content: space-between;
 
   @media (max-width: 768px) {
-    padding: 1.5rem;
-    height: 180px;
-    gap: 0.75rem;
+    padding: 1rem;
+    min-height: 140px;
+    gap: 0.5rem;
   }
 
   @media (max-width: 480px) {
-    padding: 1.25rem;
-    height: 160px;
-    gap: 0.5rem;
+    padding: 0.75rem;
+    min-height: 120px;
+    gap: 0.375rem;
+  }
+
+  @media (max-width: 375px) {
+    padding: 0.625rem;
+    min-height: 110px;
+    gap: 0.25rem;
   }
 `;
 
@@ -177,12 +246,19 @@ export const ServiceIcon = styled.div`
 
   @media (max-width: 768px) {
     svg {
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
     }
   }
 
   @media (max-width: 480px) {
+    svg {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
+  @media (max-width: 375px) {
     svg {
       width: 32px;
       height: 32px;
@@ -201,11 +277,17 @@ export const ServiceTitle = styled.h3`
   letter-spacing: 0.02em;
 
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.1;
   }
 
   @media (max-width: 480px) {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    line-height: 1.1;
+  }
+
+  @media (max-width: 375px) {
+    font-size: 0.8rem;
   }
 `;
 
@@ -223,13 +305,18 @@ export const ServiceDescription = styled.p`
   hyphens: auto;
 
   @media (max-width: 768px) {
-    font-size: 0.85rem;
-    line-height: 1.4;
+    font-size: 0.8rem;
+    line-height: 1.3;
   }
 
   @media (max-width: 480px) {
-    font-size: 0.8rem;
-    line-height: 1.3;
+    font-size: 0.75rem;
+    line-height: 1.25;
+  }
+
+  @media (max-width: 375px) {
+    font-size: 0.7rem;
+    line-height: 1.2;
   }
 `;
 export const AboutTextContainer = styled.div`
@@ -248,7 +335,21 @@ export const AboutTextContainer = styled.div`
     margin-bottom: 0.8rem;
 
     p {
-      font-size: var(--size-min-para);
+      font-size: 1.1rem; /* Más grande que var(--size-min-para) - igual que Services */
+      line-height: 1.4;
+      color: rgba(255, 255, 255, 0.85); /* Mejor contraste - igual que Services */
+    }
+  }
+
+  @media (max-width: 480px) {
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 375px) {
+    p {
+      font-size: 0.95rem;
     }
   }
 `;

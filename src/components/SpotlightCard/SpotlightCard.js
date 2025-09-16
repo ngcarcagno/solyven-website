@@ -9,9 +9,12 @@ const SpotlightCard = ({ children, className = "", spotlightColor = "rgba(255, 2
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    divRef.current.style.setProperty("--mouse-x", `${x}px`);
-    divRef.current.style.setProperty("--mouse-y", `${y}px`);
-    divRef.current.style.setProperty("--spotlight-color", spotlightColor);
+    // Convertir a porcentajes para que funcione con el CSS
+    const xPercent = (x / rect.width) * 100;
+    const yPercent = (y / rect.height) * 100;
+
+    divRef.current.style.setProperty("--mouse-x", `${xPercent}%`);
+    divRef.current.style.setProperty("--mouse-y", `${yPercent}%`);
   };
 
   return (

@@ -18,11 +18,20 @@ export const ScrollSnapContainer = styled("div")`
 export const ContentSection = styled("section")`
   position: relative;
   min-height: 100vh; /* Altura completa para que funcione el padding */
-  height: 100vh; /* Altura fija para controlar el desbordamiento */
+  height: 100vh; /* Altura fija para desktop */
   scroll-snap-align: start;
   display: flex;
-  align-items: center; /* Volver al centrado normal */
+  align-items: center; /* Centrado normal para desktop */
   justify-content: center;
+
+  @media (max-width: 768px) {
+    /* Comportamiento general para mobile - TODO se alinea al inicio */
+    height: auto;
+    min-height: 100vh;
+    align-items: flex-start;
+    padding-top: calc(var(--header-height) + 1.25rem); /* Más espacio para el header + margen */
+    overflow-y: visible;
+  }
 
   /* Padding universal basado en la altura del header */
   padding: var(--header-height) 2rem var(--header-height);
@@ -51,9 +60,17 @@ export const ContentSection = styled("section")`
     min-height: 100vh;
   }
 
+  /* Para pantallas pequeñas entre iPhone SE y mobile estándar */
+  @media only screen and (max-width: 480px) {
+    padding-top: calc(var(--header-height) + 1.35rem); /* Espacio intermedio */
+  }
+
   /* Para iPhone SE y pantallas ultra pequeñas de ancho */
   @media only screen and (max-width: 375px) {
-    padding: calc(var(--header-height) * 0.8) 0.25rem calc(var(--header-height) * 0.8);
+    padding-top: calc(var(--header-height) + 1.75rem); /* Aún más espacio para iPhone SE */
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    padding-bottom: calc(var(--header-height) * 0.8);
     min-height: 100vh; /* Mantener altura completa pero flexible */
     height: auto; /* Permitir altura dinámica */
     overflow: visible; /* Asegurar contenido visible */
@@ -111,8 +128,38 @@ export const StyledRow = styled(Row)`
 
   /* Estilos para las columnas del icono y contenido */
   .content-block-icon {
+    @media (max-width: 768px) {
+      margin-bottom: 0.25rem !important;
+    }
+
+    @media only screen and (max-width: 480px) {
+      margin-bottom: 0.125rem !important;
+    }
+
     @media only screen and (max-width: 375px) {
-      margin-bottom: 0.5rem !important;
+      margin-bottom: 0 !important; /* Sin margin en iPhone SE */
+    }
+  }
+
+  /* Estilos responsive para iconos PNG */
+  .responsive-icon-img {
+    width: min(150px, 20vh, 35vw);
+    height: min(150px, 20vh, 35vw);
+    object-fit: contain;
+
+    @media (max-width: 768px) {
+      width: min(120px, 16vh, 30vw);
+      height: min(120px, 16vh, 30vw);
+    }
+
+    @media (max-width: 480px) {
+      width: min(100px, 14vh, 28vw);
+      height: min(100px, 14vh, 28vw);
+    }
+
+    @media only screen and (max-width: 375px) {
+      width: min(80px, 12vh, 25vw);
+      height: min(80px, 12vh, 25vw);
     }
   }
 `;
@@ -135,6 +182,14 @@ export const ContentWrapper = styled("div")<{ $centered?: boolean }>`
   flex-direction: column;
   justify-content: center;
   overflow: hidden; /* Sin scroll visible */
+
+  /* En mobile, alinear al inicio para evitar que se corte el contenido */
+  @media (max-width: 768px) {
+    justify-content: flex-start;
+    padding-top: 1rem;
+    height: auto;
+    min-height: 100%;
+  }
 
   /* Para iPhone SE - usar todo el ancho disponible */
   @media only screen and (max-width: 375px) {
