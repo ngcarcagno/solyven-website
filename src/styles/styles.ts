@@ -134,6 +134,28 @@ export const Styles = createGlobalStyle`
                 color: var(--color-text-primary);
                 font-size: var(--size-h1); /* Proportional to root font-size */
                 line-height: 1.2; /* Fixed ratio - always proportional */
+                
+                /* Glow naranja con intensidad moderada y stroke */
+                text-shadow: 
+                    0 0 10px rgba(247, 88, 0, 0.4),
+                    0 0 20px rgba(247, 88, 0, 0.2),
+                    0 0 30px rgba(247, 88, 0, 0.1),
+                    1px 1px 2px rgba(0, 0, 0, 0.6);
+                
+                /* Stroke negro sutil para mejor definición */
+                -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.8);
+                
+                /* Efecto hover más intenso */
+                transition: all 0.3s ease;
+                
+                &:hover {
+                    text-shadow: 
+                        0 0 14px rgba(247, 88, 0, 0.6),
+                        0 0 28px rgba(247, 88, 0, 0.3),
+                        0 0 42px rgba(247, 88, 0, 0.15),
+                        1px 1px 2px rgba(0, 0, 0, 0.6);
+                    transform: scale(1.01);
+                }
         }
 
     p {
@@ -293,14 +315,6 @@ export const Styles = createGlobalStyle`
             white-space: normal;
             max-width: 100%;
             overflow: visible;
-        }
-        
-        /* SplitText responsive para pantallas ultra pequeñas */
-        .split-responsive {
-            white-space: normal !important;
-            word-wrap: break-word !important;
-            overflow-wrap: break-word !important;
-            width: 100% !important;
         }
     }
 

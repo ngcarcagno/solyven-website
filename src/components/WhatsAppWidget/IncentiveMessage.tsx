@@ -11,11 +11,19 @@ const IncentiveContainer = styled.div`
   padding: clamp(1rem, 2vh, 1.25rem) clamp(1.25rem, 3vw, 1.5rem); /* Fluid padding */
   backdrop-filter: blur(20px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  display: block; /* Asegurar display block */
+  text-align: left; /* Alineación por defecto */
 
   max-width: clamp(18rem, 35vw, 22rem); /* Fluid max width 288px to 352px */
   min-width: clamp(16rem, 30vw, 20rem); /* Fluid min width 256px to 320px */
   animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 9998;
+  pointer-events: none; /* No bloquear interacciones del usuario */
+
+  /* Permitir interacciones solo en el botón de cerrar */
+  button {
+    pointer-events: auto;
+  }
 
   /* Speech bubble arrow */
   &::after {
@@ -41,46 +49,61 @@ const IncentiveContainer = styled.div`
     }
   }
 
-  /* Mobile - posición al lado izquierdo del widget */
+  /* Mobile - posición horizontal debajo de todo */
   @media (max-width: 768px) {
-    bottom: 20px; /* A la misma altura del widget */
-    top: auto;
-    right: 80px; /* A la izquierda del widget (widget tiene ~60px + margen) */
-    left: 0.5rem;
-    max-width: calc(100vw - 90px); /* Dejar espacio para el widget */
-    min-width: auto;
-    width: calc(100% - 90px); /* Deja espacio para el botón */
-    padding: 1rem 1.25rem;
+    position: fixed; /* Asegurar posición fixed */
+    bottom: 80px; /* Debajo del widget con espacio */
+    left: 0.5rem; /* Margen mínimo del lado izquierdo */
+    right: 0.5rem; /* Margen mínimo del lado derecho */
+    top: auto; /* Reset top */
+    max-width: none; /* Permitir ancho completo */
+    min-width: 280px; /* Ancho mínimo para evitar texto vertical */
+    width: calc(100vw - 1rem); /* Ancho casi completo de la pantalla */
+    padding: 0.75rem 1rem;
+    transform: none; /* Sin transformación para evitar conflictos */
+    z-index: 9997; /* Menor que el widget pero mayor que el contenido */
+    display: block; /* Asegurar display block en mobile */
+    text-align: center; /* Centrar texto en mobile */
+    box-sizing: border-box; /* Incluir padding en el ancho */
 
+    /* Quitar la flecha en mobile ya que está debajo */
     &::after {
-      right: -8px; /* Flecha hacia la derecha apuntando al widget */
-      top: 50%;
-      bottom: auto;
-      left: auto;
-      transform: translateY(-50%);
-      border-width: 8px 0 8px 16px;
-      border-color: transparent transparent transparent rgba(15, 15, 15, 0.95);
+      display: none;
     }
   }
 
   @media (max-width: 480px) {
-    width: calc(100% - 80px);
-    padding: 0.875rem 1rem;
-    max-width: calc(100vw - 2rem); /* Asegurar que no se salga de la pantalla */
+    left: 0.25rem; /* Margen aún más pequeño en pantallas muy pequeñas */
+    right: 0.25rem;
+    width: calc(100vw - 0.5rem); /* Casi ancho completo */
+    min-width: 250px; /* Ancho mínimo reducido pero suficiente */
+    bottom: 70px; /* Más cerca del botón en pantallas pequeñas */
+    padding: 0.75rem 0.875rem;
     word-wrap: break-word; /* Evitar texto cortado */
+    overflow-wrap: break-word; /* Compatibilidad adicional */
     hyphens: auto; /* Permitir guiones automáticos */
+    white-space: normal; /* Asegurar que el texto se envuelva normalmente */
+    box-sizing: border-box; /* Incluir padding y border en el ancho */
   }
 `;
 
 const IncentiveText = styled.p`
   margin: 0;
   color: rgba(255, 255, 255, 0.9);
-  font-size: clamp(0.75rem, 1.5vw, 0.9rem); /* Fluid font size */
-  line-height: clamp(1.3, 0.2vw + 1.2, 1.5); /* Fluid line height */
+  font-size: clamp(0.8rem, 2vw, 0.95rem); /* Fluid font size ligeramente más grande */
+  line-height: clamp(1.4, 0.3vw + 1.3, 1.6); /* Mejor línea de altura */
   font-weight: 500;
   word-wrap: break-word; /* Evitar texto cortado */
   overflow-wrap: break-word; /* Compatibilidad */
   hyphens: auto; /* Guiones automáticos */
+  white-space: normal; /* Asegurar que el texto se ajuste normalmente */
+  text-align: center; /* Centrar texto en mobile */
+
+  @media (max-width: 768px) {
+    font-size: 0.875rem; /* Tamaño optimizado para mobile */
+    line-height: 1.5;
+    text-align: center;
+  }
 
   @media (max-width: 480px) {
     font-size: 0.8rem; /* Tamaño fijo más pequeño en móviles muy pequeños */

@@ -9,7 +9,6 @@ import Footer from "../../components/Footer";
 import { ScrollSnapContainer } from "../../components/ContentBlock/styles";
 import { BackgroundDotGrid, BackgroundGridDistortion } from "../../components/BackgroundWrapper";
 import CustomWhatsAppWidget from "../../components/WhatsAppWidget";
-import SplitText from "../../components/TexComponents/SplitText/SplitText";
 import AboutUsContent from "../Sections/AboutUs";
 import ServicesContent from "../Sections/Services";
 import ServicesContentData from "../../content/ServicesContent.json";
@@ -39,36 +38,6 @@ const Home = () => {
           />
         </BackgroundGridDistortion>
 
-        {/* Services Section - SpotlightCards */}
-        <BackgroundDotGrid>
-          <ContentBlock
-            direction="center"
-            title=""
-            content=""
-            id="services"
-            customContent={
-              <ServicesContent
-                titleComponent={
-                  <SplitText
-                    text={ServicesContentData.title}
-                    className="services-title"
-                    splitType="chars"
-                    delay={80}
-                    duration={0.5}
-                    ease="power3.out"
-                    from={{ opacity: 0, y: 30 }}
-                    to={{ opacity: 1, y: 0 }}
-                    threshold={0.1}
-                    rootMargin="-100px"
-                    tag="h6"
-                    onLetterAnimationComplete={() => {}}
-                  />
-                }
-              />
-            }
-          />
-        </BackgroundDotGrid>
-
         {/* About Section - Enhanced with animated components */}
         <BackgroundDotGrid>
           <ContentBlock
@@ -77,25 +46,19 @@ const Home = () => {
             content=""
             id="about"
             icon="Shield.png"
+            customContent={<AboutUsContent titleComponent={<h6 className="about-title">{AboutContent.title}</h6>} />}
+          />
+        </BackgroundDotGrid>
+
+        {/* Services Section - SpotlightCards */}
+        <BackgroundDotGrid>
+          <ContentBlock
+            direction="center"
+            title=""
+            content=""
+            id="services"
             customContent={
-              <AboutUsContent
-                titleComponent={
-                  <SplitText
-                    text={AboutContent.title}
-                    className="about-title"
-                    splitType="chars"
-                    delay={100}
-                    duration={0.6}
-                    ease="power3.out"
-                    from={{ opacity: 0, y: 40 }}
-                    to={{ opacity: 1, y: 0 }}
-                    threshold={0.1}
-                    rootMargin="-100px"
-                    tag="h6"
-                    onLetterAnimationComplete={() => {}}
-                  />
-                }
-              />
+              <ServicesContent titleComponent={<h6 className="services-title">{ServicesContentData.title}</h6>} />
             }
           />
         </BackgroundDotGrid>
