@@ -1,0 +1,235 @@
+.sphere-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  --radius: 520px;
+  --viewer-pad: 72px;
+  /* tile outline color - match site primary (slight transparency) */
+  /* primary #5F0807 -> rgba(95,8,7,0.06) */
+  --tile-outline-color: rgba(95, 8, 7, 0.06);
+  --tile-outline-thickness: 6px;
+  --tile-outline-glass-color: rgba(255, 255, 255, 0.02);
+  /* subtle frosted panel behind tiles */
+  --dome-panel-blur: 10px;
+  --circ: calc(var(--radius) * 3.14);
+  --rot-y: calc((360deg / var(--segments-x)) / 2);
+  --rot-x: calc((360deg / var(--segments-y)) / 2);
+  --item-width: calc(var(--circ) / var(--segments-x));
+  --item-height: calc(var(--circ) / var(--segments-y));
+}
+
+.sphere-root * {
+  box-sizing: border-box;
+}
+
+.sphere,
+.sphere-root .item,
+.sphere-root .item__image {
+  transform-style: preserve-3d;
+}
+
+main.sphere-main {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  background: transparent;
+}
+
+.stage {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  perspective: calc(var(--radius) * 2);
+  perspective-origin: 50% 50%;
+  contain: layout paint size;
+}
+
+.sphere {
+  transform: translateZ(calc(var(--radius) * -1));
+  will-change: transform;
+}
+
+.overlay,
+.overlay--blur {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.overlay {
+  /* removed vignette gradient to keep dome background transparent */
+  background: transparent;
+}
+
+.overlay--blur {
+  /* do not blur the whole dome; keep overlay itself transparent
+     — per-tile blur will be applied via .item__image::before */
+  -webkit-mask-image: none;
+  mask-image: none;
+  backdrop-filter: none;
+  background: transparent;
+}
+
+.sphere-root .item {
+  width: calc(var(--item-width) * var(--item-size-x));
+  height: calc(var(--item-height) * var(--item-size-y));
+  /* ensure no global .item background leaks in (AnimatedList uses .item)
+    The previous semi-opaque background produced a dark tint on mobile; keep transparent here. */
+  background: transparent !important;
+  position: absolute;
+  top: -999px;
+  bottom: -999px;
+  left: -999px;
+  right: -999px;
+  margin: auto;
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+  transition: transform 300ms;
+  transform: rotateY(calc(var(--rot-y) * (var(--offset-x) + ((var(--item-size-x) - 1) / 2)) + var(--rot-y-delta, 0deg)))
+    rotateX(calc(var(--rot-x) * (var(--offset-y) - ((var(--item-size-y) - 1) / 2)) + var(--rot-x-delta, 0deg)))
+    translateZ(var(--radius));
+}
+
+.sphere-root .item__image {
+  position: absolute;
+  display: block;
+  inset: 10px;
+  border-radius: var(--tile-radius, 12px);
+  background: transparent;
+  overflow: hidden;
+  backface-visibility: hidden;
+  transition: transform 300ms;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  pointer-events: auto;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  /* subtle inner frame to separate tiles from background - customizable */
+  box-shadow: inset 0 0 0 var(--tile-outline-thickness, 6px) var(--tile-outline-color),
+    inset 0 0 10px var(--tile-outline-glass-color);
+  position: absolute;
+  z-index: 1; /* place image above the per-tile blur */
+}
+
+.sphere-root .item__image::before {
+  content: "";
+  position: absolute;
+  /* make slightly larger than the image so the blur appears around edges */
+  inset: -8px;
+  border-radius: calc(var(--tile-radius, 12px) + 8px);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(var(--dome-panel-blur, 10px));
+  -webkit-backdrop-filter: blur(var(--dome-panel-blur, 10px));
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sphere-root .item__image img {
+  position: relative;
+  z-index: 1; /* keep image above the pseudo-element */
+}
+
+.sphere-root .item__image:focus {
+  outline: none;
+}
+
+.sphere-root .item__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  backface-visibility: hidden;
+  filter: var(--image-filter, none);
+}
+
+.viewer {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--viewer-pad);
+}
+
+.viewer .frame {
+  height: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--enlarge-radius, 32px);
+  display: flex;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .viewer .frame {
+    height: auto;
+    width: 100%;
+  }
+}
+
+.viewer .scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  /* Keep scrim fully transparent and non-blurring by default. */
+  background: transparent !important; /* enforce transparent */
+  pointer-events: none !important;
+  opacity: 0 !important;
+  transition: none !important;
+  backdrop-filter: none !important;
+}
+
+.sphere-root[data-enlarging="true"] .viewer .scrim {
+  /* Do not show a dark scrim when enlarging; keep interaction in viewer only. */
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.viewer .enlarge {
+  position: absolute;
+  z-index: 30;
+  border-radius: var(--enlarge-radius, 32px);
+  overflow: hidden;
+  transition: transform 500ms ease, opacity 500ms ease;
+  transform-origin: top left;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.viewer .enlarge img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: var(--image-filter, none);
+}
+
+.sphere-root .enlarge-closing img {
+  filter: var(--image-filter, none);
+}
+
+.edge-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 120px;
+  z-index: 5;
+  pointer-events: none;
+  background: transparent; /* remove edge vignette */
+}
+
+.edge-fade--top {
+  top: 0;
+  transform: rotate(180deg);
+}
+
+.edge-fade--bottom {
+  bottom: 0;
+}

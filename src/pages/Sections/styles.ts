@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 export const AboutContainer = styled.div`
   width: 100%;
@@ -6,6 +6,7 @@ export const AboutContainer = styled.div`
   margin: 0;
   display: flex;
   flex-direction: column;
+  position: relative; /* stacking context for background dome */
   height: 100%;
   max-height: 100%;
   overflow: visible;
@@ -35,6 +36,48 @@ export const AboutContainer = styled.div`
     @media only screen and (max-width: 375px) {
       margin-bottom: 0.75rem;
     }
+  }
+
+  /* When the Dome modal is open we hide the main content (scoped) to avoid visual clash and prevent interactions */
+  &[data-dome-open="true"] .about-content-root {
+    transition: opacity 260ms ease, transform 260ms ease;
+    opacity: 0.06; /* mostly hidden but keep minimal context */
+    transform: scale(0.995) translateY(4px);
+    filter: blur(2px);
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none; /* prevent clicks inside the content area */
+    visibility: visible;
+  }
+`;
+
+/* Full-bleed Dome background placed behind the About content */
+export const DomeBackground = styled.div`
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none; /* static decorative background */
+  display: block;
+  opacity: 0.035; /* very subtle */
+  transform: none;
+  filter: none;
+  /* don't blend — keep it purely decorative behind content */
+  mix-blend-mode: normal;
+
+  .dome-inner {
+    width: 100%;
+    height: 100%;
+    will-change: transform, opacity;
+  }
+`;
+
+export const DomeGlobalStyles = createGlobalStyle`
+  /* Hide the Shield/icon used by ContentBlock when the Dome is open */
+  body.dome-open .content-block-icon {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-8px) scale(0.98);
+    pointer-events: none !important;
   }
 `;
 
@@ -479,6 +522,53 @@ export const BulletsContainer = styled.div`
   }
   @media (max-width: 480px) {
     padding: 0.8rem;
+  }
+`;
+
+/* Thumbnail styles for DomeGallery preview used by AboutUs */
+export const DomeThumbnail = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  .preview-wrap {
+    width: 220px;
+    height: 180px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(180deg, #0b0b0b 0%, #141414 100%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.45));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none; /* let the preview be non-interactive */
+  }
+
+  .play-button {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  }
+
+  @media (max-width: 480px) {
+    .preview-wrap {
+      width: 160px;
+      height: 120px;
+    }
   }
 `;
 
