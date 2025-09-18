@@ -157,7 +157,7 @@ const AboutUsContent = ({ titleComponent }: AboutUsContentProps) => {
         <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem", width: "100%" }}>
           <div style={{ width: "100%", maxWidth: 720, margin: "0 auto", display: "flex", justifyContent: "center" }}>
             <Button variant="default" onClick={() => setModalOpen(true)}>
-              Explora en 3D
+              Conocenos en Acción
             </Button>
           </div>
         </div>

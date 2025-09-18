@@ -53,8 +53,8 @@ const MissionVision = () => {
                       boxShadow: "0 18px 40px rgba(0,0,0,0.6), 0 0 40px rgba(247,88,0,0.06)",
                       display: "flex",
                       flexDirection: "column",
-                      justifyContent: "center",
-                      paddingTop: "3.2rem", // space for absolute header
+                      justifyContent: "flex-start", // align content to top
+                      paddingTop: "7rem", // increase top padding so text sits below header
                       position: "relative",
                       overflow: "hidden",
                     }}>
@@ -87,7 +87,7 @@ const MissionVision = () => {
                         padding: "0 1rem",
                         marginTop: 8,
                         display: "flex",
-                        alignItems: "center",
+                        alignItems: "flex-start",
                         justifyContent: "center",
                       }}>
                       <p

@@ -23,6 +23,14 @@
   will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  transform-origin: center center;
+  /* smooth fallback if GSAP isn't available yet */
+  transition: transform 180ms ease-out;
+}
+
+.card:hover {
+  /* progressive enhancement when a CSS hover scale var is provided */
+  transform: var(--card-hover-transform, none);
 }
 
 @media (max-width: 768px) {

@@ -33,6 +33,7 @@ const CardSwap = ({
   verticalDistance = 70,
   delay = 5000,
   pauseOnHover = false,
+  hoverScale = 1.04,
   onCardClick,
   skewAmount = 6,
   easing = "elastic",
@@ -68,6 +69,7 @@ const CardSwap = ({
 
   const tlRef = useRef(null);
   const intervalRef = useRef();
+  const swapRef = useRef();
   const container = useRef(null);
 
   useEffect(() => {
@@ -132,18 +134,37 @@ const CardSwap = ({
       });
     };
 
+    // expose swap so handlers outside this effect can call it
+    swapRef.current = swap;
+
     swap();
-    intervalRef.current = window.setInterval(swap, delay);
+    intervalRef.current = window.setInterval(() => swapRef.current?.(), delay);
 
     if (pauseOnHover) {
       const node = container.current;
       const pause = () => {
         tlRef.current?.pause();
         clearInterval(intervalRef.current);
+        // scale up the front card as a UI affordance
+        try {
+          const frontIdx = order.current[0];
+          const frontEl = refs[frontIdx]?.current;
+          if (frontEl) gsap.to(frontEl, { scale: hoverScale, duration: 0.22, ease: "power2.out" });
+        } catch (err) {
+          /* ignore */
+        }
       };
       const resume = () => {
         tlRef.current?.play();
-        intervalRef.current = window.setInterval(swap, delay);
+        intervalRef.current = window.setInterval(() => swapRef.current?.(), delay);
+        // restore scale on the front card
+        try {
+          const frontIdx = order.current[0];
+          const frontEl = refs[frontIdx]?.current;
+          if (frontEl) gsap.to(frontEl, { scale: 1, duration: 0.22, ease: "power2.out" });
+        } catch (err) {
+          /* ignore */
+        }
       };
       node.addEventListener("mouseenter", pause);
       node.addEventListener("mouseleave", resume);
