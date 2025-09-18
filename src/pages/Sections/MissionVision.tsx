@@ -15,24 +15,54 @@ const MissionVision = () => {
   const CardAny: any = Card;
 
   return (
-    <div id="mission" style={{ height: "600px", position: "relative" }}>
-      <CardSwap cardDistance={60} verticalDistance={70} delay={6000} pauseOnHover={true} onCardClick={() => {}}>
-        {cards.map((c) => {
-          const Icon = iconMap[c.icon] ?? (() => null);
-          return (
-            <CardAny key={c.id}>
-              <div className="flex flex-col items-center text-center bg-gradient-to-br from-[#181818] to-[#2f2f2f] text-white rounded-2xl p-8 shadow-lg h-full">
-                <div className="mb-4">
-                  <Icon size={48} />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">{c.title}</h3>
-                <p className="text-base max-w-prose">{c.text}</p>
-              </div>
-            </CardAny>
-          );
-        })}
-      </CardSwap>
-    </div>
+    <section id="mission" style={{ display: "flex", justifyContent: "center", padding: "4rem 1rem" }}>
+      <div style={{ width: "100%", maxWidth: 1200, textAlign: "center" }}>
+        <h2 style={{ margin: "0 0 1rem 0", fontSize: "1.75rem", color: "var(--color-text-primary)" }}>
+          {"Misión & Visión"}
+        </h2>
+        <p style={{ margin: "0 0 2rem 0", color: "rgba(255,255,255,0.75)" }}>
+          Protegiendo lo esencial — Soluciones integrales de monitoreo y seguridad.
+        </p>
+
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <CardSwap
+            width={900}
+            height={520}
+            cardDistance={60}
+            verticalDistance={70}
+            delay={6000}
+            pauseOnHover={true}
+            onCardClick={() => {}}>
+            {cards.map((c) => {
+              const Icon = iconMap[c.icon] ?? (() => null);
+              return (
+                <CardAny key={c.id}>
+                  <div
+                    className="flex flex-col items-center text-center rounded-2xl p-10"
+                    style={{
+                      minHeight: "100%",
+                      background: "linear-gradient(180deg, rgba(20,20,20,0.95), rgba(36,36,36,0.95))",
+                      color: "var(--color-text-primary)",
+                      border: "1px solid rgba(255,255,255,0.06)",
+                      boxShadow: "0 18px 40px rgba(0,0,0,0.6), 0 0 40px rgba(247,88,0,0.06)",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      padding: "2rem",
+                    }}>
+                    <div style={{ marginBottom: 16 }}>
+                      <Icon size={72} color="var(--color-secondary)" />
+                    </div>
+                    <h3 style={{ fontSize: "1.25rem", fontWeight: 700, marginBottom: 12 }}>{c.title}</h3>
+                    <p style={{ maxWidth: 640, margin: "0 auto", color: "rgba(255,255,255,0.9)" }}>{c.text}</p>
+                  </div>
+                </CardAny>
+              );
+            })}
+          </CardSwap>
+        </div>
+      </div>
+    </section>
   );
 };
 
