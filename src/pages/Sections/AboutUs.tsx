@@ -3,7 +3,7 @@ import FadeContent from "../../components/FadeContent/FadeContent";
 import AnimatedList from "../../components/AnimatedList/AnimatedList";
 import { Button } from "../../common/Button";
 import AboutContent from "../../content/AboutContent.json";
-import { AboutContainer, AboutTextContainer, BulletsContainer, DomeThumbnail, DomeGlobalStyles } from "./styles";
+import { AboutContainer, AboutTextContainer, BulletsContainer, DomeGlobalStyles } from "./styles";
 import FullScreenModal from "../../components/Modal/FullScreenModal";
 
 const DomeGallery = lazy(() => import("../../components/DomeGallery/DomeGallery"));

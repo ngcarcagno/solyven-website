@@ -2,8 +2,6 @@ import { lazy } from "react";
 import IntroContent from "../../content/IntroContent.json";
 import MiddleBlockContent from "../../content/MiddleBlockContent.json";
 import AboutContent from "../../content/AboutContent.json";
-import MissionContent from "../../content/MissionContent.json";
-import ProductContent from "../../content/ProductContent.json";
 import ContactContent from "../../content/ContactContent.json";
 import Footer from "../../components/Footer";
 import { ScrollSnapContainer } from "../../components/ContentBlock/styles";
@@ -12,6 +10,7 @@ import CustomWhatsAppWidget from "../../components/WhatsAppWidget";
 import AboutUsContent from "../Sections/AboutUs";
 import ServicesContent from "../Sections/Services";
 import ServicesContentData from "../../content/ServicesContent.json";
+import MissionVision from "../Sections/MissionVision";
 
 const Contact = lazy(() => import("../../components/ContactForm"));
 const MiddleBlock = lazy(() => import("../../components/MiddleBlock"));
@@ -73,16 +72,9 @@ const Home = () => {
           />
         </BackgroundDotGrid>
 
-        {/* Mission Section */}
+        {/* Mission Section (MissionVision CardSwap) */}
         <BackgroundDotGrid>
-          <ContentBlock
-            direction="right"
-            title={MissionContent.title}
-            content={MissionContent.text}
-            animation="SplitText"
-            icon="product-launch.svg"
-            id="mission"
-          />
+          <MissionVision />
         </BackgroundDotGrid>
 
         {/* Contact Section */}

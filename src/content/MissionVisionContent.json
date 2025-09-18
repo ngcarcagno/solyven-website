@@ -1,0 +1,18 @@
+{
+  "missionVision": {
+    "cards": [
+      {
+        "id": "mission",
+        "title": "Misión",
+        "icon": "ShieldCheck",
+        "text": "Brindar resguardo y protección a los bienes de empresas y particulares, ofreciendo soluciones de seguridad integrales con personal altamente capacitado y homologado."
+      },
+      {
+        "id": "vision",
+        "title": "Visión",
+        "icon": "Globe",
+        "text": "Convertirnos en un referente nacional en servicios de seguridad, consolidando la confianza de nuestros clientes y expandiendo nuestra presencia en todo el país."
+      }
+    ]
+  }
+}
