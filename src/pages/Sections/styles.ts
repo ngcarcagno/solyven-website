@@ -7,8 +7,9 @@ export const AboutContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative; /* stacking context for background dome */
-  height: 100%;
-  max-height: 100%;
+  /* Allow the container to size based on content on small viewports to avoid forcing full height */
+  height: auto;
+  max-height: none;
   overflow: visible;
 
   /* El título h6 usa automáticamente los estilos globales - no necesita override */
@@ -31,11 +32,45 @@ export const AboutContainer = styled.div`
   /* Estilos para el contenedor del título */
   .about-title-container {
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 
     @media only screen and (max-width: 375px) {
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
     }
+  }
+
+  /* Ensure the about-content-root's content-inner uses column flex so inner parts
+     (title, intro, bullets, CTA) stack and bullets can expand to fill remaining space */
+  .about-content-root {
+    .content-inner {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+    }
+
+    /* CTA wrapper styling target (used when CTA is placed inside about-content-root) */
+    .about-cta-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding-top: 0.6rem;
+      padding-bottom: 0; /* controlled by parent */
+      flex: 0 0 auto;
+    }
+  }
+
+  /* In some layouts About is rendered as a customContent inside ContentBlock. Ensure
+     the CTA wrapper centers and occupies full width regardless of nesting. */
+  .about-cta-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0.6rem;
+    padding-bottom: 0;
+    box-sizing: border-box;
   }
 
   /* When the Dome modal is open we hide the main content (scoped) to avoid visual clash and prevent interactions */
@@ -49,7 +84,16 @@ export const AboutContainer = styled.div`
     pointer-events: none; /* prevent clicks inside the content area */
     visibility: visible;
   }
+  /* Ensure the about section icon offset is reset by default (override for 2k/tall monitors) */
+  #about .content-block-icon {
+    --section-icon-offset: 0px !important;
+    align-self: center;
+    margin-top: 0 !important;
+  }
 `;
+
+/* Per-section tweaks for the About ContentBlock icon (shield) to handle very tall viewports */
+/* Removed AboutIconTweaks (was unused). Overrides for #about are applied directly in AboutContainer above. */
 
 /* Full-bleed Dome background placed behind the About content */
 export const DomeBackground = styled.div`
@@ -448,13 +492,15 @@ export const AboutTextContainer = styled.div`
 export const BulletsContainer = styled.div`
   /* Sin fondo glassy - contenedor limpio */
   flex: 1;
+  /* Ensure flex children can shrink on small viewports */
   min-height: 0;
   padding: 0.5rem 0;
 
-  /* Adaptarse al espacio disponible del ContentBlock */
-  height: 100%;
-  max-height: 100%;
-  overflow: hidden;
+  /* Let the bullets area size naturally but prevent it from growing beyond the viewport
+     on small screens so the CTA remains reachable. Use viewport-relative max-heights. */
+  height: auto;
+  max-height: none;
+  overflow: visible;
 
   /* Responsive padding para mobile */
   @media (max-width: 768px) {
@@ -467,11 +513,18 @@ export const BulletsContainer = styled.div`
 
   /* Estilos personalizados para AnimatedList adaptados a nuestra web */
   .about-bullets-list {
-    height: 100%;
     width: 100% !important;
     max-width: 600px !important; /* Limitar ancho principal */
     margin: 0 auto !important; /* Centrar */
-    padding: 2rem 1rem 1rem 1rem; /* Top, right, bottom, left - compensar hover effects */
+    padding: 1.25rem 0.75rem 0.75rem 0.75rem; /* Compact padding to save vertical space */
+
+    /* On small viewports limit the bullets scroll area to the viewport minus other content
+       (title + intro + CTA). This keeps the CTA visible without extra scrolling. */
+    .scroll-list {
+      /* Allow the internal list to scroll but cap its height relative to viewport */
+      max-height: calc(100vh - 220px); /* 220px is an approximation for title + intro + CTA on small screens */
+      overflow-y: auto;
+    }
 
     .scroll-list-container {
       width: 100% !important;
@@ -536,8 +589,8 @@ export const BulletsContainer = styled.div`
     /* Estilos responsive para AnimatedList */
     .about-bullets-list {
       .item {
-        padding: 0.8rem 1rem;
-        margin-bottom: 0.5rem;
+        padding: 0.7rem 0.9rem;
+        margin-bottom: 0.45rem;
       }
 
       .item-text {
@@ -546,30 +599,77 @@ export const BulletsContainer = styled.div`
       }
     }
 
-    /* Estilos responsive para ScrollStack */
+    /* Estilos responsive para ScrollStack - avoid fixed heights, allow shrink */
     .about-scroll-stack {
-      height: 400px; /* Área visible también en mobile */
+      height: auto;
 
       .scroll-stack-card.bullet-card {
-        padding: 0.75rem 1rem; /* Compacto en mobile */
-        margin-bottom: 0.6rem;
+        padding: 0.65rem 0.85rem; /* Compacto en mobile */
+        margin-bottom: 0.45rem;
 
         &::after {
-          top: 0.4rem;
-          right: 0.6rem;
+          top: 0.35rem;
+          right: 0.45rem;
           font-size: 0.65rem;
         }
 
         p {
           font-size: var(--size-min-para);
-          line-height: 1.4;
-          padding-right: 1.2rem;
+          line-height: 1.35;
+          padding-right: 0.9rem;
         }
       }
     }
   }
   @media (max-width: 480px) {
-    padding: 0.8rem;
+    padding: 0.5rem 0.4rem 0.75rem 0.4rem; /* give a little bottom padding so CTA isn't flush to edge */
+
+    .about-bullets-list {
+      padding: 0.9rem 0.5rem 0.5rem 0.5rem;
+
+      /* Tighten the viewport cap on very small screens (iPhone 375x667) */
+      .scroll-list {
+        max-height: calc(100vh - 200px);
+      }
+    }
+  }
+
+  /* Mobile-specific: make bullets container expand and scroll internally so the section fits
+     the viewport and scroll-snap can still snap the whole section into view. */
+  @media only screen and (max-width: 768px) {
+    .about-content-root .content-inner {
+      /* Use full available height inside the section */
+      height: calc(100vh - var(--header-height));
+    }
+
+    /* Bullets should take remaining space and be scrollable */
+    .about-bullets-list,
+    .about-content-root .bullet-area,
+    ${"" /* target BulletsContainer */} {
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    /* Ensure the BulletsContainer itself allows internal scroll */
+    .about-bullets-list .scroll-list,
+    .about-bullets-list .scroll-list-container {
+      max-height: calc(100vh - var(--header-height) - 140px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  @media only screen and (max-width: 375px) {
+    padding: 0.35rem 0.25rem 0.9rem 0.25rem;
+
+    .about-bullets-list {
+      padding: 0.6rem 0.4rem 0.4rem 0.4rem;
+
+      .scroll-list {
+        /* further reduce to ensure CTA remains visible on very short viewports */
+        max-height: calc(100vh - 180px);
+      }
+    }
   }
 `;
 

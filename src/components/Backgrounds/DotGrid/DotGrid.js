@@ -47,8 +47,9 @@ const DotGrid = ({
   const canvasRef = useRef(null);
   const dotsRef = useRef([]);
   const pointerRef = useRef({
-    x: 0,
-    y: 0,
+    // Start pointer off-canvas so the grid doesn't animate on the top-left on initial render
+    x: -9999,
+    y: -9999,
     vx: 0,
     vy: 0,
     speed: 0,

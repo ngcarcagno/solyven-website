@@ -16,6 +16,7 @@ import {
   StyledRow,
   ButtonWrapper,
   IconWithHalo,
+  SectionIconWrap,
 } from "./styles";
 
 const ContentBlock = ({
@@ -47,17 +48,19 @@ const ContentBlock = ({
           {direction === "center" ? (
             <>
               <Col span={24} className="content-block-icon" style={{ flex: "0 0 auto" }}>
-                {typeof icon === "string" ? (
-                  icon.endsWith(".png") || icon.endsWith(".jpg") || icon.endsWith(".jpeg") ? (
-                    <IconWithHalo>
-                      <img src={`${process.env.PUBLIC_URL}/img/png/${icon}`} alt="" className="responsive-icon-img" />
-                    </IconWithHalo>
+                <SectionIconWrap>
+                  {typeof icon === "string" ? (
+                    icon.endsWith(".png") || icon.endsWith(".jpg") || icon.endsWith(".jpeg") ? (
+                      <IconWithHalo>
+                        <img src={`${process.env.PUBLIC_URL}/img/png/${icon}`} alt="" className="responsive-icon-img" />
+                      </IconWithHalo>
+                    ) : (
+                      <SvgIcon src={icon} width="min(200px, 25vh)" height="min(200px, 25vh)" />
+                    )
                   ) : (
-                    <SvgIcon src={icon} width="min(200px, 25vh)" height="min(200px, 25vh)" />
-                  )
-                ) : (
-                  icon
-                )}
+                    icon
+                  )}
+                </SectionIconWrap>
               </Col>
               <Col
                 span={24}

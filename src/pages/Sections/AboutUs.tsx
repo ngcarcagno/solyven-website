@@ -112,58 +112,47 @@ const AboutUsContent = ({ titleComponent }: AboutUsContentProps) => {
   return (
     <AboutContainer ref={containerRef} data-dome-open={modalOpen ? "true" : "false"} aria-hidden={modalOpen}>
       <DomeGlobalStyles />
-      <div className="about-content-root" style={{ position: "relative", zIndex: 1, width: "100%" }}>
-        {/* Título - siempre visible con diferentes estrategias */}
-        <div className="about-title-container">
-          {/* Título animado si las fuentes están listas y hay titleComponent */}
-          {titleComponent && fontsLoaded && !showFallback && titleComponent}
 
-          {/* Fallback mientras se cargan las fuentes o si no hay titleComponent */}
-          {(showFallback || !titleComponent || (!fontsLoaded && !titleComponent)) && (
-            <h6
-              style={{
-                margin: 0,
-                opacity: fontsLoaded && titleComponent ? 0 : 1,
-                transition: "opacity 0.3s ease",
-              }}>
-              {AboutContent.title}
-            </h6>
-          )}
-        </div>
+      {/* Render a simple inline layout when About is used as customContent inside ContentBlock
+          Avoid embedding SectionTemplate (which uses min-height:100vh) inside ContentBlock to prevent
+          double full-height sections that misalign the icon on tall viewports. */}
 
-        {/* Texto introductorio con fade */}
-        <FadeContent blur={true} duration={1000} easing="ease-out" initialOpacity={0}>
-          <AboutTextContainer>
-            <p>{AboutContent.text}</p>
-          </AboutTextContainer>
-        </FadeContent>
+      <div className="about-title-container">
+        {titleComponent && fontsLoaded && !showFallback ? (
+          titleComponent
+        ) : (
+          <h6 className="about-title">{AboutContent.title}</h6>
+        )}
+      </div>
 
-        {/* Lista de bullets - VERSIÓN FUNCIONAL CON ANIMATEDLIST */}
-        <BulletsContainer>
-          <AnimatedList
-            items={AboutContent.bullets}
-            showGradients={false}
-            enableArrowNavigation={false}
-            displayScrollbar={false}
-            className="about-bullets-list"
-            itemClassName="bullet-item"
-            onItemSelect={(item: string, index: number) => {
-              console.log(`Selected bullet ${index}: ${item}`);
-            }}
-          />
-        </BulletsContainer>
+      <FadeContent blur={true} duration={1000} easing="ease-out" initialOpacity={0}>
+        <AboutTextContainer>
+          <p>{AboutContent.text}</p>
+        </AboutTextContainer>
+      </FadeContent>
 
-        {/* Centered CTA below the list - constrained to same max-width as list */}
-        <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem", width: "100%" }}>
-          <div style={{ width: "100%", maxWidth: 720, margin: "0 auto", display: "flex", justifyContent: "center" }}>
-            <Button variant="default" onClick={() => setModalOpen(true)}>
-              Conocenos en Acción
-            </Button>
-          </div>
+      <BulletsContainer>
+        <AnimatedList
+          items={AboutContent.bullets}
+          showGradients={false}
+          enableArrowNavigation={false}
+          displayScrollbar={false}
+          className="about-bullets-list"
+          itemClassName="bullet-item"
+          onItemSelect={(item: string, index: number) => {
+            console.log(`Selected bullet ${index}: ${item}`);
+          }}
+        />
+      </BulletsContainer>
+
+      <div className="about-cta-wrap">
+        <div style={{ width: "100%", maxWidth: 720, display: "flex", justifyContent: "center" }}>
+          <Button variant="default" onClick={() => setModalOpen(true)}>
+            Conocenos en Acción
+          </Button>
         </div>
       </div>
 
-      {/* Fullscreen modal with lazy-loaded DomeGallery */}
       {modalOpen && (
         <FullScreenModal onClose={() => setModalOpen(false)} transparentBackdrop={true}>
           <div style={{ width: "100vw", height: "100vh" }}>

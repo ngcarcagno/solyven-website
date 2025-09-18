@@ -64,12 +64,10 @@ export const LogoContainer = styled(Link)`
     filter: drop-shadow(0 0 3px rgba(0, 53, 122, 0.7)) drop-shadow(0 0 12px rgba(0, 53, 122, 0.3))
       drop-shadow(0 3px 8px rgba(0, 0, 0, 0.5));
   }
-
   /* Removed media query - now handled by clamp() padding in HeaderSection */
 
-    .logo-with-outline {
-      height: 42px;
-    }
+  .logo-with-outline {
+    height: 42px;
   }
 `;
 

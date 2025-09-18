@@ -8,6 +8,30 @@ export const ScrollSnapContainer = styled("div")`
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
 
+  @media (max-width: 768px) {
+    /* Keep mandatory snapping behaviour; sections will be adapted to fit the viewport instead */
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+
+  /* Provide a helper inner wrapper that sections can use to constrain inner content
+     so it always fits the viewport minus header and CTA areas. Sections should wrap
+     their content in a div.content-inner to enable this behavior. */
+  .content-inner {
+    width: 100%;
+    height: auto;
+  }
+
+  @media only screen and (max-width: 768px) {
+    /* Cap inner content to fit the viewport minus header and a safe margin for CTA */
+    .content-inner {
+      max-height: calc(100vh - var(--header-height) - 56px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
   /* Oculta scrollbars en algunos navegadores */
   scrollbar-width: none; /* Firefox */
   &::-webkit-scrollbar {
@@ -139,6 +163,12 @@ export const StyledRow = styled(Row)`
     @media only screen and (max-width: 375px) {
       margin-bottom: 0 !important; /* Sin margin en iPhone SE */
     }
+    /* Ensure icon halos are not clipped by parents */
+    overflow: visible !important;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   /* Estilos responsive para iconos PNG */
@@ -321,6 +351,10 @@ export const ButtonWrapper = styled("div")<{ $centered?: boolean }>`
 export const IconWithHalo = styled("div")`
   position: relative;
   display: inline-block;
+  overflow: visible; /* Allow pseudo-elements to overflow for halo effect */
+  z-index: 3;
+  transform: none; /* ensure this element does not create a transformed stacking context */
+  will-change: auto;
 
   /* Halo animado principal - más difuminado con color detail (azul) */
   &::before {
@@ -329,8 +363,9 @@ export const IconWithHalo = styled("div")`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: min(220px, 28vh, 50vw);
-    height: min(220px, 28vh, 50vw);
+    /* More conservative halo sizing to avoid large overflow on wide screens */
+    width: clamp(140px, 16vh, 30vw);
+    height: clamp(140px, 16vh, 30vw);
     border-radius: 50%;
     background: radial-gradient(
       ellipse 120% 80% at center,
@@ -343,6 +378,7 @@ export const IconWithHalo = styled("div")`
     filter: blur(8px);
     z-index: 1;
     animation: haloAnimation 4s ease-in-out infinite;
+    pointer-events: none; /* ensure halos don't capture pointer events */
   }
 
   /* Segundo halo más amplio y sutil con color detail (azul) */
@@ -352,8 +388,8 @@ export const IconWithHalo = styled("div")`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: min(280px, 35vh, 60vw);
-    height: min(280px, 35vh, 60vw);
+    width: clamp(180px, 22vh, 40vw);
+    height: clamp(180px, 22vh, 40vw);
     border-radius: 50%;
     background: radial-gradient(
       ellipse 140% 90% at center,
@@ -365,13 +401,14 @@ export const IconWithHalo = styled("div")`
     filter: blur(12px);
     z-index: 0;
     animation: haloAnimation 4s ease-in-out infinite reverse;
+    pointer-events: none;
   }
 
   /* Efecto de levitación para el PNG */
   img,
   svg {
     position: relative;
-    z-index: 2;
+    z-index: 4; /* place icon above halos */
     animation: levitationFloat 3s ease-in-out infinite;
     transform-origin: center;
   }
@@ -401,4 +438,18 @@ export const IconWithHalo = styled("div")`
       transform: translateY(-4px) rotate(-0.5deg);
     }
   }
+`;
+
+/* Wrapper to allow per-section icon offsets and ensure overflow is visible */
+export const SectionIconWrap = styled("div")`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible; /* Ensure halos are visible */
+  z-index: 3;
+  /* Allow sections to set a custom vertical offset, e.g. --section-icon-offset: 16px */
+  margin-top: var(--section-icon-offset, 0px);
+  position: relative; /* keep in normal flow */
+  transform: none; /* avoid creating stacking context */
+  will-change: auto;
 `;

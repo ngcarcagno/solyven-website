@@ -83,10 +83,11 @@ export const Styles = createGlobalStyle`
         background: var(--color-bg-gradient);
         color: var(--color-text-secondary);
     overflow-x: hidden;
-    /* Let the body be the primary scroll container so footer scrolls naturally */
-    overflow-y: auto;
-    /* Enable scroll snapping for full-height sections */
-    scroll-snap-type: y mandatory;
+     /* Let the body be the primary scroll container so footer scrolls naturally */
+     overflow-y: auto;
+     /* Enable scroll snapping for full-height sections on desktop; on touch/mobile use proximity (less aggressive)
+         so users can scroll inside sections without the scroll snapping immediately snapping them back. */
+     scroll-snap-type: y mandatory;
     
     /* PROPORTIONAL SCALING - Root font size scales with viewport */
     font-size: clamp(12px, 1.5vw, 16px); /* Reduced range for better mobile adaptation */
@@ -195,6 +196,10 @@ export const Styles = createGlobalStyle`
         text-rendering: optimizeLegibility;
     }
 
+        /* Keep scroll-snap mandatory globally to preserve the section-based UX.
+           If future per-section exceptions are required, we'll handle them selectively
+           per-section rather than globally. */
+
     .about-block-image svg {
         text-align: center;
     }
@@ -229,6 +234,26 @@ export const Styles = createGlobalStyle`
         backdrop-filter: blur(4px);
         -webkit-backdrop-filter: blur(4px);
     }
+
+        /* Specific offset rules for the About section icon (shield) so it aligns on very tall screens */
+        #about .content-block-icon {
+                --section-icon-offset: 0px;
+                /* make sure the icon column aligns with content by default */
+                align-self: center;
+                overflow: visible;
+        }
+
+        @media (min-height: 900px) {
+            #about .content-block-icon {
+                --section-icon-offset: 56px;
+            }
+        }
+
+        @media (min-height: 1200px) {
+            #about .content-block-icon {
+                --section-icon-offset: 120px;
+            }
+        }
 
     /* Drawer menu items styling */
     .ant-drawer-body .ant-col {
