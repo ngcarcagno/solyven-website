@@ -5,6 +5,7 @@ import { ContentBlockProps } from "./types";
 import { Button } from "../../common/Button";
 import { SvgIcon } from "../../common/SvgIcon";
 import DecryptedText from "../TexComponents/DecryptedText";
+import SplitText from "../TexComponents/SplitText/SplitText";
 import {
   ContentSection,
   Content,
@@ -17,7 +18,17 @@ import {
   IconWithHalo,
 } from "./styles";
 
-const ContentBlock = ({ icon, title, content, section, button, id, direction, customContent }: ContentBlockProps) => {
+const ContentBlock = ({
+  icon,
+  title,
+  content,
+  section,
+  button,
+  id,
+  direction,
+  customContent,
+  animation,
+}: ContentBlockProps) => {
   const scrollTo = (id: string) => {
     const element = document.getElementById(id) as HTMLDivElement;
     element.scrollIntoView({
@@ -58,27 +69,25 @@ const ContentBlock = ({ icon, title, content, section, button, id, direction, cu
                 <ContentWrapper $centered={true}>
                   {title && (
                     <h6>
-                      <DecryptedText
-                        text={title}
-                        animateOn="both"
-                        revealDirection="start"
-                        speed={60}
-                        maxIterations={10}
-                        sequential={true}
-                      />
+                      {animation === "DecryptedText" ? (
+                        <DecryptedText
+                          text={title}
+                          animateOn="view"
+                          revealDirection="start"
+                          speed={30}
+                          maxIterations={10}
+                          sequential={true}
+                        />
+                      ) : animation === "SplitText" ? (
+                        <SplitText text={title} tag="h6" className="split-title" onLetterAnimationComplete={() => {}} />
+                      ) : (
+                        <span>{title}</span>
+                      )}
                     </h6>
                   )}
                   {content && (
                     <Content>
-                      <DecryptedText
-                        text={content}
-                        animateOn="view"
-                        revealDirection="start"
-                        speed={60}
-                        maxIterations={10}
-                        sequential={true}
-                        useOriginalCharsOnly={true}
-                      />
+                      <span>{content}</span>
                     </Content>
                   )}
                   {customContent}
@@ -160,13 +169,7 @@ const ContentBlock = ({ icon, title, content, section, button, id, direction, cu
                     />
                   </h6>
                   <Content>
-                    <DecryptedText
-                      text={content}
-                      animateOn="view"
-                      revealDirection="center"
-                      speed={45}
-                      maxIterations={40}
-                    />
+                    <span>{content}</span>
                   </Content>
                   {customContent}
                   {direction === "right" ? (

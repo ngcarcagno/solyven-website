@@ -33,6 +33,7 @@ const Home = () => {
             direction="center"
             title={IntroContent.title}
             content={IntroContent.text}
+            animation="DecryptedText"
             button={IntroContent.button}
             id="intro"
           />
@@ -78,6 +79,7 @@ const Home = () => {
             direction="right"
             title={MissionContent.title}
             content={MissionContent.text}
+            animation="SplitText"
             icon="product-launch.svg"
             id="mission"
           />
