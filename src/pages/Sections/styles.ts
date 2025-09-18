@@ -184,6 +184,54 @@ export const ServicesContainer = styled.div`
       }
     }
   }
+
+  /* Generic section description to reuse subtitle/description styles across different sections */
+  .section-description {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    .subtitle {
+      font-family: var(--font-subtitle);
+      font-size: var(--size-body);
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .description {
+      font-family: var(--font-subtitle);
+      font-size: calc(var(--size-body) * 0.9);
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      margin-bottom: 1.25rem;
+
+      .subtitle {
+        font-size: 1.1rem;
+        line-height: 1.4;
+      }
+
+      .description {
+        font-size: 0.95rem;
+        line-height: 1.4;
+        color: rgba(255, 255, 255, 0.85);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .subtitle { font-size: 1rem; }
+      .description { font-size: 0.9rem; }
+    }
+
+    @media (max-width: 375px) {
+      .subtitle { font-size: 0.95rem; }
+      .description { font-size: 0.85rem; }
+    }
+  }
+  }
 `;
 
 export const ServicesGrid = styled.div`
