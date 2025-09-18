@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/solyven-website/static/css/main.256d9a4c.css",
-    "main.js": "/solyven-website/static/js/main.9c179084.js",
+    "main.js": "/solyven-website/static/js/main.91d961dd.js",
     "static/css/945.0b90e7fb.chunk.css": "/solyven-website/static/css/945.0b90e7fb.chunk.css",
-    "static/js/945.09a05f6c.chunk.js": "/solyven-website/static/js/945.09a05f6c.chunk.js",
+    "static/js/945.285512b1.chunk.js": "/solyven-website/static/js/945.285512b1.chunk.js",
     "static/css/846.943a25cf.chunk.css": "/solyven-website/static/css/846.943a25cf.chunk.css",
     "static/css/101.3f34dfcc.chunk.css": "/solyven-website/static/css/101.3f34dfcc.chunk.css",
     "static/js/101.27531bcf.chunk.js": "/solyven-website/static/js/101.27531bcf.chunk.js",
@@ -26,9 +26,9 @@
     "static/js/531.969199e2.chunk.js": "/solyven-website/static/js/531.969199e2.chunk.js",
     "index.html": "/solyven-website/index.html",
     "main.256d9a4c.css.map": "/solyven-website/static/css/main.256d9a4c.css.map",
-    "main.9c179084.js.map": "/solyven-website/static/js/main.9c179084.js.map",
+    "main.91d961dd.js.map": "/solyven-website/static/js/main.91d961dd.js.map",
     "945.0b90e7fb.chunk.css.map": "/solyven-website/static/css/945.0b90e7fb.chunk.css.map",
-    "945.09a05f6c.chunk.js.map": "/solyven-website/static/js/945.09a05f6c.chunk.js.map",
+    "945.285512b1.chunk.js.map": "/solyven-website/static/js/945.285512b1.chunk.js.map",
     "846.943a25cf.chunk.css.map": "/solyven-website/static/css/846.943a25cf.chunk.css.map",
     "101.3f34dfcc.chunk.css.map": "/solyven-website/static/css/101.3f34dfcc.chunk.css.map",
     "101.27531bcf.chunk.js.map": "/solyven-website/static/js/101.27531bcf.chunk.js.map",
@@ -52,6 +52,6 @@
   },
   "entrypoints": [
     "static/css/main.256d9a4c.css",
-    "static/js/main.9c179084.js"
+    "static/js/main.91d961dd.js"
   ]
 }
