@@ -32,11 +32,31 @@ export const AboutContainer = styled.div`
   /* Estilos para el contenedor del título */
   .about-title-container {
     text-align: center;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
 
-    @media only screen and (max-width: 375px) {
+    /* Tighter title spacing on mobile so title and subtitle compress better */
+    @media only screen and (max-width: 768px) {
+      margin-bottom: 0.75rem;
+    }
+
+    @media only screen and (max-width: 480px) {
       margin-bottom: 0.5rem;
     }
+
+    @media only screen and (max-width: 375px) {
+      margin-bottom: 0.35rem;
+    }
+  }
+
+  /* Reduce the h6 size for about titles on small viewports to try to keep it on one line */
+  .about-title {
+    font-family: var(--font-title);
+    /* Keep title larger on desktop but allow it to shrink on narrow viewports */
+    font-size: clamp(1.4rem, 2.4vw, 2.25rem);
+    line-height: 1.04;
+    margin: 0 0 clamp(0.35rem, 1.6vh, 0.9rem) 0;
+    letter-spacing: 0.3px;
+    -webkit-text-stroke: 0.55px rgba(0, 0, 0, 0.85);
   }
 
   /* Ensure the about-content-root's content-inner uses column flex so inner parts
@@ -455,7 +475,7 @@ export const ServiceDescription = styled.p`
   }
 `;
 export const AboutTextContainer = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: clamp(0.45rem, 1.6vh, 1rem);
   flex-shrink: 0;
 
   p {
@@ -504,11 +524,11 @@ export const BulletsContainer = styled.div`
 
   /* Responsive padding para mobile */
   @media (max-width: 768px) {
-    padding: 0.5rem 1rem; /* Un poco más de padding en mobile */
+    padding: clamp(0.45rem, 1.6vh, 0.9rem) 1rem; /* Un poco más de padding en mobile */
   }
 
   @media (max-width: 480px) {
-    padding: 0.5rem 0.5rem; /* Menos padding en pantallas muy pequeñas */
+    padding: clamp(0.35rem, 1.2vh, 0.6rem) 0.5rem; /* Menos padding en pantallas muy pequeñas */
   }
 
   /* Estilos personalizados para AnimatedList adaptados a nuestra web */
@@ -516,25 +536,29 @@ export const BulletsContainer = styled.div`
     width: 100% !important;
     max-width: 600px !important; /* Limitar ancho principal */
     margin: 0 auto !important; /* Centrar */
-    padding: 1.25rem 0.75rem 0.75rem 0.75rem; /* Compact padding to save vertical space */
+    padding: clamp(0.6rem, 2.2vh, 1.25rem) clamp(0.5rem, 1.6vw, 0.9rem) clamp(0.5rem, 1.6vh, 0.9rem)
+      clamp(0.5rem, 1.6vw, 0.9rem);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 
     /* On small viewports limit the bullets scroll area to the viewport minus other content
-       (title + intro + CTA). This keeps the CTA visible without extra scrolling. */
-    .scroll-list {
-      /* Allow the internal list to scroll but cap its height relative to viewport */
-      max-height: calc(100vh - 220px); /* 220px is an approximation for title + intro + CTA on small screens */
-      overflow-y: auto;
-    }
-
+       (title + intro + CTA). Use var(--vh) when available so mobile chrome is handled. */
     .scroll-list-container {
       width: 100% !important;
       max-width: 100% !important; /* Usar el ancho del contenedor padre */
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
 
     .scroll-list {
-      max-height: 100%;
-      padding: 0.5rem; /* Padding interno para compensar hover effects */
+      /* Fill the available vertical space inside the bullets list and scroll internally */
+      flex: 1 1 auto;
+      height: 100%;
+      max-height: none; /* let flex control height */
       overflow-y: auto;
+      padding: clamp(0.25rem, 1vh, 0.5rem) 0.15rem; /* reduced vertical padding to save space */
       overflow-x: visible; /* Permitir que los efectos de hover se vean */
 
       /* Scrollbar personalizado */
@@ -551,6 +575,19 @@ export const BulletsContainer = styled.div`
         border-radius: 2px;
       }
     }
+
+    /* Reduce margin introduced by AnimatedItem wrapper (inline style) and ensure last item has no extra bottom gap */
+    .scroll-list > div[data-index] {
+      margin-bottom: clamp(0.25rem, 1vh, 0.5rem) !important;
+    }
+
+    .scroll-list > div[data-index]:last-child,
+    .about-bullets-list .item:last-child {
+      margin-bottom: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    /* .scroll-list-container handled above */
 
     .item {
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
@@ -583,6 +620,12 @@ export const BulletsContainer = styled.div`
       margin: 0;
       font-weight: 400;
     }
+  }
+
+  /* Ensure the CTA sits directly under the bullets list without extra gap */
+  .about-cta-wrap {
+    padding-top: 0.15rem;
+    margin-top: 0;
   }
 
   @media (max-width: 768px) {
@@ -639,7 +682,8 @@ export const BulletsContainer = styled.div`
   @media only screen and (max-width: 768px) {
     .about-content-root .content-inner {
       /* Use full available height inside the section */
-      height: calc(100vh - var(--header-height));
+      /* Prefer var(--vh) when set to account for mobile chrome UI */
+      height: calc(var(--vh, 1vh) * 100 - var(--header-height));
     }
 
     /* Bullets should take remaining space and be scrollable */
@@ -653,7 +697,7 @@ export const BulletsContainer = styled.div`
     /* Ensure the BulletsContainer itself allows internal scroll */
     .about-bullets-list .scroll-list,
     .about-bullets-list .scroll-list-container {
-      max-height: calc(100vh - var(--header-height) - 140px);
+      max-height: calc(var(--vh, 1vh) * 100 - var(--header-height) - clamp(120px, 18vh, 180px));
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
@@ -664,11 +708,55 @@ export const BulletsContainer = styled.div`
 
     .about-bullets-list {
       padding: 0.6rem 0.4rem 0.4rem 0.4rem;
-
       .scroll-list {
         /* further reduce to ensure CTA remains visible on very short viewports */
-        max-height: calc(100vh - 180px);
+        max-height: calc(var(--vh, 1vh) * 100 - clamp(140px, 22vh, 200px));
       }
+    }
+  }
+
+  /* Very short mobile viewports — collapse non-essential gaps so content fits tightly */
+  @media (max-height: 700px) and (max-width: 420px) {
+    .about-content-root .content-inner {
+      gap: 4px;
+      padding-bottom: 2px;
+    }
+
+    .about-title-container {
+      margin-bottom: 0.1rem !important;
+    }
+
+    .about-title {
+      margin-bottom: 0.08rem !important;
+      font-size: clamp(1.2rem, 3vw, 1.9rem);
+      line-height: 1.02;
+    }
+
+    /* Reduce intro spacing */
+    .about-content-root p,
+    .about-text-container,
+    .AboutTextContainer {
+      margin-bottom: 0.08rem !important;
+      padding-bottom: 0 !important;
+    }
+
+    /* Tighten bullets container padding and item spacing */
+    .about-bullets-list {
+      padding: 0.2rem 0.35rem !important;
+    }
+
+    .about-bullets-list .item {
+      margin-bottom: 0.35rem !important;
+      padding: 0.5rem 0.6rem !important;
+    }
+
+    .about-bullets-list .scroll-list {
+      max-height: calc(var(--vh, 1vh) * 100 - clamp(110px, 18vh, 150px)) !important;
+    }
+
+    .about-cta-wrap {
+      padding-top: 0.2rem !important;
+      padding-bottom: 0.18rem !important;
     }
   }
 `;

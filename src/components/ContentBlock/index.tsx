@@ -18,6 +18,7 @@ import {
   IconWithHalo,
   SectionIconWrap,
 } from "./styles";
+import FullViewportSection from "../FullViewport/FullViewportSection";
 
 const ContentBlock = ({
   icon,
@@ -36,32 +37,15 @@ const ContentBlock = ({
       behavior: "smooth",
     });
   };
-
-  return (
-    <ContentSection>
-      <Fade direction={direction === "center" ? "up" : direction} triggerOnce>
-        <StyledRow
-          justify={direction === "center" ? "center" : "space-between"}
-          align="middle"
-          id={id}
-          direction={direction}>
-          {direction === "center" ? (
-            <>
-              <Col span={24} className="content-block-icon" style={{ flex: "0 0 auto" }}>
-                <SectionIconWrap>
-                  {typeof icon === "string" ? (
-                    icon.endsWith(".png") || icon.endsWith(".jpg") || icon.endsWith(".jpeg") ? (
-                      <IconWithHalo>
-                        <img src={`${process.env.PUBLIC_URL}/img/png/${icon}`} alt="" className="responsive-icon-img" />
-                      </IconWithHalo>
-                    ) : (
-                      <SvgIcon src={icon} width="min(200px, 25vh)" height="min(200px, 25vh)" />
-                    )
-                  ) : (
-                    icon
-                  )}
-                </SectionIconWrap>
-              </Col>
+  const isCenter = direction === "center";
+  // For center sections we wrap the ContentSection inside FullViewportSection (structural)
+  if (direction === "center") {
+    return (
+      <FullViewportSection>
+        <ContentSection>
+          <Fade direction="up" triggerOnce>
+            <StyledRow justify="center" align="middle" id={id} direction={direction}>
+              {/* Single column with icon + content together */}
               <Col
                 span={24}
                 style={{
@@ -70,24 +54,27 @@ const ContentBlock = ({
                   overflow: "visible",
                 }}>
                 <ContentWrapper $centered={true}>
-                  {title && (
-                    <h6>
-                      {animation === "DecryptedText" ? (
-                        <DecryptedText
-                          text={title}
-                          animateOn="view"
-                          revealDirection="start"
-                          speed={30}
-                          maxIterations={10}
-                          sequential={true}
-                        />
-                      ) : animation === "SplitText" ? (
-                        <SplitText text={title} tag="h6" className="split-title" onLetterAnimationComplete={() => {}} />
+                  <div className="content-block-icon">
+                    <SectionIconWrap>
+                      {typeof icon === "string" ? (
+                        icon.endsWith(".png") || icon.endsWith(".jpg") || icon.endsWith(".jpeg") ? (
+                          <IconWithHalo>
+                            <img
+                              src={`${process.env.PUBLIC_URL}/img/png/${icon}`}
+                              alt=""
+                              className="responsive-icon-img"
+                            />
+                          </IconWithHalo>
+                        ) : (
+                          <SvgIcon src={icon} width="min(200px, 25vh)" height="min(200px, 25vh)" />
+                        )
                       ) : (
-                        <span>{title}</span>
+                        icon
                       )}
-                    </h6>
-                  )}
+                    </SectionIconWrap>
+                  </div>
+
+                  {title && <h6>{title}</h6>}
                   {content && (
                     <Content>
                       <span>{content}</span>
@@ -96,133 +83,82 @@ const ContentBlock = ({
                   {customContent}
                   <ButtonWrapper $centered={true}>
                     {typeof button === "object" &&
-                      button.map(
-                        (
-                          item: {
-                            color?: string;
-                            title: string;
-                          },
-                          id: number
-                        ) => {
-                          return (
-                            <Button key={id} color={item.color} onClick={() => scrollTo("about")}>
-                              {item.title}
-                            </Button>
-                          );
-                        }
-                      )}
+                      button.map((item: any, id: number) => (
+                        <Button key={id} color={item.color} onClick={() => scrollTo("about")}>
+                          {item.title}
+                        </Button>
+                      ))}
                   </ButtonWrapper>
-                  {typeof section === "object" && (
-                    <ServiceWrapper style={{ justifyContent: "center", flexWrap: "wrap", gap: "2rem" }}>
-                      <Row justify="center" gutter={[32, 32]}>
-                        {section.map(
-                          (
-                            item: {
-                              title: string;
-                              content: string;
-                              icon: string;
-                            },
-                            id: number
-                          ) => {
-                            return (
-                              <Col key={id} xs={24} sm={12} md={8} lg={6} style={{ textAlign: "center" }}>
-                                <SvgIcon src={item.icon} width="60px" height="60px" />
-                                <MinTitle>{item.title}</MinTitle>
-                                <MinPara>{item.content}</MinPara>
-                              </Col>
-                            );
-                          }
-                        )}
-                      </Row>
-                    </ServiceWrapper>
-                  )}
                 </ContentWrapper>
               </Col>
-            </>
-          ) : (
-            <>
-              <Col lg={11} md={11} sm={12} xs={24} style={{ display: "flex", alignItems: "center" }}>
-                {typeof icon === "string" ? (
-                  icon.endsWith(".png") || icon.endsWith(".jpg") || icon.endsWith(".jpeg") ? (
-                    <img
-                      src={`${process.env.PUBLIC_URL}/img/png/${icon}`}
-                      alt=""
-                      style={{
-                        width: "min(100%, 40vh)",
-                        height: "min(100%, 40vh)",
-                        objectFit: "contain",
-                      }}
-                    />
-                  ) : (
-                    <SvgIcon src={icon} width="min(100%, 40vh)" height="min(100%, 40vh)" />
-                  )
+            </StyledRow>
+          </Fade>
+        </ContentSection>
+      </FullViewportSection>
+    );
+  }
+
+  // Non-center directions keep the original layout
+  return (
+    <ContentSection>
+      <Fade direction={isCenter ? "up" : direction} triggerOnce>
+        <StyledRow justify={isCenter ? "center" : "space-between"} align="middle" id={id} direction={direction}>
+          {/* ...existing non-center layout... */}
+          <>
+            <Col lg={11} md={11} sm={12} xs={24} style={{ display: "flex", alignItems: "center" }}>
+              {typeof icon === "string" ? (
+                icon.endsWith(".png") || icon.endsWith(".jpg") || icon.endsWith(".jpeg") ? (
+                  <img
+                    src={`${process.env.PUBLIC_URL}/img/png/${icon}`}
+                    alt=""
+                    style={{
+                      width: "min(100%, 40vh)",
+                      height: "min(100%, 40vh)",
+                      objectFit: "contain",
+                    }}
+                  />
                 ) : (
-                  icon
+                  <SvgIcon src={icon} width="min(100%, 40vh)" height="min(100%, 40vh)" />
+                )
+              ) : (
+                icon
+              )}
+            </Col>
+            <Col lg={11} md={11} sm={11} xs={24} style={{ display: "flex", flexDirection: "column" }}>
+              <ContentWrapper style={{ flex: "1", display: "flex", flexDirection: "column" }}>
+                <h6>
+                  <DecryptedText text={title} animateOn="view" revealDirection="center" speed={45} maxIterations={30} />
+                </h6>
+                <Content>
+                  <span>{content}</span>
+                </Content>
+                {customContent}
+                {direction === "right" ? (
+                  <ButtonWrapper>
+                    {typeof button === "object" &&
+                      button.map((item: any, id: number) => (
+                        <Button key={id} color={item.color} onClick={() => scrollTo("about")}>
+                          {item.title}
+                        </Button>
+                      ))}
+                  </ButtonWrapper>
+                ) : (
+                  <ServiceWrapper>
+                    <Row justify="space-between">
+                      {typeof section === "object" &&
+                        section.map((item: any, id: number) => (
+                          <Col key={id} span={11}>
+                            <SvgIcon src={item.icon} width="60px" height="60px" />
+                            <MinTitle>{item.title}</MinTitle>
+                            <MinPara>{item.content}</MinPara>
+                          </Col>
+                        ))}
+                    </Row>
+                  </ServiceWrapper>
                 )}
-              </Col>
-              <Col lg={11} md={11} sm={11} xs={24} style={{ display: "flex", flexDirection: "column" }}>
-                <ContentWrapper style={{ flex: "1", display: "flex", flexDirection: "column" }}>
-                  <h6>
-                    <DecryptedText
-                      text={title}
-                      animateOn="view"
-                      revealDirection="center"
-                      speed={45}
-                      maxIterations={30}
-                    />
-                  </h6>
-                  <Content>
-                    <span>{content}</span>
-                  </Content>
-                  {customContent}
-                  {direction === "right" ? (
-                    <ButtonWrapper>
-                      {typeof button === "object" &&
-                        button.map(
-                          (
-                            item: {
-                              color?: string;
-                              title: string;
-                            },
-                            id: number
-                          ) => {
-                            return (
-                              <Button key={id} color={item.color} onClick={() => scrollTo("about")}>
-                                {item.title}
-                              </Button>
-                            );
-                          }
-                        )}
-                    </ButtonWrapper>
-                  ) : (
-                    <ServiceWrapper>
-                      <Row justify="space-between">
-                        {typeof section === "object" &&
-                          section.map(
-                            (
-                              item: {
-                                title: string;
-                                content: string;
-                                icon: string;
-                              },
-                              id: number
-                            ) => {
-                              return (
-                                <Col key={id} span={11}>
-                                  <SvgIcon src={item.icon} width="60px" height="60px" />
-                                  <MinTitle>{item.title}</MinTitle>
-                                  <MinPara>{item.content}</MinPara>
-                                </Col>
-                              );
-                            }
-                          )}
-                      </Row>
-                    </ServiceWrapper>
-                  )}
-                </ContentWrapper>
-              </Col>
-            </>
-          )}
+              </ContentWrapper>
+            </Col>
+          </>
         </StyledRow>
       </Fade>
     </ContentSection>

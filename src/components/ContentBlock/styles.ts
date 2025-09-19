@@ -104,6 +104,28 @@ export const ContentSection = styled("section")`
     align-items: center !important;
     justify-content: center !important;
   }
+
+  /* When ContentSection is used inside a real viewport wrapper (FullViewportSection)
+     avoid duplicating 100vh and reduce padding so inner content can fit inside the
+     actual viewport element. The wrapper will set the real height. */
+  &[data-full-viewport="true"] {
+    height: auto !important;
+    min-height: 0 !important;
+    align-items: flex-start !important;
+    padding-top: calc(var(--header-height) * 0.6) !important;
+    padding-bottom: calc(var(--header-height) * 0.6) !important;
+    overflow: hidden !important;
+
+    @media only screen and (max-width: 768px) {
+      padding-top: calc(var(--header-height) * 0.4) !important;
+      padding-bottom: calc(var(--header-height) * 0.4) !important;
+    }
+
+    @media only screen and (max-width: 375px) {
+      padding-top: calc(var(--header-height) * 0.25) !important;
+      padding-bottom: calc(var(--header-height) * 0.25) !important;
+    }
+  }
 `;
 
 export const StyledRow = styled(Row)`
@@ -258,6 +280,13 @@ export const ContentWrapper = styled("div")<{ $centered?: boolean }>`
     overflow-y: auto; /* Scroll si es necesario */
   }
 
+  /* On small width viewports, cap height so CTA is reachable and allow internal scroll */
+  @media only screen and (max-width: 480px) {
+    max-height: calc(100vh - var(--header-height) - 72px); /* leave room for CTA and some margin */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   /* Para pantallas muy pequeñas de altura */
   @media only screen and (max-height: 500px) {
     justify-content: flex-start;
@@ -364,8 +393,8 @@ export const IconWithHalo = styled("div")`
     left: 50%;
     transform: translate(-50%, -50%);
     /* More conservative halo sizing to avoid large overflow on wide screens */
-    width: clamp(140px, 16vh, 30vw);
-    height: clamp(140px, 16vh, 30vw);
+    width: clamp(120px, 14vh, 28vw);
+    height: clamp(120px, 14vh, 28vw);
     border-radius: 50%;
     background: radial-gradient(
       ellipse 120% 80% at center,
@@ -388,8 +417,8 @@ export const IconWithHalo = styled("div")`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: clamp(180px, 22vh, 40vw);
-    height: clamp(180px, 22vh, 40vw);
+    width: clamp(140px, 18vh, 34vw);
+    height: clamp(140px, 18vh, 34vw);
     border-radius: 50%;
     background: radial-gradient(
       ellipse 140% 90% at center,
@@ -409,6 +438,7 @@ export const IconWithHalo = styled("div")`
   svg {
     position: relative;
     z-index: 4; /* place icon above halos */
+    /* disable levitation on small screens to prevent layout shift */
     animation: levitationFloat 3s ease-in-out infinite;
     transform-origin: center;
   }
@@ -452,4 +482,21 @@ export const SectionIconWrap = styled("div")`
   position: relative; /* keep in normal flow */
   transform: none; /* avoid creating stacking context */
   will-change: auto;
+
+  /* On small viewports, reset offsets so icon stays visually attached to content */
+  @media only screen and (max-width: 480px) {
+    margin-top: 0 !important;
+  }
+
+  /* Reduce halo size and disable animation on very small screens */
+  @media only screen and (max-width: 375px) {
+    &::before,
+    &::after {
+      display: none;
+    }
+    img,
+    svg {
+      animation: none !important;
+    }
+  }
 `;

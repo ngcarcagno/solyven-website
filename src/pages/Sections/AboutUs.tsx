@@ -113,43 +113,46 @@ const AboutUsContent = ({ titleComponent }: AboutUsContentProps) => {
     <AboutContainer ref={containerRef} data-dome-open={modalOpen ? "true" : "false"} aria-hidden={modalOpen}>
       <DomeGlobalStyles />
 
-      {/* Render a simple inline layout when About is used as customContent inside ContentBlock
-          Avoid embedding SectionTemplate (which uses min-height:100vh) inside ContentBlock to prevent
-          double full-height sections that misalign the icon on tall viewports. */}
+      {/* Wrap the about content in a structural root + content-inner so ScrollSnapContainer
+          can cap inner height and allow internal scroll on small viewports. This is a
+          structural change to make spacing adaptive and avoid overflow. */}
+      <div className="about-content-root">
+        <div className="content-inner">
+          <div className="about-title-container">
+            {titleComponent && fontsLoaded && !showFallback ? (
+              titleComponent
+            ) : (
+              <h6 className="about-title">{AboutContent.title}</h6>
+            )}
+          </div>
 
-      <div className="about-title-container">
-        {titleComponent && fontsLoaded && !showFallback ? (
-          titleComponent
-        ) : (
-          <h6 className="about-title">{AboutContent.title}</h6>
-        )}
-      </div>
+          <FadeContent blur={true} duration={1000} easing="ease-out" initialOpacity={0}>
+            <AboutTextContainer>
+              <p>{AboutContent.text}</p>
+            </AboutTextContainer>
+          </FadeContent>
 
-      <FadeContent blur={true} duration={1000} easing="ease-out" initialOpacity={0}>
-        <AboutTextContainer>
-          <p>{AboutContent.text}</p>
-        </AboutTextContainer>
-      </FadeContent>
+          <BulletsContainer>
+            <AnimatedList
+              items={AboutContent.bullets}
+              showGradients={false}
+              enableArrowNavigation={false}
+              displayScrollbar={false}
+              className="about-bullets-list"
+              itemClassName="bullet-item"
+              onItemSelect={(item: string, index: number) => {
+                console.log(`Selected bullet ${index}: ${item}`);
+              }}
+            />
+          </BulletsContainer>
 
-      <BulletsContainer>
-        <AnimatedList
-          items={AboutContent.bullets}
-          showGradients={false}
-          enableArrowNavigation={false}
-          displayScrollbar={false}
-          className="about-bullets-list"
-          itemClassName="bullet-item"
-          onItemSelect={(item: string, index: number) => {
-            console.log(`Selected bullet ${index}: ${item}`);
-          }}
-        />
-      </BulletsContainer>
-
-      <div className="about-cta-wrap">
-        <div style={{ width: "100%", maxWidth: 720, display: "flex", justifyContent: "center" }}>
-          <Button variant="default" onClick={() => setModalOpen(true)}>
-            Conocenos en Acción
-          </Button>
+          <div className="about-cta-wrap">
+            <div style={{ width: "100%", maxWidth: 720, display: "flex", justifyContent: "center" }}>
+              <Button variant="default" onClick={() => setModalOpen(true)}>
+                Conocenos en Acción
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
 

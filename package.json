@@ -19,6 +19,7 @@
     "ogl": "^1.0.11",
     "react": "^18.2.0",
     "react-awesome-reveal": "^3.8.1",
+    "react-div-100vh": "^0.7.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.4",
     "react-scripts": "^5.0.1",
@@ -50,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-div-100vh": "^0.3.0",
     "gh-pages": "^6.3.0"
   }
 }
