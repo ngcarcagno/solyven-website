@@ -139,6 +139,7 @@ const ServicesContent = ({ titleComponent }: ServicesContentProps) => {
         {/* Fallback mientras se cargan las fuentes o si no hay titleComponent */}
         {(showFallback || !titleComponent || (!fontsLoaded && !titleComponent)) && (
           <h6
+            className="about-title"
             style={{
               margin: 0,
               opacity: fontsLoaded && titleComponent ? 0 : 1,

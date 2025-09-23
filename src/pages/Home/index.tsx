@@ -58,7 +58,7 @@ const Home = () => {
             content=""
             id="services"
             customContent={
-              <ServicesContent titleComponent={<h6 className="services-title">{ServicesContentData.title}</h6>} />
+              <ServicesContent titleComponent={<h6 className="about-title">{ServicesContentData.title}</h6>} />
             }
           />
         </BackgroundDotGrid>
@@ -81,7 +81,7 @@ const Home = () => {
 
       {/* Custom WhatsApp Widget - Outside ScrollSnapContainer to avoid z-index issues */}
       <CustomWhatsAppWidget
-        phoneNumber="5491169369090"
+        phoneNumber="5491127511315"
         companyName="Solyven Seguridad"
         replyTimeText="Respuesta inmediata"
         message="¡Hola! 👋 ¿Necesitás un presupuesto personalizado para tu empresa?"

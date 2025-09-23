@@ -179,16 +179,37 @@ export const ServicesContainer = styled.div`
   /* Estilos para el contenedor del título */
   .services-title-container {
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 
-    @media (max-width: 768px) {
-      margin-top: 0;
-      margin-bottom: 1rem;
-      padding-top: 0;
+    @media only screen and (max-width: 768px) {
+      margin-bottom: 0.75rem;
+    }
+
+    @media only screen and (max-width: 480px) {
+      margin-bottom: 0.5rem;
     }
 
     @media only screen and (max-width: 375px) {
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.35rem;
+    }
+
+    /* Strongly-specific nested rule to match AboutUs mobile sizing. Only
+       override the properties required, using !important where the global
+       stylesheet applies !important in small viewports. */
+    > h6.about-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.4rem, 2.4vw, 2.25rem) !important;
+      line-height: 1.04 !important;
+      margin: 0 0 clamp(0.35rem, 1.6vh, 0.9rem) 0;
+      letter-spacing: 0.3px;
+      -webkit-text-stroke: 0.55px rgba(0, 0, 0, 0.85);
+      /* Restore glow to match global headings */
+      text-shadow:
+        0 0 10px rgba(247, 88, 0, 0.4),
+        0 0 20px rgba(247, 88, 0, 0.2),
+        0 0 30px rgba(247, 88, 0, 0.1),
+        1px 1px 2px rgba(0, 0, 0, 0.6);
+      color: var(--color-text-primary);
     }
   }
 
@@ -315,36 +336,72 @@ export const ServicesGrid = styled.div`
   }
 
   @media (max-width: 768px) {
+    /* On tablet and below, switch to single column but allow centered narrower cards */
     grid-template-columns: 1fr;
     gap: 1rem;
-    max-width: 350px;
-    padding: 0 0.5rem; /* Padding horizontal para evitar cortes */
+    max-width: 420px;
+    padding: 0 0.5rem;
+    justify-items: center; /* center children */
 
-    /* En mobile todas las cards ocupan todo el ancho */
+    .service-item {
+      width: 100%;
+      max-width: 320px; /* allow narrower than full width */
+      justify-self: center;
+    }
+
+    /* Remove special spanning behavior so all cards behave same */
     .service-item:nth-child(3) {
-      grid-column: 1;
-      max-width: none;
+      grid-column: auto;
+      max-width: 320px;
     }
   }
 
   @media (max-width: 480px) {
+    /* Stack as narrow centered blocks to save horizontal space */
+    grid-template-columns: 1fr;
     gap: 0.75rem;
-    max-width: 320px;
+    max-width: 360px;
     padding: 0 0.25rem;
+    justify-items: center;
+
+    .service-item {
+      width: 100%;
+      max-width: 320px !important; /* expand to match the larger last card */
+      justify-self: center;
+      padding: 0; /* let inner ServiceCard control padding */
+    }
+
+    /* Ensure nth-child doesn't deviate */
+    .service-item:nth-child(1),
+    .service-item:nth-child(2),
+    .service-item:nth-child(3) {
+      max-width: 320px !important;
+      width: 100% !important;
+      justify-self: center !important;
+    }
   }
 
   @media (max-width: 375px) {
+    grid-template-columns: 1fr;
     gap: 0.5rem;
-    max-width: 300px;
+    max-width: 320px;
     padding: 0;
-  } /* Estilos para SpotlightCard */
-  .service-spotlight-card {
-    height: 100%;
-    border-radius: 0.75rem;
-    overflow: visible; /* Permitir que el hover se vea completo */
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    justify-items: center;
 
-    /* Removemos el transform de aquí para evitar conflictos con SpotlightCard CSS */
+    .service-item {
+      width: 100%;
+      max-width: 300px !important; /* make first two match the larger last card */
+      justify-self: center;
+      padding: 0;
+    }
+
+    .service-item:nth-child(1),
+    .service-item:nth-child(2),
+    .service-item:nth-child(3) {
+      max-width: 300px !important;
+      width: 100% !important;
+      justify-self: center !important;
+    }
   }
 `;
 

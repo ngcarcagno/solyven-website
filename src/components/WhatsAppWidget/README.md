@@ -44,7 +44,7 @@
 
 ```tsx
 <CustomWhatsAppWidget
-  phoneNumber="5491169369090"
+  phoneNumber="5491127511315"
   companyName="Solyven Seguridad"
   replyTimeText="Respuesta inmediata"
   message="¡Hola! 👋 ¿Necesitás un presupuesto personalizado para tu empresa?"
