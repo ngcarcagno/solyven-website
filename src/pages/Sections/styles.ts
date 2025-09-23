@@ -51,6 +51,7 @@ export const AboutContainer = styled.div`
   /* Reduce the h6 size for about titles on small viewports to try to keep it on one line */
   .about-title {
     font-family: var(--font-title);
+    text-transform: uppercase;
     /* Keep title larger on desktop but allow it to shrink on narrow viewports */
     font-size: clamp(1.4rem, 2.4vw, 2.25rem);
     line-height: 1.04;
@@ -142,6 +143,25 @@ export const DomeGlobalStyles = createGlobalStyle`
     visibility: hidden !important;
     transform: translateY(-8px) scale(0.98);
     pointer-events: none !important;
+  }
+`;
+
+export const MissionTitleOverride = createGlobalStyle`
+  /* Force mission title to match AboutUs sizing and look on small viewports */
+  #mission .services-title-container > h6.about-title {
+    font-family: var(--font-title);
+    font-size: clamp(1.4rem, 2.4vw, 2.25rem) !important;
+    line-height: 1.04 !important;
+    margin: 0 0 clamp(0.35rem, 1.6vh, 0.9rem) 0;
+    letter-spacing: 0.3px;
+    -webkit-text-stroke: 0.55px rgba(0, 0, 0, 0.85);
+    text-shadow:
+      0 0 10px rgba(247, 88, 0, 0.4),
+      0 0 20px rgba(247, 88, 0, 0.2),
+      0 0 30px rgba(247, 88, 0, 0.1),
+      1px 1px 2px rgba(0, 0, 0, 0.6) !important;
+    color: var(--color-text-primary) !important;
+    text-transform: uppercase !important;
   }
 `;
 

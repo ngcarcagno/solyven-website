@@ -1,12 +1,25 @@
 .card-swap-container {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  transform: translate(5%, 20%);
-  transform-origin: bottom right;
-
+  position: relative; /* allow wrapping container to position it centrally */
+  margin: 0 auto;
+  transform: none;
+  transform-origin: center center;
   perspective: 900px;
   overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The outer wrapper (added in MissionVision) should be a positioned parent so we can
+   absolutely anchor the visual stack on desktop while keeping mobile centered. */
+.card-swap-outer {
+  position: relative;
+}
+
+/* Visual nudge so the card stack appears anchored lower (cards come from below) */
+.card-swap-container.shift-down,
+.card-swap-outer.shift-down {
+  transform: translateY(12%);
 }
 
 .card {
@@ -35,12 +48,37 @@
 
 @media (max-width: 768px) {
   .card-swap-container {
-    transform: scale(0.75) translate(25%, 25%);
+    transform: scale(0.9) translateY(12%);
   }
 }
 
 @media (max-width: 480px) {
   .card-swap-container {
-    transform: scale(0.55) translate(25%, 25%);
+    transform: scale(0.82) translateY(18%);
+  }
+}
+
+/* Desktop (restore anchored layout similar to previous behavior) */
+@media (min-width: 769px) {
+  /* ensure the outer wrapper is the positioning context */
+  .card-swap-outer {
+    position: relative;
+  }
+
+  .card-swap-outer .card-swap-container {
+    position: absolute;
+    right: 4%;
+    bottom: 6vh;
+    margin: 0;
+    transform-origin: bottom right;
+    /* small visual offset to match previous design */
+    transform: translate(5%, 20%);
+    display: block;
+  }
+
+  /* On desktop the shift-down visual nudge should be minimal (cards anchored lower already) */
+  .card-swap-outer.shift-down .card-swap-container,
+  .card-swap-outer.shift-down {
+    transform: translate(5%, 20%);
   }
 }
