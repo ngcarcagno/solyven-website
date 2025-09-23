@@ -48,10 +48,10 @@ const Footer = () => {
               <AddressLines>
                 <Para>Zárate, Buenos Aires</Para>
                 <MapLink
-                  href="https://www.google.com/maps/search/?api=1&query=3+de+febrero+1676+Zarate+Buenos+Aires"
+                  href="https://www.google.com/maps/search/?api=1&query=3+de+febrero+167+Zarate+Buenos+Aires"
                   target="_blank"
                   rel="noopener noreferrer">
-                  3 de febrero 1676
+                  3 de febrero 167
                 </MapLink>
               </AddressLines>
             </AddressCard>

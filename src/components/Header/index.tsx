@@ -37,7 +37,7 @@ const Header = () => {
         <MobileMenuItem onClick={() => scrollTo("mission")}>
           <span>Misión</span>
         </MobileMenuItem>
-        <MobileMenuItem onClick={() => scrollTo("product")}>
+        <MobileMenuItem onClick={() => scrollTo("services")}>
           <span>Servicios</span>
         </MobileMenuItem>
         <div style={{ marginTop: "1rem" }}>
@@ -60,7 +60,7 @@ const Header = () => {
       <NavContainer>
         <Span onClick={() => scrollTo("about")}>Nosotros</Span>
         <Span onClick={() => scrollTo("mission")}>Misión</Span>
-        <Span onClick={() => scrollTo("product")}>Servicios</Span>
+        <Span onClick={() => scrollTo("services")}>Servicios</Span>
         <Button variant="header" onClick={() => scrollTo("contact")}>
           Contacto
         </Button>

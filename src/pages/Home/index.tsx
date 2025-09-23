@@ -63,15 +63,6 @@ const Home = () => {
           />
         </BackgroundDotGrid>
 
-        {/* Middle Block Section */}
-        <BackgroundDotGrid>
-          <MiddleBlock
-            title={MiddleBlockContent.title}
-            content={MiddleBlockContent.text}
-            button={MiddleBlockContent.button}
-          />
-        </BackgroundDotGrid>
-
         {/* Mission Section (MissionVision CardSwap) */}
         <BackgroundDotGrid>
           <MissionVision />
