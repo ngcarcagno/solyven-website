@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef, lazy, Suspense } from "react";
 import FadeContent from "../../components/FadeContent/FadeContent";
 import AnimatedList from "../../components/AnimatedList/AnimatedList";
+import useBulletsAvailableHeight from "../../hooks/useBulletsAvailableHeight";
 import { Button } from "../../common/Button";
 import AboutContent from "../../content/AboutContent.json";
 import { AboutContainer, AboutTextContainer, BulletsContainer, DomeGlobalStyles } from "./styles";
@@ -17,6 +18,12 @@ const AboutUsContent = ({ titleComponent }: AboutUsContentProps) => {
   const [showFallback, setShowFallback] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const introRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  // compute available bullets height and write to CSS variable --about-bullets-height
+  useBulletsAvailableHeight({ rootRef: containerRef, titleRef, introRef, ctaRef, padding: 12 });
 
   useEffect(() => {
     if (modalOpen) {
@@ -122,12 +129,14 @@ const AboutUsContent = ({ titleComponent }: AboutUsContentProps) => {
             {titleComponent && fontsLoaded && !showFallback ? (
               titleComponent
             ) : (
-              <h6 className="about-title">{AboutContent.title}</h6>
+              <h6 ref={titleRef} className="about-title">
+                {AboutContent.title}
+              </h6>
             )}
           </div>
 
           <FadeContent blur={true} duration={1000} easing="ease-out" initialOpacity={0}>
-            <AboutTextContainer>
+            <AboutTextContainer ref={introRef as any}>
               <p>{AboutContent.text}</p>
             </AboutTextContainer>
           </FadeContent>
@@ -146,7 +155,7 @@ const AboutUsContent = ({ titleComponent }: AboutUsContentProps) => {
             />
           </BulletsContainer>
 
-          <div className="about-cta-wrap">
+          <div ref={ctaRef} className="about-cta-wrap">
             <div style={{ width: "100%", maxWidth: 720, display: "flex", justifyContent: "center" }}>
               <Button variant="default" onClick={() => setModalOpen(true)}>
                 Conocenos en Acción

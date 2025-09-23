@@ -556,7 +556,8 @@ export const BulletsContainer = styled.div`
       /* Fill the available vertical space inside the bullets list and scroll internally */
       flex: 1 1 auto;
       height: 100%;
-      max-height: none; /* let flex control height */
+      /* Respect the JS-computed available bullets height when present */
+      max-height: var(--about-bullets-height, none);
       overflow-y: auto;
       padding: clamp(0.25rem, 1vh, 0.5rem) 0.15rem; /* reduced vertical padding to save space */
       overflow-x: visible; /* Permitir que los efectos de hover se vean */
@@ -741,6 +742,51 @@ export const BulletsContainer = styled.div`
     }
 
     /* Tighten bullets container padding and item spacing */
+    .about-bullets-list {
+      padding: 0.2rem 0.35rem !important;
+    }
+
+    .about-bullets-list .item {
+      margin-bottom: 0.35rem !important;
+      padding: 0.5rem 0.6rem !important;
+    }
+
+    .about-bullets-list .scroll-list {
+      max-height: calc(var(--vh, 1vh) * 100 - clamp(110px, 18vh, 150px)) !important;
+    }
+
+    .about-cta-wrap {
+      padding-top: 0.2rem !important;
+      padding-bottom: 0.18rem !important;
+    }
+  }
+
+  /* Also apply the same compacting rules for any viewport that is short regardless of width
+     (useful for small-height desktop windows or kiosks). This duplicates the block above but
+     without a max-width so it applies when only height is constrained. */
+  @media (max-height: 700px) {
+    .about-content-root .content-inner {
+      gap: 4px;
+      padding-bottom: 2px;
+    }
+
+    .about-title-container {
+      margin-bottom: 0.1rem !important;
+    }
+
+    .about-title {
+      margin-bottom: 0.08rem !important;
+      font-size: clamp(1.2rem, 3vw, 1.9rem);
+      line-height: 1.02;
+    }
+
+    .about-content-root p,
+    .about-text-container,
+    .AboutTextContainer {
+      margin-bottom: 0.08rem !important;
+      padding-bottom: 0 !important;
+    }
+
     .about-bullets-list {
       padding: 0.2rem 0.35rem !important;
     }
