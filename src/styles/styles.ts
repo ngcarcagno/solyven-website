@@ -47,11 +47,20 @@ export const Styles = createGlobalStyle`
 
     /* Header layout - PROPORTIONAL (scales with root font-size) */
     --header-height: 4em; /* Always 4x the root font size */
+     /* Header offset from top (used when header is fixed). Sections should begin after
+         the header bottom, so we expose this as a variable to compute section paddings. */
+     --header-offset: 0.5em;
+     /* Small extra guard used when computing section top padding to avoid overlap
+         with fixed header on some devices. Configurable from :root. */
+     --section-top-guard: 0.25rem;
+    /* Reserve space at the bottom of the viewport for fixed CTAs / widgets (WhatsApp bubble, promo bar) */
+    --section-bottom-guard: 4rem;
     
     /* Content block layout - PROPORTIONAL */
     --content-min-height: 100vh;
     --content-padding: 6em 2em 5em; /* Reduced vertical padding for better mobile */
-    --content-padding-mobile: 3em 1.5em 3em; /* Reduced mobile padding */
+    /* Reduced mobile padding: slightly tighter to improve vertical density on small screens */
+    --content-padding-mobile: 5em 0em 0em; /* was 3em 1.5em 3em */
     --content-wrapper-max-width: min(90vw, 36em); /* Slightly wider max-width */
     
     /* Glassy UI variables - PROPORTIONAL SCALING */
@@ -133,7 +142,9 @@ export const Styles = createGlobalStyle`
                 font-family: var(--font-title);
                 text-transform: uppercase;
                 color: var(--color-text-primary);
-                font-size: var(--size-h1); /* Proportional to root font-size */
+                     /* Fluid heading size to avoid abrupt jumps between breakpoints.
+                         Uses the existing size variables as min/max anchors. */
+                     font-size: clamp(var(--size-h1-xs), calc(1.0rem + 2.8vw), var(--size-h1)); /* fluid */
                 line-height: 1.2; /* Fixed ratio - always proportional */
                 
                 /* Glow naranja con intensidad moderada y stroke */
@@ -167,6 +178,33 @@ export const Styles = createGlobalStyle`
 
     h1 {
         font-weight: 600;
+    }
+
+    /* Reduce glowing effect on very small screens (phones) so titles don't appear too intense */
+    @media (max-width: 480px) {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            /* Softer glow: reduced spread and opacity */
+            text-shadow:
+                0 0 6px rgba(247, 88, 0, 0.28),
+                0 0 12px rgba(247, 88, 0, 0.16),
+                0 0 18px rgba(247, 88, 0, 0.08),
+                1px 1px 1px rgba(0, 0, 0, 0.6);
+
+            /* Slightly thinner stroke so text remains crisp but less heavy */
+            -webkit-text-stroke: 0.35px rgba(0, 0, 0, 0.8);
+
+            /* Keep sizing but avoid extra transform on hover which can be jarring on touch */
+            transition: color 0.2s ease, text-shadow 0.2s ease;
+
+            &:hover {
+                transform: none;
+            }
+        }
     }
     
     *:focus {
@@ -421,4 +459,9 @@ export const Styles = createGlobalStyle`
             line-height: 1.3; /* Interlineado más compacto para párrafos */
         }
     }
+
+        /* Removed earlier experimental global overrides for AboutUs (kept per-section fixes inside AboutContainer)
+             This file should not contain aggressive !important overrides that break local styled-components.
+             Per-section short-height behavior is implemented inside src/pages/Sections/styles.ts
+        */
         `;

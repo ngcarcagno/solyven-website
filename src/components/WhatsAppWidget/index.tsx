@@ -33,6 +33,30 @@ const CustomWhatsAppWidget: React.FC<WhatsAppWidgetProps> = ({
     config,
   } = useIncentiveMessages(isOpen, context);
 
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(max-width: 768px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    try {
+      mq.addEventListener ? mq.addEventListener("change", update) : mq.addListener(update);
+    } catch (e) {
+      // older browsers
+      mq.addListener(update);
+    }
+    window.addEventListener("resize", update);
+    return () => {
+      try {
+        mq.removeEventListener ? mq.removeEventListener("change", update) : mq.removeListener(update);
+      } catch (e) {
+        mq.removeListener(update);
+      }
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
   // Animación de pulso cada 10 segundos para llamar la atención
   useEffect(() => {
     if (!config.enabled) return;
@@ -67,9 +91,9 @@ const CustomWhatsAppWidget: React.FC<WhatsAppWidgetProps> = ({
   };
 
   return (
-    <WhatsAppContainer>
+    <WhatsAppContainer className={showIncentive ? "above-promo" : ""}>
       {/* Mensaje de incentivo */}
-      {showIncentive && !isOpen && currentIncentiveMessage && (
+      {showIncentive && !isOpen && currentIncentiveMessage && !isMobile && (
         <IncentiveMessage
           onClose={() => {
             hideIncentive();
@@ -87,14 +111,14 @@ const CustomWhatsAppWidget: React.FC<WhatsAppWidgetProps> = ({
         isOpen={isOpen}
         showNotification={showNotification}>
         {/* Badge de notificación - solo con incentivos */}
-        {showIncentive && !isOpen && (
+        {showIncentive && !isOpen && !isMobile && (
           <NotificationBadge>
             <span>1</span>
           </NotificationBadge>
         )}
 
         {/* Animación de pulso - solo con incentivos */}
-        {showIncentive && !isOpen && <PulseAnimation />}
+        {showIncentive && !isOpen && !isMobile && <PulseAnimation />}
 
         {/* Ícono de WhatsApp */}
         <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">

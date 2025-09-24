@@ -188,6 +188,16 @@ main.sphere-main {
   backdrop-filter: none !important;
 }
 
+/* Close button for enlarged images/modal. Positioned bottom-right inside viewer. */
+/* Ensure any modal-specific close controls are placed above the header/hamburger.
+   We intentionally use a very large z-index to avoid being overlapped. The visual
+   styling of the close button lives in the modal component (FullScreenModal). */
+.viewer .dg-close {
+  position: absolute;
+  z-index: 20001; /* higher than header (1000) and modal overlay (10000) */
+  pointer-events: auto;
+}
+
 .sphere-root[data-enlarging="true"] .viewer .scrim {
   /* Do not show a dark scrim when enlarging; keep interaction in viewer only. */
   opacity: 0 !important;

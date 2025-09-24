@@ -26,7 +26,8 @@ export const ScrollSnapContainer = styled("div")`
   @media only screen and (max-width: 768px) {
     /* Cap inner content to fit the viewport minus header and a safe margin for CTA */
     .content-inner {
-      max-height: calc(100vh - var(--header-height) - 56px);
+      /* Reserve bottom guard so fixed widgets (WhatsApp / promo) don't overlap inner scroll area */
+      max-height: calc(100vh - var(--header-height) - var(--section-bottom-guard));
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
@@ -41,8 +42,8 @@ export const ScrollSnapContainer = styled("div")`
 
 export const ContentSection = styled("section")`
   position: relative;
-  min-height: 100vh; /* Altura completa para que funcione el padding */
-  height: 100vh; /* Altura fija para desktop */
+  min-height: 100vh; /* allow full-viewport minimum but don't force fixed height */
+  height: auto; /* let the section grow if its content needs more space */
   scroll-snap-align: start;
   display: flex;
   align-items: center; /* Centrado normal para desktop */
@@ -53,7 +54,8 @@ export const ContentSection = styled("section")`
     height: auto;
     min-height: 100vh;
     align-items: flex-start;
-    padding-top: calc(var(--header-height) + 1.25rem); /* Más espacio para el header + margen */
+    /* Compute padding so the section starts exactly after the fixed header bottom */
+    padding-top: calc(var(--header-offset) + var(--header-height) + var(--section-top-guard));
     overflow-y: visible;
   }
 
@@ -66,6 +68,21 @@ export const ContentSection = styled("section")`
     padding: var(--header-height) 1rem var(--header-height);
   }
 
+  /* Responsive para pantallas medianas-altas (ej: 1536x864) */
+  @media only screen and (min-width: 1200px) and (max-height: 950px) {
+    padding: calc(var(--header-height) * 0.7) 0.7rem calc(var(--header-height) * 0.7);
+    font-size: 0.97em;
+    .content-inner {
+      max-width: 700px;
+    }
+  }
+  @media only screen and (min-width: 1200px) and (max-height: 900px) {
+    padding: calc(var(--header-height) * 0.6) 0.5rem calc(var(--header-height) * 0.6);
+    font-size: 0.95em;
+    .content-inner {
+      max-width: 620px;
+    }
+  }
   @media only screen and (max-height: 950px) {
     height: 100vh; /* Mantener altura fija */
     padding: calc(var(--header-height) * 1.5) 1rem calc(var(--header-height) * 1.5);
@@ -86,12 +103,14 @@ export const ContentSection = styled("section")`
 
   /* Para pantallas pequeñas entre iPhone SE y mobile estándar */
   @media only screen and (max-width: 480px) {
-    padding-top: calc(var(--header-height) + 1.35rem); /* Espacio intermedio */
+    /* Compute padding for small phones to start after header */
+    padding-top: calc(var(--header-offset) + var(--header-height) + var(--section-top-guard) * 0.5);
   }
 
   /* Para iPhone SE y pantallas ultra pequeñas de ancho */
   @media only screen and (max-width: 375px) {
-    padding-top: calc(var(--header-height) + 1.75rem); /* Aún más espacio para iPhone SE */
+    /* Compute padding for very small phones */
+    padding-top: calc(var(--header-offset) + var(--header-height) + var(--section-top-guard) * 0.5);
     padding-left: 0.25rem;
     padding-right: 0.25rem;
     padding-bottom: calc(var(--header-height) * 0.8);
@@ -103,6 +122,12 @@ export const ContentSection = styled("section")`
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
+  }
+
+  /* Prevent default top margins from first child elements (e.g. h1) from
+     creating unexpected gaps below the fixed header */
+  > *:first-child {
+    margin-top: 0;
   }
 
   /* When ContentSection is used inside a real viewport wrapper (FullViewportSection)
@@ -124,6 +149,22 @@ export const ContentSection = styled("section")`
     @media only screen and (max-width: 375px) {
       padding-top: calc(var(--header-height) * 0.25) !important;
       padding-bottom: calc(var(--header-height) * 0.25) !important;
+    }
+  }
+
+  /* Responsive para pantallas medianas-altas (ej: 1536x864) */
+  @media only screen and (min-width: 1200px) and (max-height: 950px) {
+    padding: calc(var(--header-height) * 0.7) 0.7rem calc(var(--header-height) * 0.7);
+    font-size: 0.97em;
+    .content-inner {
+      max-width: 700px;
+    }
+  }
+  @media only screen and (min-width: 1200px) and (max-height: 900px) {
+    padding: calc(var(--header-height) * 0.6) 0.5rem calc(var(--header-height) * 0.6);
+    font-size: 0.95em;
+    .content-inner {
+      max-width: 620px;
     }
   }
 `;

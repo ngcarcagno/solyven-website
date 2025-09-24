@@ -4,7 +4,7 @@ import { MenuOutlined } from "@ant-design/icons";
 
 export const HeaderSection = styled("header")`
   position: fixed;
-  top: 0.5em; /* Proportional top spacing */
+  top: var(--header-offset); /* Proportional top spacing via variable */
   left: 0;
   right: 0;
   width: 100%;

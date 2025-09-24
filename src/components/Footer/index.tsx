@@ -2,19 +2,32 @@ import { Row } from "antd";
 import { SvgIcon } from "../../common/SvgIcon";
 import Container from "../../common/Container";
 
-import { NavLink, Extra, LogoContainer, Para, FooterContainer, AddressCard, AddressLines, MapLink } from "./styles";
+import {
+  NavLink,
+  Extra,
+  LogoContainer,
+  Para,
+  FooterContainer,
+  AddressCard,
+  AddressLines,
+  MapLink,
+  FooterMiddle,
+  DevLogoStack,
+} from "./styles";
 
 interface SocialLinkProps {
   href: string;
   src: string;
   preserveColor?: boolean;
+  label?: string;
 }
 
 const Footer = () => {
-  const SocialLink = ({ href, src, preserveColor }: SocialLinkProps) => {
+  const SocialLink = ({ href, src, preserveColor, label }: SocialLinkProps) => {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" key={src} aria-label={src}>
-        <SvgIcon src={src} width="25px" height="25px" preserveColor={preserveColor} />
+      <a href={href} target="_blank" rel="noopener noreferrer" key={src} aria-label={src} className="social-link">
+        <SvgIcon src={src} preserveColor={preserveColor} />
+        {label && <span className="social-label">{label}</span>}
       </a>
     );
   };
@@ -26,25 +39,26 @@ const Footer = () => {
           <Row justify="space-between" align="middle" style={{ paddingTop: "3rem" }}>
             <NavLink to="/">
               <LogoContainer>
-                <SvgIcon src="logo.svg" aria-label="homepage" width="101px" height="64px" />
+                <SvgIcon
+                  src="logo.svg"
+                  aria-label="homepage"
+                  preserveColor={false}
+                  width="180px"
+                  height="48px"
+                  className="logo-with-outline"
+                />
               </LogoContainer>
             </NavLink>
             <FooterContainer>
               <SocialLink
-                href="https://github.com/Adrinlol/create-react-app-adrinlol"
-                src="github.svg"
+                href="https://www.instagram.com/clooveragency/"
+                src="instagram.svg"
                 preserveColor={false}
+                label="@seguridadSolyvenn"
               />
-              <SocialLink href="https://twitter.com/Adrinlolx" src="twitter.svg" preserveColor={false} />
-              <SocialLink
-                href="https://www.linkedin.com/in/lasha-kakabadze/"
-                src="linkedin.svg"
-                preserveColor={false}
-              />
-              <SocialLink href="https://medium.com/@lashakakabadze/" src="medium.svg" preserveColor={false} />
             </FooterContainer>
             <AddressCard>
-              <SvgIcon src="map-pin.svg" width="28px" height="28px" preserveColor={false} />
+              <SvgIcon src="map-pin.svg" preserveColor={false} />
               <AddressLines>
                 <Para>Zárate, Buenos Aires</Para>
                 <MapLink
@@ -56,6 +70,17 @@ const Footer = () => {
               </AddressLines>
             </AddressCard>
           </Row>
+          {/* centered middle row for developer credit / external link */}
+          <FooterMiddle>
+            <DevLogoStack
+              href="https://www.instagram.com/clooveragency/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Cloover Agency">
+              <img src={`${process.env.PUBLIC_URL}/img/png/LogoCloover.png`} alt="Cloover Agency" />
+              <div className="dev-label">Desarrollado por Cloover Agency</div>
+            </DevLogoStack>
+          </FooterMiddle>
         </Container>
       </Extra>
     </>

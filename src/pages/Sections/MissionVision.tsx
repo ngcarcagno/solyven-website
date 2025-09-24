@@ -20,6 +20,8 @@ const MissionVision = () => {
   const [vw, setVw] = useState<number>(1200);
   const [vh, setVh] = useState<number>(800);
 
+  // Track viewport width and height
+
   useEffect(() => {
     const handleResize = () => {
       setVw(window.innerWidth);
@@ -33,6 +35,8 @@ const MissionVision = () => {
       if (typeof window !== "undefined") window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  // (no title DOM measuring - keep previous layout logic)
 
   // Compute sizes using both width and height so we can reduce card sizes on short viewports
   const computeSizes = (width: number, height: number) => {
@@ -170,6 +174,19 @@ const MissionVision = () => {
     paddingBottom: isMobile ? 36 : 0,
   };
 
+  // Determine if the CardSwap area would intrude into the title visual area using computed sizes.
+  // We'll toggle a class on the outer wrapper to reduce aggressive translations when needed.
+  const shouldAvoidOverlap = () => {
+    // Estimate title bottom (headerHeight + titleEstimatedHeight) and card top (header + title + small buffer)
+    const titleEstimatedHeight = isMobile ? Math.max(88, Math.round(vh * 0.12)) : Math.max(120, Math.round(vh * 0.18));
+    const titleBottom = headerHeight + titleEstimatedHeight;
+    // CardSwap's visual top when anchored absolute at bottom: compute approximate top coordinate
+    const cardVisualTop = vh - (Math.round(cardSwapHeight) + (isMobile ? 0 : Math.round(window.innerHeight * 0.06)));
+    // If the cardVisualTop is less than titleBottom, it will intrude; use a small margin
+    return cardVisualTop < titleBottom + 8;
+  };
+  const avoidOverlapClass = shouldAvoidOverlap() ? "avoid-overlap" : "";
+
   return (
     <section id="mission">
       <MissionTitleOverride />
@@ -206,19 +223,20 @@ const MissionVision = () => {
         <div style={cardsBlockStyle}>
           <div style={wrapperStyle}>
             <div
-              className="card-swap-outer shift-down"
+              className={`card-swap-outer shift-down ${avoidOverlapClass}`}
               style={{
                 width: cardSwapWidth,
                 height: cardSwapHeight,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                marginTop: 8,
               }}>
               <CardSwap
                 width={cardSwapWidth}
                 height={cardSwapHeight}
                 cardDistance={Math.round(cardSwapWidth * 0.06)}
-                verticalDistance={Math.round(cardSwapWidth * 0.07)}
+                verticalDistance={Math.round(cardSwapWidth * 0.15)}
                 delay={6000}
                 pauseOnHover={true}
                 onCardClick={() => {}}>

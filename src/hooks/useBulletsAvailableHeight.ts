@@ -31,10 +31,10 @@ export default function useBulletsAvailableHeight({ rootRef, titleRef, introRef,
         const safety = 8;
 
         // available space for bullets area
-        const available = Math.max(
-          80,
-          Math.round(viewportH - headerHeight - titleH - introH - ctaH - padding - safety)
-        );
+        const minHeight = 40;
+        const maxHeight = Math.round(viewportH * 0.6); // máximo 60% del viewport
+        const availableRaw = Math.round(viewportH - headerHeight - titleH - introH - ctaH - padding - safety);
+        const available = Math.max(minHeight, Math.min(availableRaw, maxHeight));
 
         if (rootRef.current) {
           rootRef.current.style.setProperty("--about-bullets-height", `${available}px`);

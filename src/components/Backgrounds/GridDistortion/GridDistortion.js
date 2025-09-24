@@ -115,7 +115,11 @@ const GridDistortion = ({ grid = 15, mouse = 0.1, strength = 0.15, relaxation = 
       renderer.setSize(width, height);
 
       if (plane) {
-        plane.scale.set(containerAspect, 1, 1);
+        // Preserve image aspect ratio and center-crop to cover the container
+        const imageAspect = imageAspectRef.current || 1;
+        // Compute scale factor so the textured plane covers the container while keeping aspect ratio
+        const factor = Math.max(containerAspect / imageAspect, 1);
+        plane.scale.set(imageAspect * factor, 1 * factor, 1);
       }
 
       const frustumHeight = 1;

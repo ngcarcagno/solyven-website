@@ -19,7 +19,7 @@
 /* Visual nudge so the card stack appears anchored lower (cards come from below) */
 .card-swap-container.shift-down,
 .card-swap-outer.shift-down {
-  transform: translateY(12%);
+  transform: translateY(22%); /* moved 20% further down */
 }
 
 .card {
@@ -48,13 +48,15 @@
 
 @media (max-width: 768px) {
   .card-swap-container {
-    transform: scale(0.9) translateY(12%);
+    /* Keep transform explicitly none so GSAP-managed transforms work reliably on mobile */
+    transform: none;
   }
 }
 
 @media (max-width: 480px) {
   .card-swap-container {
-    transform: scale(0.82) translateY(18%);
+    /* Keep transform explicitly none so GSAP-managed transforms work reliably on narrow screens */
+    transform: none;
   }
 }
 
@@ -72,13 +74,21 @@
     margin: 0;
     transform-origin: bottom right;
     /* small visual offset to match previous design */
-    transform: translate(5%, 20%);
+    transform: translate(5%, 30%); /* moved 20% further down */
     display: block;
+  }
+
+  /* When runtime detects potential overlap, reduce the visual translation and lift the bottom slightly
+     to keep the cards from intruding into section title area. This is toggled by MissionVision logic. */
+  .card-swap-outer.avoid-overlap .card-swap-container,
+  .card-swap-outer.avoid-overlap {
+    transform: translate(2%, 18%); /* moved 20% further down */
+    bottom: 4vh;
   }
 
   /* On desktop the shift-down visual nudge should be minimal (cards anchored lower already) */
   .card-swap-outer.shift-down .card-swap-container,
   .card-swap-outer.shift-down {
-    transform: translate(5%, 20%);
+    transform: translate(5%, 40%);
   }
 }

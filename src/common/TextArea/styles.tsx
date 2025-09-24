@@ -3,25 +3,27 @@ import styled from "styled-components";
 export const StyledContainer = styled("div")`
   display: inline-block;
   width: 100%;
-  padding: 0.625em 0.3125em; /* Proportional padding */
-  margin-bottom: -0.625em; /* Proportional margin */
+  padding: 0.5em 0.25em; /* Proportional padding */
+  margin-bottom: 0.25em; /* Keep a small gap below the textarea */
 `;
 
 export const StyledTextArea = styled("textarea")`
-  resize: none;
-  font-size: 0.875em; /* Proportional font size */
-  height: 11.5625em; /* Proportional height */
+  resize: vertical;
+  font-size: 0.98rem; /* Slightly larger for readability */
+  height: auto;
+  min-height: 5.5rem; /* Ensure at least ~2 visible rows comfortably */
+  max-height: 28vh; /* Prevent the textarea from growing too tall */
 
-  /* Para pantallas de altura limitada (desde 950px hacia abajo) */
+  /* For short viewports, keep the textarea at a reasonable minimum but
+     reduce spacing elsewhere (handled in FormGroup) so textarea stays usable. */
   @media only screen and (max-height: 950px) {
-    height: 3em; /* MUY compacto para forzar que entre */
-    min-height: 3em; /* Mínimo funcional */
-    max-height: 4em; /* Máximo permitido */
-    resize: vertical; /* Permitir redimensionamiento manual */
+    min-height: 4.2rem; /* still approx two rows */
+    max-height: 22vh;
   }
 
   @media only screen and (max-height: 500px) {
-    height: 4em; /* Aún más compacto */
+    min-height: 4rem;
+    max-height: 20vh;
   }
 `;
 

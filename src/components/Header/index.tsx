@@ -34,11 +34,11 @@ const Header = () => {
         <MobileMenuItem onClick={() => scrollTo("about")}>
           <span>Nosotros</span>
         </MobileMenuItem>
-        <MobileMenuItem onClick={() => scrollTo("mission")}>
-          <span>Misión</span>
-        </MobileMenuItem>
         <MobileMenuItem onClick={() => scrollTo("services")}>
           <span>Servicios</span>
+        </MobileMenuItem>
+        <MobileMenuItem onClick={() => scrollTo("mission")}>
+          <span>Misión</span>
         </MobileMenuItem>
         <div style={{ marginTop: "1rem" }}>
           <Button variant="header" onClick={() => scrollTo("contact")}>
@@ -59,8 +59,8 @@ const Header = () => {
       {/* Navegación Desktop */}
       <NavContainer>
         <Span onClick={() => scrollTo("about")}>Nosotros</Span>
-        <Span onClick={() => scrollTo("mission")}>Misión</Span>
         <Span onClick={() => scrollTo("services")}>Servicios</Span>
+        <Span onClick={() => scrollTo("mission")}>Misión</Span>
         <Button variant="header" onClick={() => scrollTo("contact")}>
           Contacto
         </Button>

@@ -37,6 +37,25 @@ export const AboutContainer = styled.div`
     /* Tighter title spacing on mobile so title and subtitle compress better */
     @media only screen and (max-width: 768px) {
       margin-bottom: 0.75rem;
+      /* Responsive para pantallas medianas-altas (ej: 1536x864) */
+      @media only screen and (min-width: 1200px) and (max-height: 950px) {
+        font-size: 0.97em;
+        .about-title {
+          font-size: clamp(1.2rem, 2vw, 1.7rem);
+        }
+        .about-content-root .content-inner {
+          max-width: 700px;
+        }
+      }
+      @media only screen and (min-width: 1200px) and (max-height: 900px) {
+        font-size: 0.95em;
+        .about-title {
+          font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+        }
+        .about-content-root .content-inner {
+          max-width: 620px;
+        }
+      }
     }
 
     @media only screen and (max-width: 480px) {
@@ -63,9 +82,18 @@ export const AboutContainer = styled.div`
   /* Ensure the about-content-root's content-inner uses column flex so inner parts
      (title, intro, bullets, CTA) stack and bullets can expand to fill remaining space */
   .about-content-root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 0;
+
     .content-inner {
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
       width: 100%;
       height: 100%;
       min-height: 0;
@@ -110,6 +138,101 @@ export const AboutContainer = styled.div`
     --section-icon-offset: 0px !important;
     align-self: center;
     margin-top: 0 !important;
+  }
+  /* Short-height desktop: scoped mobile-like behavior inside AboutContainer
+     This keeps the icon visible and confines scrolling to the bullets area only. */
+  @media screen and (min-width: 769px) and (max-height: 900px) {
+    height: auto;
+    .about-content-root {
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 0;
+      overflow: visible;
+    }
+    .about-content-root .content-inner {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-height: calc(100vh - var(--header-height) - 140px);
+      min-height: auto;
+      overflow: visible;
+    }
+    .about-bullets-list .scroll-list {
+      max-height: clamp(120px, 28vh, 340px);
+      min-height: 80px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .content-block-icon {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* When viewport height is limited, progressively shrink visual elements
+     (titles, icon, bullets, CTA) similar to mobile behavior so content never
+     gets cut off. This applies regardless of width for any short windows. */
+  @media screen and (max-height: 900px) {
+    /* Scale down titles and body text */
+    .about-title {
+      font-size: clamp(1.05rem, 2.2vw, 1.6rem) !important;
+      margin-bottom: 0.4rem !important;
+    }
+
+    .about-text-container p {
+      font-size: clamp(0.95rem, 1.6vw, 1.02rem) !important;
+      line-height: 1.35 !important;
+      margin-bottom: 0.35rem !important;
+    }
+
+    /* Reduce icon size so it remains visible */
+    .content-block-icon,
+    #about .content-block-icon {
+      transform: none !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    .content-block-icon svg {
+      width: clamp(42px, 6.5vw, 90px) !important;
+      height: auto !important;
+    }
+
+    /* Bullets list: smaller items and bounded height */
+    .about-bullets-list,
+    .about-bullets-list .scroll-list {
+      font-size: clamp(0.98rem, 1.6vw, 1.05rem) !important; /* made a bit larger, responsive */
+      padding: 0.15rem 0.35rem !important;
+    }
+    .about-bullets-list .item,
+    .about-bullets-list .bullet-item {
+      padding: 0.34rem 0.48rem !important;
+      margin-bottom: 0.22rem !important;
+    }
+    .about-bullets-list .scroll-list {
+      max-height: clamp(110px, 26vh, 320px) !important;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+
+    /* CTA: smaller spacing and button size */
+    .about-cta-wrap {
+      padding-top: 0.4rem !important;
+      padding-bottom: 0.4rem !important;
+    }
+    .about-cta-wrap button,
+    .about-cta-wrap .ant-btn {
+      padding: 0.6rem 1rem !important;
+      font-size: 0.95rem !important;
+    }
+
+    /* Constrain the content-inner to avoid pushing content off screen */
+    .about-content-root .content-inner {
+      max-height: calc(100vh - var(--header-height) - 110px) !important;
+      padding-top: 8px !important;
+      padding-bottom: 8px !important;
+      overflow: visible !important;
+    }
   }
 `;
 
@@ -165,6 +288,8 @@ export const MissionTitleOverride = createGlobalStyle`
   }
 `;
 
+/* ServicesTitleOverride removed — per design we control the Services title via ServicesContainer rules */
+
 /* ========================================
    SERVICES SECTION STYLES
    ======================================== */
@@ -174,8 +299,11 @@ export const ServicesContainer = styled.div`
   margin: 0;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  max-height: 100%;
+  /* Let the section size naturally based on its content. Forcing 100% height
+    combined with parent centering caused titles to be vertically centered and
+    sometimes pushed out of view on certain desktop aspect ratios (e.g. 1536x864). */
+  height: auto;
+  max-height: none;
   overflow: visible;
 
   @media (max-width: 768px) {
@@ -186,6 +314,19 @@ export const ServicesContainer = styled.div`
     /* Forzar que comience desde arriba */
     justify-content: flex-start;
     align-items: stretch;
+  }
+
+  /* Force top-alignment on larger viewports so content (title + grid) starts
+     right below the header instead of being vertically centered. This prevents
+     the empty gap observed on some desktop resolutions. */
+  align-items: stretch;
+  justify-content: flex-start;
+
+  /* Ensure the title stays above decorative/translated elements */
+  .services-title-container {
+    position: relative;
+    z-index: 8;
+    margin-top: 0;
   }
 
   @media (max-width: 480px) {
@@ -230,6 +371,27 @@ export const ServicesContainer = styled.div`
         0 0 30px rgba(247, 88, 0, 0.1),
         1px 1px 2px rgba(0, 0, 0, 0.6);
       color: var(--color-text-primary);
+    }
+
+    /* (reverted explicit override) */
+  }
+  /* Responsive para pantallas medianas-altas (ej: 1536x864) */
+  @media only screen and (min-width: 1200px) and (max-height: 950px) {
+    font-size: 0.97em;
+    .services-title-container h6 {
+      font-size: clamp(1.2rem, 2vw, 1.7rem);
+    }
+    .content-inner {
+      max-width: 700px;
+    }
+  }
+  @media only screen and (min-width: 1200px) and (max-height: 900px) {
+    font-size: 0.95em;
+    .services-title-container h6 {
+      font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+    }
+    .content-inner {
+      max-width: 620px;
     }
   }
 
@@ -341,11 +503,29 @@ export const ServicesContainer = styled.div`
 
 export const ServicesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(2, minmax(clamp(220px, 24vw, 320px), 1fr));
+  gap: clamp(1rem, 2vw, 2rem);
   width: 100%;
-  max-width: 1100px;
+  max-width: clamp(600px, 60vw, 900px);
   margin: 0 auto;
+
+  /* Si el alto es bajo, compactar el grid y los cards */
+  @media (max-height: 900px) {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(0.5rem, 1vw, 1.2rem);
+    max-width: 700px;
+    .service-item {
+      max-width: 280px !important;
+    }
+  }
+  @media (max-height: 800px) {
+    grid-template-columns: 1fr;
+    gap: clamp(0.4rem, 0.8vw, 1rem);
+    max-width: 420px;
+    .service-item {
+      max-width: 220px !important;
+    }
+  }
 
   /* Pirámide invertida: 2 arriba, 1 abajo centrada */
   .service-item:nth-child(3) {
@@ -358,10 +538,10 @@ export const ServicesGrid = styled.div`
   @media (max-width: 768px) {
     /* On tablet and below, switch to single column but allow centered narrower cards */
     grid-template-columns: 1fr;
-    gap: 1rem;
-    max-width: 420px;
-    padding: 0 0.5rem;
-    justify-items: center; /* center children */
+    gap: clamp(1rem, 2vw, 2rem);
+    grid-template-columns: repeat(2, minmax(clamp(220px, 24vw, 320px), 1fr));
+    grid-template-rows: auto auto;
+    max-width: clamp(600px, 60vw, 900px);
 
     .service-item {
       width: 100%;
@@ -426,38 +606,32 @@ export const ServicesGrid = styled.div`
 `;
 
 export const ServiceCard = styled.div`
-  padding: 2rem;
+  padding: clamp(0.5rem, 1vw, 1rem);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  min-height: 220px;
+  min-height: clamp(90px, 12vw, 180px);
+  max-height: clamp(120px, 18vw, 220px);
   width: 100%;
   background: transparent;
   border: none;
   border-radius: 1.5rem;
   position: relative;
-  gap: 1rem;
+  gap: clamp(0.3rem, 0.8vw, 0.8rem);
+  justify-content: center;
 
-  /* Cards más cuadradas/rectangulares como la referencia */
-  justify-content: space-between;
-
-  @media (max-width: 768px) {
-    padding: 1rem;
-    min-height: 140px;
-    gap: 0.5rem;
+  @media (max-height: 900px) {
+    min-height: 90px;
+    max-height: 140px;
+    padding: 0.5rem;
+    gap: 0.3rem;
   }
-
-  @media (max-width: 480px) {
-    padding: 0.75rem;
-    min-height: 120px;
-    gap: 0.375rem;
-  }
-
-  @media (max-width: 375px) {
-    padding: 0.625rem;
-    min-height: 110px;
-    gap: 0.25rem;
+  @media (max-height: 800px) {
+    min-height: 70px;
+    max-height: 110px;
+    padding: 0.3rem;
+    gap: 0.2rem;
   }
 `;
 
@@ -470,8 +644,8 @@ export const ServiceIcon = styled.div`
   flex-shrink: 0;
 
   svg {
-    width: 36px;
-    height: 36px;
+    width: clamp(22px, 3vw, 36px);
+    height: clamp(22px, 3vw, 36px);
     stroke-width: 2;
     filter: drop-shadow(0 2px 6px rgba(247, 88, 0, 0.3));
   }
@@ -500,32 +674,32 @@ export const ServiceIcon = styled.div`
 
 export const ServiceTitle = styled.h3`
   font-family: var(--font-title);
-  font-size: 1.1rem;
+  /* Fluid title: conservative sizing to keep card titles smaller than section title */
+  font-size: clamp(0.75rem, 1vw, 1.1rem);
   color: var(--color-text-primary);
   margin: 0;
   text-transform: uppercase;
   line-height: 1.2;
   flex-shrink: 0;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 
-  @media (max-width: 768px) {
-    font-size: 0.95rem;
-    line-height: 1.1;
+  /* Additional tight caps for very small devices — clamp above handles most sizes but we'll keep a safety cap */
+  @media (max-width: 420px) {
+    /* Force tighter size on narrow phones (e.g. 360x800) */
+    font-size: clamp(0.72rem, calc(0.62rem + 1.1vw), 0.9rem) !important;
+    line-height: 1.05;
   }
 
-  @media (max-width: 480px) {
-    font-size: 0.85rem;
-    line-height: 1.1;
-  }
-
-  @media (max-width: 375px) {
-    font-size: 0.8rem;
+  /* Extra aggressive cap for very small narrow screens (older phones / 360 width) */
+  @media (max-width: 360px) {
+    font-size: 0.78rem !important;
+    line-height: 1.02;
   }
 `;
 
 export const ServiceDescription = styled.p`
   font-family: var(--font-subtitle);
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 0.9vw, 0.95rem);
   color: rgba(255, 255, 255, 0.85);
   line-height: 1.5;
   margin: 0;
@@ -880,6 +1054,42 @@ export const BulletsContainer = styled.div`
     .about-cta-wrap {
       padding-top: 0.2rem !important;
       padding-bottom: 0.18rem !important;
+    }
+  }
+
+  /* Compactar y eliminar gaps en pantallas de poco alto */
+  @media (max-height: 900px) {
+    .about-content-root {
+      .content-inner {
+        gap: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .about-title-container {
+        margin-bottom: 0.1rem !important;
+      }
+      .about-title {
+        margin-bottom: 0.08rem !important;
+      }
+      .about-text-container,
+      .AboutTextContainer {
+        margin-bottom: 0.08rem !important;
+        padding-bottom: 0 !important;
+      }
+      .about-bullets-list {
+        padding: 0.1rem 0.2rem !important;
+      }
+      .about-bullets-list .item {
+        margin-bottom: 0.12rem !important;
+        padding: 0.4rem 0.5rem !important;
+      }
+      .about-bullets-list .scroll-list {
+        max-height: calc(var(--vh, 1vh) * 100 - clamp(90px, 14vh, 120px)) !important;
+      }
+      .about-cta-wrap {
+        padding-top: 0.08rem !important;
+        padding-bottom: 0.08rem !important;
+        margin-top: 0 !important;
+      }
     }
   }
 `;

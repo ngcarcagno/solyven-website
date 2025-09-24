@@ -69,6 +69,14 @@ export const Extra = styled("section")`
 export const LogoContainer = styled("div")`
   display: flex;
   position: relative;
+  align-items: center;
+  /* main logo scales responsively while preserving aspect ratio */
+  .svg-icon {
+    width: auto !important;
+    /* match header visual height (max) while allowing slight shrink on smaller viewports */
+    height: clamp(36px, 3.5vw, 42px) !important;
+    display: block !important;
+  }
 `;
 
 export const Para = styled("div")`
@@ -120,10 +128,12 @@ export const Empty = styled("div")`
 `;
 
 export const FooterContainer = styled("div")`
+  --footer-icon-size: clamp(22px, 2.4vw, 36px); /* responsive icon size used across footer */
   max-width: 510px;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* center icons horizontally inside the footer container */
+  gap: 0.75rem; /* consistent spacing between icons */
   text-align: center;
   align-items: center;
   transition: all 0.1s ease-in-out;
@@ -140,20 +150,119 @@ export const FooterContainer = styled("div")`
 
   @media screen and (max-width: 769px) {
     width: auto;
+    /* keep social anchors visible on mobile; labels will be hidden at smaller breakpoints */
+  }
 
-    a:not(:last-child) {
-      display: none;
+  /* ensure SVG icons inside footer match a single responsive size and can be controlled by CSS */
+  .svg-icon {
+    width: var(--footer-icon-size) !important; /* override inline style applied by SvgIcon */
+    height: var(--footer-icon-size) !important;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 8px;
+    cursor: pointer;
+    height: var(--footer-icon-size);
+    min-width: var(--footer-icon-size);
+    padding: 0 0.5rem;
+    color: rgba(255, 255, 255, 0.92); /* ensure currentColor for SVGs */
+  }
+
+  /* label shown to the right of social icons (e.g., Instagram handle) */
+  .social-label {
+    margin-left: 0.5rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  @media screen and (max-width: 480px) {
+    .social-label {
+      display: none; /* show only icon on narrow screens */
     }
   }
 
-  div {
-    cursor: pointer;
-    margin-right: 15px;
-    width: 25px;
-    height: 25px;
+  a:hover .svg-icon {
+    filter: none;
+    /* accent on hover */
+    opacity: 0.98;
+  }
 
-    &:hover {
-      fill: var(--color-secondary);
+  .social-link:hover {
+    color: var(--color-secondary);
+  }
+
+  /* Instagram-specific tweak removed to keep icons uniform */
+
+  /* Ensure inner svg fills the svg-icon container to prevent tiny viewBox renderings */
+  .svg-icon svg {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+
+  /* explicit footer logo sizing (use a slightly larger clamp to match header size) */
+  /* Make the footer's logo-with-outline match the header's visual size exactly */
+  .svg-icon.logo-with-outline {
+    height: 42px !important;
+    width: auto !important;
+    display: block !important;
+  }
+`;
+
+/* Developer / Agency logo link: previously used variant removed because Footer now uses a stacked centered credit row (FooterMiddle + DevLogoStack). */
+
+/* A centered middle row below the main footer row for developer credit or similar */
+export const FooterMiddle = styled("div")`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem 0 1rem 0;
+  pointer-events: none; /* container passive; inner anchors remain interactive */
+
+  a {
+    pointer-events: auto;
+  }
+
+  @media screen and (max-width: 480px) {
+    padding: 0.5rem 0;
+  }
+`;
+
+/* Stacked logo + label used in the centered row */
+export const DevLogoStack = styled("a")`
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  text-align: center;
+  img {
+    height: clamp(28px, 4.2vw, 48px);
+    width: auto;
+    display: block;
+    max-width: 90%;
+    object-fit: contain;
+  }
+  .dev-label {
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1;
+  }
+
+  @media screen and (max-width: 480px) {
+    img {
+      height: 32px;
+    }
+    .dev-label {
+      /* keep label visible on mobile, slightly smaller */
+      font-size: 0.78rem;
     }
   }
 `;
@@ -210,6 +319,12 @@ export const AddressCard = styled("div")`
 export const AddressLines = styled("div")`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+
+  /* hide textual address on small screens, keep only the icon */
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
 
 export const MapLink = styled("a")`

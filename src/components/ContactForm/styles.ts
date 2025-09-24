@@ -5,8 +5,9 @@ import styled from "styled-components";
 export const FormGroup = styled("form")`
   /* Formulario limpio que funciona dentro de ContentBlock */
   width: 100%;
-  max-width: 600px; /* Límite máximo razonable */
-  margin: 1.5em auto 0; /* Separación del texto superior, centrado horizontal */
+  /* Allow the form to grow horizontally but cap to a comfortable max */
+  max-width: min(820px, 86vw);
+  margin: 1.2em auto 0; /* Slightly tighter top margin */
   box-sizing: border-box;
   flex: 1;
   min-height: 0; /* Permite que se comprima si es necesario */
@@ -23,9 +24,24 @@ export const FormGroup = styled("form")`
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 0.875em 2.125em rgba(0, 0, 0, 0.65);
-  padding: 1.25em;
+  padding: 1.1em;
   transition: transform 240ms ease, box-shadow 240ms ease;
 
+  /* Responsive para pantallas medianas-altas (ej: 1536x864) */
+  /* On wide screens with limited height, allow more horizontal room while keeping vertical
+     constraints. The form will use a larger max-width but reduce padding/gap to fit. */
+  @media only screen and (min-width: 1200px) and (max-height: 950px) {
+    max-width: min(760px, 72vw);
+    padding: 0.85em;
+    gap: 0.7em;
+    font-size: 0.98em;
+  }
+  @media only screen and (min-width: 1200px) and (max-height: 900px) {
+    max-width: min(700px, 70vw);
+    padding: 0.75em;
+    gap: 0.6em;
+    font-size: 0.97em;
+  }
   /* Mobile: más compacto */
   @media only screen and (max-width: 768px) {
     padding: 1em;
@@ -47,10 +63,11 @@ export const FormGroup = styled("form")`
 
   /* Para pantallas de altura limitada (funciona desde 950px hacia abajo) */
   @media only screen and (max-height: 950px) {
-    padding: 0.75em;
-    gap: 0.5em;
-    margin: 0.5em auto 0; /* Menos margen superior */
-    max-height: calc(70vh - calc(var(--header-height) * 2)); /* FORZAR compresión del form */
+    padding: 0.6em;
+    gap: 0.35em; /* much tighter vertical spacing */
+    margin: 0.4em auto 0; /* Menos margen superior */
+    /* Constrain by available viewport space but leave room for header + CTA */
+    max-height: calc(100vh - var(--header-height) - 100px);
     overflow-y: auto; /* Scroll interno si es muy necesario */
   }
 
@@ -65,6 +82,31 @@ export const FormGroup = styled("form")`
     padding: 0.5em;
     gap: 0.25em;
     margin: 0.25em auto 0;
+  }
+
+  /* Aggressive compaction for very short viewports: remove gaps between fields to free vertical space
+     while keeping each control usable. This is intentionally scoped to very short heights. */
+  @media only screen and (max-height: 900px) {
+    gap: 0.15em !important;
+    margin: 0.3em auto 0 !important;
+
+    label {
+      margin-bottom: 0.08rem !important;
+      font-size: 0.92rem !important;
+    }
+
+    input,
+    textarea {
+      padding: 0.42em 0.5em !important;
+    }
+
+    /* tighten button spacing */
+    ${/* scoper for ButtonContainer since it's sibling inside FormGroup */ ""}
+    & > div[role='button'],
+    & ${""} > .ant-btn,
+    & .ant-btn {
+      padding: 0.5em 0.8em !important;
+    }
   }
 
   &:hover {
