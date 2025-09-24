@@ -181,12 +181,12 @@ main.sphere-main {
   position: absolute;
   inset: 0;
   z-index: 10;
-  /* Keep scrim fully transparent and non-blurring by default. */
-  background: transparent !important; /* enforce transparent */
-  pointer-events: none !important;
-  opacity: 0 !important;
-  transition: none !important;
-  backdrop-filter: none !important;
+  /* Default scrim is transparent and non-interactive until an image is enlarged. */
+  background: rgba(0, 0, 0, 0);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 500ms ease;
+  backdrop-filter: blur(3px);
 }
 
 /* Close button for enlarged images/modal. Positioned bottom-right inside viewer. */
@@ -200,9 +200,14 @@ main.sphere-main {
 }
 
 .sphere-root[data-enlarging="true"] .viewer .scrim {
-  /* Do not show a dark scrim when enlarging; keep interaction in viewer only. */
-  opacity: 0 !important;
-  pointer-events: none !important;
+  /* When an image is enlarged show the scrim and allow it to receive clicks to close. */
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* When an image is enlarged, allow the viewer to receive pointer events (so scrim closes overlay). */
+.sphere-root[data-enlarging="true"] .viewer {
+  pointer-events: auto;
 }
 
 .viewer .enlarge {
