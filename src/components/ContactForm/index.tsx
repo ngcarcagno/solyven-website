@@ -9,7 +9,7 @@ import ContentBlock from "../ContentBlock";
 import { FormGroup, Span, ButtonContainer } from "./styles";
 
 const Contact = ({ title, content, id }: ContactProps) => {
-  const { values, errors, handleChange, handleSubmit } = useForm(validate);
+  const { values, errors, handleChange, handleSubmit, isSubmitting } = useForm(validate);
 
   const ValidationType = ({ type }: ValidationTypeProps) => {
     const ErrorMessage = errors[type as keyof typeof errors];
@@ -20,13 +20,21 @@ const Contact = ({ title, content, id }: ContactProps) => {
   const contactFormContent = (
     <FormGroup autoComplete="off" onSubmit={handleSubmit}>
       <Col span={24}>
-        <Input type="text" name="Nombre" placeholder="Tu Nombre" value={values.name || ""} onChange={handleChange} />
+        <Input
+          type="text"
+          name="name"
+          label="Nombre"
+          placeholder="Tu Nombre"
+          value={values.name || ""}
+          onChange={handleChange}
+        />
         <ValidationType type="name" />
       </Col>
       <Col span={24}>
         <Input
           type="text"
-          name="Email"
+          name="email"
+          label="Email"
           placeholder="Tu Correo Electrónico"
           value={values.email || ""}
           onChange={handleChange}
@@ -34,11 +42,13 @@ const Contact = ({ title, content, id }: ContactProps) => {
         <ValidationType type="email" />
       </Col>
       <Col span={24}>
-        <TextArea placeholder="Tu Mensaje" value={values.message || ""} name="Mensaje" onChange={handleChange} />
+        <TextArea placeholder="Tu Mensaje" value={values.message || ""} name="message" label="Mensaje" onChange={handleChange} />
         <ValidationType type="message" />
       </Col>
       <ButtonContainer>
-        <Button name="submit">Submit</Button>
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Enviando..." : "Enviar"}
+        </Button>
       </ButtonContainer>
     </FormGroup>
   );

@@ -8,6 +8,8 @@ export interface ButtonProps {
   name?: string;
   children: React.ReactNode;
   onClick?: () => void;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
   variant?: "default" | "compact" | "header";
   style?: React.CSSProperties;
 }
@@ -27,6 +29,7 @@ export interface InputProps {
   type?: string;
   value?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => void;
+  label?: string;
 }
 
 export interface validateProps {
