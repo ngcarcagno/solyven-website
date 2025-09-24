@@ -143,6 +143,7 @@ export default function DomeGallery({
   const openingRef = useRef(false);
   const openStartedAtRef = useRef(0);
   const lastDragEndAt = useRef(0);
+  const pendingOpenTimer = useRef(null);
 
   const scrollLockedRef = useRef(false);
   const lockScroll = useCallback(() => {
@@ -547,6 +548,21 @@ export default function DomeGallery({
       if (draggingRef.current) return;
       if (performance.now() - lastDragEndAt.current < 80) return;
       if (openingRef.current) return;
+      // If there is already an enlarged overlay, close it and reopen the clicked tile after the
+      // closing animation so users can swap images without manually closing first.
+      const viewer = viewerRef.current;
+      const overlayExists = viewer && viewer.querySelector && viewer.querySelector('.enlarge');
+      if (overlayExists) {
+        // If clicking the same currently-focused element, ignore
+        if (focusedElRef.current === e.currentTarget) return;
+        if (scrimRef.current) scrimRef.current.click();
+        if (pendingOpenTimer.current) clearTimeout(pendingOpenTimer.current);
+        pendingOpenTimer.current = setTimeout(() => {
+          pendingOpenTimer.current = null;
+          openItemFromElement(e.currentTarget);
+        }, enlargeTransitionMs + 60);
+        return;
+      }
       openItemFromElement(e.currentTarget);
     },
     [openItemFromElement]
@@ -558,6 +574,18 @@ export default function DomeGallery({
       if (draggingRef.current) return;
       if (performance.now() - lastDragEndAt.current < 80) return;
       if (openingRef.current) return;
+      const viewer = viewerRef.current;
+      const overlayExists = viewer && viewer.querySelector && viewer.querySelector('.enlarge');
+      if (overlayExists) {
+        if (focusedElRef.current === e.currentTarget) return;
+        if (scrimRef.current) scrimRef.current.click();
+        if (pendingOpenTimer.current) clearTimeout(pendingOpenTimer.current);
+        pendingOpenTimer.current = setTimeout(() => {
+          pendingOpenTimer.current = null;
+          openItemFromElement(e.currentTarget);
+        }, enlargeTransitionMs + 60);
+        return;
+      }
       openItemFromElement(e.currentTarget);
     },
     [openItemFromElement]
@@ -568,6 +596,18 @@ export default function DomeGallery({
       if (draggingRef.current) return;
       if (performance.now() - lastDragEndAt.current < 80) return;
       if (openingRef.current) return;
+      const viewer = viewerRef.current;
+      const overlayExists = viewer && viewer.querySelector && viewer.querySelector('.enlarge');
+      if (overlayExists) {
+        if (focusedElRef.current === e.currentTarget) return;
+        if (scrimRef.current) scrimRef.current.click();
+        if (pendingOpenTimer.current) clearTimeout(pendingOpenTimer.current);
+        pendingOpenTimer.current = setTimeout(() => {
+          pendingOpenTimer.current = null;
+          openItemFromElement(e.currentTarget);
+        }, enlargeTransitionMs + 60);
+        return;
+      }
       openItemFromElement(e.currentTarget);
     },
     [openItemFromElement]
@@ -576,6 +616,10 @@ export default function DomeGallery({
   useEffect(() => {
     return () => {
       document.body.classList.remove("dg-scroll-lock");
+      if (pendingOpenTimer.current) {
+        clearTimeout(pendingOpenTimer.current);
+        pendingOpenTimer.current = null;
+      }
     };
   }, []);
 

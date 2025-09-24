@@ -167,6 +167,7 @@ main.sphere-main {
   aspect-ratio: 1;
   border-radius: var(--enlarge-radius, 32px);
   display: flex;
+  pointer-events: none; /* allow underlying tiles to receive clicks */
 }
 
 @media (max-aspect-ratio: 1/1) {
