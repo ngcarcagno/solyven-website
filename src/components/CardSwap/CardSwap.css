@@ -92,3 +92,22 @@
     transform: translate(5%, 40%);
   }
 }
+
+/* Target small, short phones (example: iPhone 6/7/8 = 375x667) and similar
+   viewports: push the card stack further down so it doesn't overlap the
+   section title/subtitle. We target both width and height to avoid applying
+   this rule to narrow but very tall screens. */
+@media only screen and (max-width: 375px) and (max-height: 700px) {
+  .card-swap-outer.shift-down {
+    /* push the whole outer wrapper down more aggressively on small phones */
+    transform: translateY(38%);
+    /* add a tiny top margin for extra breathing room when transforms are ignored */
+    margin-top: 8px;
+  }
+
+  /* When the inner container also has the shift-down class, make sure it
+     doesn't counteract the outer movement. Prefer outer transform here. */
+  .card-swap-container.shift-down {
+    transform: none;
+  }
+}
