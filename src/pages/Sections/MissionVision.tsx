@@ -139,6 +139,12 @@ const MissionVision = () => {
     paddingTop: isMobile ? "0.5rem" : undefined,
   };
 
+  // Ajuste: en mobile, empujar el bloque de cards un 10% más abajo y subir el título/subtítulo un 10%
+  if (isMobile) {
+    cardsBlockStyle.marginTop = `${Math.round(vh * 0.1)}px`;
+    titleBlockStyle.marginTop = `-${Math.round(vh * 0.1)}px`;
+  }
+
   // Derive CardSwap dimensions from the available cardsHeight and vw
   const availableHeight = Math.max(220, Math.round(cardsAvailableHeight * (isMobile ? 0.9 : 1))) - 20; // small padding allowance
   const availableWidth = Math.round(vw * 0.94);
