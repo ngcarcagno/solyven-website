@@ -24,7 +24,7 @@ const ContentBlock = lazy(() =>
 const Home = () => {
   return (
     <>
-      <ScrollSnapContainer>
+      <ScrollSnapContainer id="scroll-snap-container">
         <ScrollToTop />
         {/* Intro Section - Security Control Room Background */}
         <BackgroundGridDistortion>
@@ -74,19 +74,19 @@ const Home = () => {
         </BackgroundDotGrid>
 
         {/* Footer Section */}
-        <div style={{ scrollSnapAlign: "end" }}>
+        <div id="footer-snap" style={{ scrollSnapAlign: "end" }}>
           <Footer />
         </div>
-      </ScrollSnapContainer>
 
-      {/* Custom WhatsApp Widget - Outside ScrollSnapContainer to avoid z-index issues */}
-      <CustomWhatsAppWidget
-        phoneNumber="5491127511315"
-        companyName="Solyven Seguridad"
-        replyTimeText="Respuesta inmediata"
-        message="¡Hola! 👋 ¿Necesitás un presupuesto personalizado para tu empresa?"
-        context="homepage"
-      />
+        {/* Custom WhatsApp Widget - Outside ScrollSnapContainer to avoid z-index issues */}
+        <CustomWhatsAppWidget
+          phoneNumber="5491127511315"
+          companyName="Solyven Seguridad"
+          replyTimeText="Respuesta inmediata"
+          message="¡Hola! 👋 ¿Necesitás un presupuesto personalizado para tu empresa?"
+          context="homepage"
+        />
+      </ScrollSnapContainer>
     </>
   );
 };

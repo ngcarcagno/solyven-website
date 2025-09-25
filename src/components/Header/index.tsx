@@ -13,6 +13,7 @@ import {
   Span,
   MobileMenuItem,
 } from "./styles";
+import { temporarilyDisableFooterSnap } from "../../common/utils/temporarilyDisableFooterSnap";
 
 const Header = () => {
   const [visible, setVisibility] = useState(false);
@@ -89,10 +90,21 @@ const Header = () => {
   );
 
   function scrollTo(id: string) {
+    if (id === "contact") {
+      temporarilyDisableFooterSnap("footer-snap", 700);
+      setTimeout(() => {
+        const element = document.getElementById(id) as HTMLDivElement;
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+        setVisibility(false);
+      }, 10);
+      return;
+    }
     const element = document.getElementById(id) as HTMLDivElement;
-    element.scrollIntoView({
-      behavior: "smooth",
-    });
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
     setVisibility(false);
   }
 };
