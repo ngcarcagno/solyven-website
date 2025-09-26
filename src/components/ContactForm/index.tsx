@@ -8,6 +8,9 @@ import TextArea from "../../common/TextArea";
 import ContentBlock from "../ContentBlock";
 import { FormGroup, Span, ButtonContainer } from "./styles";
 
+// Cambia a false para volver al submit tradicional
+const useMailto = true;
+
 const Contact = ({ title, content, id }: ContactProps) => {
   const { values, errors, handleChange, handleSubmit, isSubmitting } = useForm(validate);
 
@@ -16,9 +19,22 @@ const Contact = ({ title, content, id }: ContactProps) => {
     return <Span>{ErrorMessage}</Span>;
   };
 
-  // El formulario como contenido personalizado para ContentBlock
+  // Handler modular para mailto
+  const handleMailtoSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Validación simple (puedes mejorarla)
+    if (!values.name || !values.message) return;
+    // Asunto formal con nombre
+    const subject = encodeURIComponent(`Nuevo mensaje de contacto de ${values.name} - Solyven Web`);
+    // Mensaje tipo carta
+    const body = encodeURIComponent(`${values.message}\n\nSaludos cordiales,\n${values.name}`);
+    const to = process.env.REACT_APP_CONTACT_EMAIL || "info@solyven.com";
+    const mailto = `mailto:${to}?subject=${subject}&body=${body}`;
+    window.location.href = mailto;
+  };
+
   const contactFormContent = (
-    <FormGroup autoComplete="off" onSubmit={handleSubmit}>
+    <FormGroup autoComplete="off" onSubmit={useMailto ? handleMailtoSubmit : handleSubmit}>
       <Col span={24}>
         <Input
           type="text"
@@ -30,17 +46,20 @@ const Contact = ({ title, content, id }: ContactProps) => {
         />
         <ValidationType type="name" />
       </Col>
-      <Col span={24}>
-        <Input
-          type="text"
-          name="email"
-          label="Email"
-          placeholder="Tu Correo Electrónico"
-          value={values.email || ""}
-          onChange={handleChange}
-        />
-        <ValidationType type="email" />
-      </Col>
+      {/* Ocultar campo email si es mailto */}
+      {!useMailto && (
+        <Col span={24}>
+          <Input
+            type="text"
+            name="email"
+            label="Email"
+            placeholder="Tu Correo Electrónico"
+            value={values.email || ""}
+            onChange={handleChange}
+          />
+          <ValidationType type="email" />
+        </Col>
+      )}
       <Col span={24}>
         <TextArea
           placeholder="Tu Mensaje"
@@ -53,7 +72,7 @@ const Contact = ({ title, content, id }: ContactProps) => {
       </Col>
       <ButtonContainer>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Enviando..." : "Enviar"}
+          {isSubmitting ? (useMailto ? "Redirigiendo..." : "Enviando...") : "Enviar"}
         </Button>
       </ButtonContainer>
     </FormGroup>
