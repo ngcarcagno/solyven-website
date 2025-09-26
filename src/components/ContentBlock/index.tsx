@@ -74,7 +74,18 @@ const ContentBlock = ({
                     </SectionIconWrap>
                   </div>
 
-                  {title && <h6>{title}</h6>}
+                  {title && (
+                    <h6>
+                      <DecryptedText
+                        text={title}
+                        animateOn="view"
+                        revealDirection="center"
+                        speed={45}
+                        maxIterations={30}
+                        forceOnMount={true}
+                      />
+                    </h6>
+                  )}
                   {content && (
                     <Content>
                       <span>{content}</span>
@@ -127,7 +138,14 @@ const ContentBlock = ({
             <Col lg={11} md={11} sm={11} xs={24} style={{ display: "flex", flexDirection: "column" }}>
               <ContentWrapper style={{ flex: "1", display: "flex", flexDirection: "column" }}>
                 <h6>
-                  <DecryptedText text={title} animateOn="view" revealDirection="center" speed={45} maxIterations={30} />
+                  <DecryptedText
+                    text={title}
+                    animateOn="view"
+                    revealDirection="center"
+                    speed={45}
+                    maxIterations={30}
+                    forceOnMount={true}
+                  />
                 </h6>
                 <Content>
                   <span>{content}</span>

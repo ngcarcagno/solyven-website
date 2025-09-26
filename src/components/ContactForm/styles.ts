@@ -67,7 +67,7 @@ export const FormGroup = styled("form")`
     gap: 0.35em; /* much tighter vertical spacing */
     margin: 0.4em auto 0; /* Menos margen superior */
     /* Constrain by available viewport space but leave room for header + CTA */
-  max-height: calc(100dvh - var(--header-height) - 100px);
+    max-height: calc(100dvh - var(--header-height) - 100px);
     overflow-y: auto; /* Scroll interno si es muy necesario */
   }
 

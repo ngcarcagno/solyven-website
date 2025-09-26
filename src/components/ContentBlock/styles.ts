@@ -139,7 +139,6 @@ export const ContentSection = styled("section")`
     align-items: flex-start !important;
     padding-top: calc(var(--header-height) * 0.6) !important;
     padding-bottom: calc(var(--header-height) * 0.6) !important;
-    overflow: hidden !important;
 
     @media only screen and (max-width: 768px) {
       padding-top: calc(var(--header-height) * 0.4) !important;

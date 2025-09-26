@@ -30,6 +30,7 @@ export default function DecryptedText({
   parentClassName = "",
   encryptedClassName = "",
   animateOn = "hover",
+  forceOnMount = false,
   ...props
 }) {
   const [displayText, setDisplayText] = useState(text);
@@ -42,6 +43,12 @@ export default function DecryptedText({
   useEffect(() => {
     let interval;
     let currentIteration = 0;
+
+    // Si forceOnMount está activo, forzar animación al montar
+    if (forceOnMount && !hasAnimated) {
+      setIsHovering(true);
+      setHasAnimated(true);
+    }
 
     const getNextIndex = (revealedSet) => {
       const textLength = text.length;

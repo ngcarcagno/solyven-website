@@ -4,19 +4,19 @@
 
 :root {
   /* Colors */
-  --color-primary: #5F0807;
-  --color-secondary: #F75800;
+  --color-primary: #5f0807;
+  --color-secondary: #f75800;
   --color-detail: #00357a;
   --color-bg-gradient: linear-gradient(135deg, #181818 0%, #1f1f1f 30%, #2f2f2f 70%, #4a4a4a 100%);
   --color-bg-solid: #333333;
-  --color-text-primary: #FFFFFF;
+  --color-text-primary: #ffffff;
   --color-text-secondary: #333333;
 
   /* Fonts */
-  --font-base: 'Montserrat Medium', sans-serif;
-  --font-title: 'ArchivoBlack', serif;
-  --font-subtitle: 'Montserrat Regular', sans-serif;
-  --font-button: 'Montserrat Medium', sans-serif;
+  --font-base: "Montserrat Medium", sans-serif;
+  --font-title: "ArchivoBlack", serif;
+  --font-subtitle: "Montserrat Regular", sans-serif;
+  --font-button: "Montserrat Medium", sans-serif;
 
   /* Sizes */
   --size-base: 1rem;
@@ -29,13 +29,13 @@
   --size-min-para: 0.75em;
 
   /* Glass UI */
-  --glass-bg: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.008));
+  --glass-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.008));
   --glass-bg-v2: rgba(255, 255, 255, 0.15);
-  --glass-border: rgba(255,255,255,0.12);
+  --glass-border: rgba(255, 255, 255, 0.12);
   --glass-border-v2: 1px solid rgba(255, 255, 255, 0.2);
   --glass-blur: 0.625em;
   --glass-blur-v2: 0.625em;
-  --glass-shadow: 0 0.875em 2.125em rgba(0,0,0,0.65);
+  --glass-shadow: 0 0.875em 2.125em rgba(0, 0, 0, 0.65);
   --glass-shadow-v2: 0 0.5em 2em rgba(0, 0, 0, 0.1);
   --glass-radius: 0.75em;
 
