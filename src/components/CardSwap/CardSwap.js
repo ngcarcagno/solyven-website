@@ -32,8 +32,8 @@ const CardSwap = ({
   cardDistance = 60,
   verticalDistance = 70,
   delay = 5000,
-  pauseOnHover = false,
-  hoverScale = 1.04,
+  onClickEffect = true,
+  onHoverEffect = false,
   onCardClick,
   skewAmount = 6,
   easing = "elastic",
@@ -72,24 +72,26 @@ const CardSwap = ({
   const swapRef = useRef();
   const container = useRef(null);
 
+  // Modular: autoplay siempre activo, pero click/hover resetean el timer y hacen swap si la prop lo permite
+  // Flag para bloquear interacción durante animación
+  const isAnimating = useRef(false);
   useEffect(() => {
     const total = refs.length;
     refs.forEach((r, i) => placeNow(r.current, makeSlot(i, cardDistance, verticalDistance, total), skewAmount));
 
     const swap = () => {
       if (order.current.length < 2) return;
-
+      if (isAnimating.current) return;
+      isAnimating.current = true;
       const [front, ...rest] = order.current;
       const elFront = refs[front].current;
       const tl = gsap.timeline();
       tlRef.current = tl;
-
       tl.to(elFront, {
         y: "+=500",
         duration: config.durDrop,
         ease: config.ease,
       });
-
       tl.addLabel("promote", `-=${config.durDrop * config.promoteOverlap}`);
       rest.forEach((idx, i) => {
         const el = refs[idx].current;
@@ -107,7 +109,6 @@ const CardSwap = ({
           `promote+=${i * 0.15}`
         );
       });
-
       const backSlot = makeSlot(refs.length - 1, cardDistance, verticalDistance, refs.length);
       tl.addLabel("return", `promote+=${config.durMove * config.returnDelay}`);
       tl.call(
@@ -128,66 +129,58 @@ const CardSwap = ({
         },
         "return"
       );
-
       tl.call(() => {
         order.current = [...rest, front];
+        isAnimating.current = false;
       });
     };
-
-    // expose swap so handlers outside this effect can call it
     swapRef.current = swap;
-
     swap();
+    // autoplay siempre activo
     intervalRef.current = window.setInterval(() => swapRef.current?.(), delay);
-
-    if (pauseOnHover) {
-      const node = container.current;
-      const pause = () => {
-        tlRef.current?.pause();
-        clearInterval(intervalRef.current);
-        // scale up the front card as a UI affordance
-        try {
-          const frontIdx = order.current[0];
-          const frontEl = refs[frontIdx]?.current;
-          if (frontEl) gsap.to(frontEl, { scale: hoverScale, duration: 0.22, ease: "power2.out" });
-        } catch (err) {
-          /* ignore */
-        }
-      };
-      const resume = () => {
-        tlRef.current?.play();
-        intervalRef.current = window.setInterval(() => swapRef.current?.(), delay);
-        // restore scale on the front card
-        try {
-          const frontIdx = order.current[0];
-          const frontEl = refs[frontIdx]?.current;
-          if (frontEl) gsap.to(frontEl, { scale: 1, duration: 0.22, ease: "power2.out" });
-        } catch (err) {
-          /* ignore */
-        }
-      };
-      node.addEventListener("mouseenter", pause);
-      node.addEventListener("mouseleave", resume);
-      return () => {
-        node.removeEventListener("mouseenter", pause);
-        node.removeEventListener("mouseleave", resume);
-        clearInterval(intervalRef.current);
-      };
-    }
     return () => clearInterval(intervalRef.current);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing]);
+  }, [cardDistance, verticalDistance, delay, skewAmount, easing]);
 
+  // swap y reset timer al click/hover según props
+  const resetAutoplayAndSwap = () => {
+    if (isAnimating.current) return;
+    clearInterval(intervalRef.current);
+    swapRef.current?.();
+    intervalRef.current = window.setInterval(() => swapRef.current?.(), delay);
+  };
+  // Siempre la card frontal recibe el efecto, sin importar dónde se haga click/hover
+  const handleCardClick = (i, e) => {
+    if (isAnimating.current) return;
+    e?.stopPropagation();
+    if (onClickEffect) {
+      resetAutoplayAndSwap();
+    }
+    if (onCardClick) onCardClick(order.current[0]); // siempre pasa el índice de la card frontal
+  };
+  const handleCardMouseEnter = (i, e) => {
+    if (!onHoverEffect || isAnimating.current) return;
+    clearInterval(intervalRef.current);
+    const frontIdx = order.current[0];
+    const frontEl = refs[frontIdx]?.current;
+    if (frontEl) gsap.to(frontEl, { scale: 1.04, duration: 0.22, ease: "power2.out" });
+  };
+  const handleCardMouseLeave = (i, e) => {
+    if (!onHoverEffect || isAnimating.current) return;
+    intervalRef.current = window.setInterval(() => swapRef.current?.(), delay);
+    const frontIdx = order.current[0];
+    const frontEl = refs[frontIdx]?.current;
+    if (frontEl) gsap.to(frontEl, { scale: 1, duration: 0.22, ease: "power2.out" });
+  };
   const rendered = childArr.map((child, i) =>
     isValidElement(child)
       ? cloneElement(child, {
           key: i,
           ref: refs[i],
           style: { width, height, ...(child.props.style ?? {}) },
-          onClick: (e) => {
-            child.props.onClick?.(e);
-            onCardClick?.(i);
-          },
+          onClick: handleCardClick,
+          onMouseEnter: handleCardMouseEnter,
+          onMouseLeave: handleCardMouseLeave,
         })
       : child
   );

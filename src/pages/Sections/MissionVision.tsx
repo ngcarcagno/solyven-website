@@ -244,7 +244,8 @@ const MissionVision = () => {
                 cardDistance={Math.round(cardSwapWidth * 0.06)}
                 verticalDistance={Math.round(cardSwapWidth * 0.15)}
                 delay={6000}
-                pauseOnHover={true}
+                onClickEffect={true}
+                onHoverEffect={vw > 900}
                 onCardClick={() => {}}>
                 {cards.map((c) => {
                   const Icon = iconMap[c.icon] ?? (() => null);
