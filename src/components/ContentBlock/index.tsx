@@ -80,7 +80,7 @@ const ContentBlock = ({
                         text={title}
                         animateOn="view"
                         revealDirection="center"
-                        speed={45}
+                        speed={25}
                         maxIterations={30}
                         forceOnMount={true}
                       />
