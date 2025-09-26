@@ -37,7 +37,15 @@ export const LogoContainer = styled(Link)`
     height: 3em; /* Proportional logo size */
     width: auto;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    filter: drop-shadow(0 0 0.125em rgba(0, 53, 122, 0.5)) drop-shadow(0 0.125em 0.375em rgba(0, 0, 0, 0.4));
+    display: block;
+  }
+  /* SVG border effect exactly as in the footer */
+  .logo-with-outline svg {
+    stroke: #fff;
+    stroke-width: 1.2px;
+    paint-order: stroke fill;
+    filter: drop-shadow(0 0 2px rgba(255,255,255,0.18));
+    transition: stroke 0.2s, filter 0.2s;
   }
 
   /* Para pantallas muy pequeñas de altura */
@@ -60,9 +68,12 @@ export const LogoContainer = styled(Link)`
   }
 
   &:hover .logo-with-outline {
-    transform: translateY(-1px) scale(1.05);
-    filter: drop-shadow(0 0 3px rgba(0, 53, 122, 0.7)) drop-shadow(0 0 12px rgba(0, 53, 122, 0.3))
-      drop-shadow(0 3px 8px rgba(0, 0, 0, 0.5));
+    transform: translateY(-1px) scale(1.08);
+  }
+  &:hover .logo-with-outline svg {
+    stroke: #fff;
+    stroke-width: 2.2px;
+    filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px var(--color-secondary, #f75800));
   }
   /* Removed media query - now handled by clamp() padding in HeaderSection */
 
