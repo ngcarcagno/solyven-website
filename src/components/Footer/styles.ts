@@ -1,5 +1,27 @@
-import styled from "styled-components";
+// ...existing code...
+
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
+
+export const FooterRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  padding-top: 3rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+
+  @media (max-width: 769px) {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding-top: 2rem;
+  }
+`;
 
 export const FooterSection = styled("footer")`
   /* Mismo glassmorphism que el header */
@@ -83,6 +105,11 @@ export const Para = styled("div")`
   color: rgba(255, 255, 255, 0.8); /* Color blanco para fondo oscuro glassmorphism */
   font-size: clamp(0.8rem, 1.5vw, 0.875rem); /* Fluid font size 12.8px to 14px */
   width: clamp(60%, 70%, 80%); /* Fluid width */
+  &.address-city {
+    @media (max-width: 600px) {
+      display: none;
+    }
+  }
 `;
 
 export const Large = styled(Link)`
@@ -129,13 +156,11 @@ export const Empty = styled("div")`
 
 export const FooterContainer = styled("div")`
   --footer-icon-size: clamp(22px, 2.4vw, 36px); /* responsive icon size used across footer */
-  max-width: 510px;
-  width: 100%;
-  display: flex;
-  justify-content: center; /* center icons horizontally inside the footer container */
-  gap: 0.75rem; /* consistent spacing between icons */
+  width: auto;
+  max-width: none;
+  padding: 0;
+  /* No display: flex here; let .footer-row handle layout */
   text-align: center;
-  align-items: center;
   transition: all 0.1s ease-in-out;
 
   a {
@@ -153,12 +178,21 @@ export const FooterContainer = styled("div")`
     /* keep social anchors visible on mobile; labels will be hidden at smaller breakpoints */
   }
 
-  /* ensure SVG icons inside footer match a single responsive size and can be controlled by CSS */
+  /* ensure SVG icons inside footer match a single responsive size, are perfectly square, and centered */
   .svg-icon {
-    width: var(--footer-icon-size) !important; /* override inline style applied by SvgIcon */
+    width: var(--footer-icon-size) !important;
     height: var(--footer-icon-size) !important;
-    display: inline-block;
+    min-width: var(--footer-icon-size) !important;
+    min-height: var(--footer-icon-size) !important;
+    aspect-ratio: 1 / 1;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
     vertical-align: middle;
+    /* Prevents inline SVGs from overflowing or being off-center */
+    overflow: hidden;
+    /* Remove extra space below inline-block SVGs */
+    line-height: 0;
   }
 
   a {
@@ -182,11 +216,14 @@ export const FooterContainer = styled("div")`
     white-space: nowrap;
   }
 
-  @media screen and (max-width: 480px) {
-    .social-label {
-      display: none; /* show only icon on narrow screens */
-    }
-  }
+  /*
+  // Si se quiere ocultar el texto en mobile, descomentar:
+  // @media screen and (max-width: 480px) {
+  //   .social-label {
+  //     display: none;
+  //   }
+  // }
+  */
 
   a:hover .svg-icon {
     filter: none;
@@ -200,11 +237,14 @@ export const FooterContainer = styled("div")`
 
   /* Instagram-specific tweak removed to keep icons uniform */
 
-  /* Ensure inner svg fills the svg-icon container to prevent tiny viewBox renderings */
+  /* Ensure inner svg fills the svg-icon container, is centered, and keeps aspect ratio */
   .svg-icon svg {
-    width: 100% !important;
-    height: 100% !important;
+    width: 90% !important;
+    height: 90% !important;
     display: block;
+    margin: auto;
+    object-fit: contain;
+    aspect-ratio: 1 / 1;
   }
 
   /* explicit footer logo sizing (use a slightly larger clamp to match header size) */
@@ -321,12 +361,14 @@ export const AddressLines = styled("div")`
   flex-direction: column;
   align-items: flex-start;
 
-  /* hide textual address on small screens, keep only the icon */
-  @media screen and (max-width: 480px) {
-    display: none;
+  .address-city {
+    @media screen and (max-width: 480px) {
+      display: none;
+    }
   }
 `;
 
+// Modular address block for Footer
 export const MapLink = styled("a")`
   display: inline-flex;
   align-items: center;
@@ -345,5 +387,35 @@ export const MapLink = styled("a")`
   &:hover {
     color: var(--color-secondary);
     text-shadow: 0 0 8px rgba(247, 88, 0, 0.3);
+  }
+`;
+
+export const AddressText = styled("div")`
+  color: rgba(255, 255, 255, 0.85);
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  font-family: inherit;
+  font-weight: normal;
+  line-height: 1.2;
+  @media (max-width: 600px) {
+    font-size: 1rem;
+    text-align: center;
+  }
+`;
+
+export const StyledMapLink = styled(MapLink)`
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  font-weight: 600;
+  text-decoration: underline dotted rgba(255, 255, 255, 0.25);
+  transition: color 0.2s;
+  &:hover {
+    color: var(--color-secondary, #f75800);
+    text-decoration: underline solid var(--color-secondary, #f75800);
+  }
+  @media (max-width: 600px) {
+    display: block;
+    text-align: center;
+    font-size: 1.05rem;
+    margin: 0 auto;
   }
 `;

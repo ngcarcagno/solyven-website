@@ -13,6 +13,9 @@ import {
   MapLink,
   FooterMiddle,
   DevLogoStack,
+  FooterRow,
+  AddressText,
+  StyledMapLink,
 } from "./styles";
 
 interface SocialLinkProps {
@@ -36,7 +39,7 @@ const Footer = () => {
     <>
       <Extra>
         <Container border={true}>
-          <Row justify="space-between" align="middle" style={{ paddingTop: "3rem" }}>
+          <FooterRow>
             <NavLink to="/">
               <LogoContainer>
                 <SvgIcon
@@ -57,19 +60,45 @@ const Footer = () => {
                 label="@seguridadSolyvenn"
               />
             </FooterContainer>
+            {/* WhatsApp phone icon and link */}
+            <FooterContainer>
+              <a
+                href="https://wa.me/5493487611111"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Enviar WhatsApp"
+                className="social-link">
+                <SvgIcon src="phone.svg" preserveColor={false} />
+                <span className="social-label">+54 9 3487 61-1111</span>
+              </a>
+            </FooterContainer>
+            {/* Mail icon and mailto link */}
+            <FooterContainer>
+              <a
+                href="mailto:info@solyven.com.ar"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Enviar mail"
+                className="social-link">
+                <SvgIcon src="mail.svg" preserveColor={false} />
+                <span className="social-label">info@solyven.com.ar</span>
+              </a>
+            </FooterContainer>
             <AddressCard>
               <SvgIcon src="map-pin.svg" preserveColor={false} />
               <AddressLines>
-                <Para>Zárate, Buenos Aires</Para>
-                <MapLink
-                  href="https://www.google.com/maps/search/?api=1&query=3+de+febrero+167+Zarate+Buenos+Aires"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  3 de febrero 167
-                </MapLink>
+                <Para className="address-city">Zárate, Buenos Aires</Para>
+                <AddressText className="address-street">
+                  <StyledMapLink
+                    href="https://www.google.com/maps/search/?api=1&query=3+de+febrero+167+Zarate+Buenos+Aires"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    3 de febrero 167
+                  </StyledMapLink>
+                </AddressText>
               </AddressLines>
             </AddressCard>
-          </Row>
+          </FooterRow>
           {/* centered middle row for developer credit / external link */}
           <FooterMiddle>
             <DevLogoStack

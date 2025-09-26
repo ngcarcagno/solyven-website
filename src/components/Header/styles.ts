@@ -44,7 +44,7 @@ export const LogoContainer = styled(Link)`
     stroke: #fff;
     stroke-width: 1.2px;
     paint-order: stroke fill;
-    filter: drop-shadow(0 0 2px rgba(255,255,255,0.18));
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.18));
     transition: stroke 0.2s, filter 0.2s;
   }
 
