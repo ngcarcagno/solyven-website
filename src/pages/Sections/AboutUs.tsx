@@ -167,7 +167,7 @@ const AboutUsContent = ({ titleComponent }: AboutUsContentProps) => {
 
       {modalOpen && (
         <FullScreenModal onClose={() => setModalOpen(false)} transparentBackdrop={true}>
-          <div style={{ width: "100vw", height: "100vh" }}>
+          <div style={{ width: "100vw", height: "100dvh" }}>
             <Suspense fallback={<div style={{ color: "#fff" }}>Cargando galería...</div>}>
               <DomeGallery fit={0.95} fitBasis="min" minRadius={600} segments={40} />
             </Suspense>

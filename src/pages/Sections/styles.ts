@@ -153,7 +153,7 @@ export const AboutContainer = styled.div`
       display: flex;
       flex-direction: column;
       width: 100%;
-      max-height: calc(100vh - var(--header-height) - 140px);
+  max-height: calc(100dvh - var(--header-height) - 140px);
       min-height: auto;
       overflow: visible;
     }
@@ -228,7 +228,7 @@ export const AboutContainer = styled.div`
 
     /* Constrain the content-inner to avoid pushing content off screen */
     .about-content-root .content-inner {
-      max-height: calc(100vh - var(--header-height) - 110px) !important;
+  max-height: calc(100dvh - var(--header-height) - 110px) !important;
       padding-top: 8px !important;
       padding-bottom: 8px !important;
       overflow: visible !important;
@@ -924,7 +924,7 @@ export const BulletsContainer = styled.div`
 
       /* Tighten the viewport cap on very small screens (iPhone 375x667) */
       .scroll-list {
-        max-height: calc(100vh - 200px);
+  max-height: calc(100dvh - 200px);
       }
     }
   }

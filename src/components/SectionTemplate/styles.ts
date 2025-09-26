@@ -9,7 +9,7 @@ export const TemplateContainer = styled.section`
   position: relative;
   padding: calc(var(--header-height) * 0.38) 1rem 1rem;
   box-sizing: border-box;
-  min-height: 100vh; /* keep minimum full-screen so snap works, but don't force exact height */
+  min-height: 100dvh; /* keep minimum full-screen so snap works, but don't force exact height */
 
   @media only screen and (max-width: 768px) {
     padding: calc(var(--header-height) * 0.35) 0.75rem 0.75rem;

@@ -2,7 +2,7 @@ import { Row } from "antd";
 import styled from "styled-components";
 
 export const ScrollSnapContainer = styled("div")`
-  height: 100vh;
+  height: 100dvh;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
   -webkit-overflow-scrolling: touch;
@@ -27,7 +27,7 @@ export const ScrollSnapContainer = styled("div")`
     /* Cap inner content to fit the viewport minus header and a safe margin for CTA */
     .content-inner {
       /* Reserve bottom guard so fixed widgets (WhatsApp / promo) don't overlap inner scroll area */
-      max-height: calc(100vh - var(--header-height) - var(--section-bottom-guard));
+      max-height: calc(100dvh - var(--header-height) - var(--section-bottom-guard));
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
@@ -42,7 +42,7 @@ export const ScrollSnapContainer = styled("div")`
 
 export const ContentSection = styled("section")`
   position: relative;
-  min-height: 100vh; /* allow full-viewport minimum but don't force fixed height */
+  min-height: 100dvh; /* allow full-viewport minimum but don't force fixed height */
   height: auto; /* let the section grow if its content needs more space */
   scroll-snap-align: start;
   display: flex;
@@ -52,7 +52,7 @@ export const ContentSection = styled("section")`
   @media (max-width: 768px) {
     /* Comportamiento general para mobile - TODO se alinea al inicio */
     height: auto;
-    min-height: 100vh;
+    min-height: 100dvh;
     align-items: flex-start;
     /* Compute padding so the section starts exactly after the fixed header bottom */
     padding-top: calc(var(--header-offset) + var(--header-height) + var(--section-top-guard));
@@ -84,7 +84,7 @@ export const ContentSection = styled("section")`
     }
   }
   @media only screen and (max-height: 950px) {
-    height: 100vh; /* Mantener altura fija */
+    height: 100dvh; /* Mantener altura fija */
     padding: calc(var(--header-height) * 1.5) 1rem calc(var(--header-height) * 1.5);
     align-items: center; /* Mantener centrado pero respetando padding */
     justify-content: center;
@@ -93,12 +93,12 @@ export const ContentSection = styled("section")`
   /* Para pantallas muy pequeñas de altura (iPhone SE landscape, etc) */
   @media only screen and (max-height: 500px) {
     padding: calc(var(--header-height) * 0.5) 1rem calc(var(--header-height) * 0.5);
-    min-height: 100vh;
+    min-height: 100dvh;
   }
 
   @media only screen and (max-height: 400px) {
     padding: calc(var(--header-height) * 0.3) 0.5rem calc(var(--header-height) * 0.3);
-    min-height: 100vh;
+    min-height: 100dvh;
   }
 
   /* Para pantallas pequeñas entre iPhone SE y mobile estándar */
@@ -114,7 +114,7 @@ export const ContentSection = styled("section")`
     padding-left: 0.25rem;
     padding-right: 0.25rem;
     padding-bottom: calc(var(--header-height) * 0.8);
-    min-height: 100vh; /* Mantener altura completa pero flexible */
+    min-height: 100dvh; /* Mantener altura completa pero flexible */
     height: auto; /* Permitir altura dinámica */
     overflow: visible; /* Asegurar contenido visible */
 
@@ -131,7 +131,7 @@ export const ContentSection = styled("section")`
   }
 
   /* When ContentSection is used inside a real viewport wrapper (FullViewportSection)
-     avoid duplicating 100vh and reduce padding so inner content can fit inside the
+     avoid duplicating 100dvh and reduce padding so inner content can fit inside the
      actual viewport element. The wrapper will set the real height. */
   &[data-full-viewport="true"] {
     height: auto !important;
@@ -195,7 +195,7 @@ export const StyledRow = styled(Row)`
 
   /* Para pantallas de altura limitada - forzar compresión */
   @media only screen and (max-height: 950px) {
-    max-height: calc(100vh - (var(--header-height) * 3)); /* Espacio disponible sin paddings */
+    max-height: calc(100dvh - (var(--header-height) * 3)); /* Espacio disponible sin paddings */
     overflow: visible; /* Permitir que el contenido se vea */
   }
 
@@ -316,14 +316,14 @@ export const ContentWrapper = styled("div")<{ $centered?: boolean }>`
   /* Para pantallas de altura limitada */
   @media only screen and (max-height: 950px) {
     min-height: 0; /* Permitir compresión total */
-    max-height: calc(100vh - (var(--header-height) * 3)); /* FORZAR altura máxima */
+    max-height: calc(100dvh - (var(--header-height) * 3)); /* FORZAR altura máxima */
     gap: 0.75rem; /* Espaciado más compacto entre elementos */
     overflow-y: auto; /* Scroll si es necesario */
   }
 
   /* On small width viewports, cap height so CTA is reachable and allow internal scroll */
   @media only screen and (max-width: 480px) {
-    max-height: calc(100vh - var(--header-height) - 72px); /* leave room for CTA and some margin */
+    max-height: calc(100dvh - var(--header-height) - 72px); /* leave room for CTA and some margin */
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }

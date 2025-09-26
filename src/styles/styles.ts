@@ -57,7 +57,7 @@ export const Styles = createGlobalStyle`
     --section-bottom-guard: 4rem;
     
     /* Content block layout - PROPORTIONAL */
-    --content-min-height: 100vh;
+    --content-min-height: 100dvh;
     --content-padding: 6em 2em 5em; /* Reduced vertical padding for better mobile */
     /* Reduced mobile padding: slightly tighter to improve vertical density on small screens */
     --content-padding-mobile: 5em 0em 0em; /* was 3em 1.5em 3em */

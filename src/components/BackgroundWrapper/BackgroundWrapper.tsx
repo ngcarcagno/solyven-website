@@ -4,7 +4,7 @@ export const BackgroundWrapper = styled.section`
   position: relative;
   scroll-snap-align: start;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   padding: 0 1rem; /* Agregar padding horizontal */
 `;

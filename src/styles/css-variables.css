@@ -41,7 +41,7 @@
 
   /* Layout */
   --header-height: 4em;
-  --content-min-height: 100vh;
+  --content-min-height: 100dvh;
   --content-padding: 6em 2em 5em;
   --content-padding-mobile: 3em 1.5em 3em;
   --content-wrapper-max-width: min(90vw, 36em);
