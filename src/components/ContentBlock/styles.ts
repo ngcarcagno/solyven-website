@@ -41,6 +41,21 @@ export const ScrollSnapContainer = styled("div")`
 `;
 
 export const ContentSection = styled("section")`
+  @media only screen and (max-height: 700px) {
+    /* Desktop con poco alto: reducir padding y fuente para que todo quepa */
+    padding: calc(var(--header-height) * 0.5) 0.5rem calc(var(--header-height) * 0.5);
+    font-size: 0.9em;
+    .content-inner {
+      max-width: 600px;
+    }
+  }
+  @media only screen and (max-height: 620px) {
+    padding: calc(var(--header-height) * 0.3) 0.25rem calc(var(--header-height) * 0.3);
+    font-size: 0.85em;
+    .content-inner {
+      max-width: 520px;
+    }
+  }
   position: relative;
   min-height: 100dvh; /* allow full-viewport minimum but don't force fixed height */
   height: auto; /* let the section grow if its content needs more space */
@@ -265,6 +280,47 @@ export const StyledRow = styled(Row)`
    No tiene estilos específicos aquí.
    ======================================== */
 export const ContentWrapper = styled("div")<{ $centered?: boolean }>`
+  @media only screen and (max-height: 700px) {
+    min-height: 0;
+    gap: 0.5rem;
+    font-size: 0.9em;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  @media only screen and (max-height: 620px) {
+    gap: 0.25rem;
+    font-size: 0.85em;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+  @media only screen and (max-height: 700px) {
+    gap: 0.5rem;
+    font-size: 0.9em;
+    .content-block-icon {
+      margin-bottom: 0.25rem !important;
+    }
+    /* Iconos más pequeños */
+    .responsive-icon-img {
+      width: min(100px, 14vh, 20vw);
+      height: min(100px, 14vh, 20vw);
+    }
+    button {
+      font-size: 0.9em;
+      padding: 0.5em 1em;
+    }
+  }
+  @media only screen and (max-height: 620px) {
+    gap: 0.25rem;
+    font-size: 0.85em;
+    .responsive-icon-img {
+      width: min(80px, 10vh, 16vw);
+      height: min(80px, 10vh, 16vw);
+    }
+    button {
+      font-size: 0.85em;
+      padding: 0.4em 0.8em;
+    }
+  }
   position: relative;
   max-width: ${({ $centered }) => ($centered ? "min(95vw, 1200px)" : "var(--content-wrapper-max-width)")};
 
@@ -314,10 +370,16 @@ export const ContentWrapper = styled("div")<{ $centered?: boolean }>`
 
   /* Para pantallas de altura limitada */
   @media only screen and (max-height: 950px) {
-    min-height: 0; /* Permitir compresión total */
-    max-height: calc(100dvh - (var(--header-height) * 3)); /* FORZAR altura máxima */
-    gap: 0.75rem; /* Espaciado más compacto entre elementos */
-    overflow-y: auto; /* Scroll si es necesario */
+    min-height: 0;
+    max-height: calc(100dvh - (var(--header-height) * 3));
+    gap: 0;
+    overflow-y: auto;
+  }
+  @media only screen and (max-height: 700px) {
+    gap: 0;
+  }
+  @media only screen and (max-width: 768px) {
+    gap: 0;
   }
 
   /* On small width viewports, cap height so CTA is reachable and allow internal scroll */
@@ -346,11 +408,25 @@ export const ContentWrapper = styled("div")<{ $centered?: boolean }>`
    SERVICE SECTIONS (cuando direction no es "right")
    ======================================== */
 export const ServiceWrapper = styled("div")`
+  @media only screen and (max-height: 700px) {
+    gap: 1em;
+  }
+  @media only screen and (max-height: 620px) {
+    gap: 0.5em;
+  }
   display: flex;
-  justify-content: space-between;
-  max-width: 100%;
-  gap: 2em; /* Proportional gap between services */
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 2em;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  /* Eliminar max-width restrictivo */
+  @media only screen and (max-width: 900px) {
+    flex-direction: column;
+    gap: 1em;
+    align-items: stretch;
+  }
 `;
 
 /* ========================================
@@ -368,6 +444,14 @@ export const Content = styled("p")`
    Solo para elementos dentro de ServiceWrapper
    ======================================== */
 export const MinTitle = styled("h6")`
+  @media only screen and (max-height: 700px) {
+    font-size: calc(var(--size-min-title) * 0.9);
+    padding: 0.25em 0;
+  }
+  @media only screen and (max-height: 620px) {
+    font-size: calc(var(--size-min-title) * 0.8);
+    padding: 0.15em 0;
+  }
   font-size: var(--size-min-title);
   line-height: 1.2; /* Proportional line height */
   padding: 0.4em 0; /* Proportional padding */
@@ -393,6 +477,20 @@ export const MinPara = styled("p")`
    - Centrado: center con max-width 100% y gap
    ======================================== */
 export const ButtonWrapper = styled("div")<{ $centered?: boolean }>`
+  @media only screen and (max-height: 700px) {
+    gap: 0.75em;
+    button {
+      font-size: 0.9em;
+      padding: 0.5em 1em;
+    }
+  }
+  @media only screen and (max-height: 620px) {
+    gap: 0.4em;
+    button {
+      font-size: 0.85em;
+      padding: 0.4em 0.8em;
+    }
+  }
   display: flex;
   justify-content: ${({ $centered }) => ($centered ? "center" : "space-between")};
   max-width: 100%;

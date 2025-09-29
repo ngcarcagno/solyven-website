@@ -10,7 +10,7 @@ export const AboutContainer = styled.div`
   /* Allow the container to size based on content on small viewports to avoid forcing full height */
   height: auto;
   max-height: none;
-  overflow: visible;
+  overflow: visible !important;
 
   /* El título h6 usa automáticamente los estilos globales - no necesita override */
 
@@ -97,6 +97,7 @@ export const AboutContainer = styled.div`
       width: 100%;
       height: 100%;
       min-height: 0;
+      overflow: visible !important;
     }
 
     /* CTA wrapper styling target (used when CTA is placed inside about-content-root) */
@@ -153,15 +154,15 @@ export const AboutContainer = styled.div`
       display: flex;
       flex-direction: column;
       width: 100%;
-      max-height: calc(100dvh - var(--header-height) - 140px);
+      max-height: none;
       min-height: auto;
-      overflow: visible;
+      overflow: visible !important;
     }
     .about-bullets-list .scroll-list {
-      max-height: clamp(120px, 28vh, 340px);
+      max-height: none;
       min-height: 80px;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
+      overflow: visible !important;
+      -webkit-overflow-scrolling: auto;
     }
     .content-block-icon {
       visibility: visible;
@@ -210,9 +211,9 @@ export const AboutContainer = styled.div`
       margin-bottom: 0.22rem !important;
     }
     .about-bullets-list .scroll-list {
-      max-height: clamp(110px, 26vh, 320px) !important;
-      overflow-y: auto !important;
-      -webkit-overflow-scrolling: touch !important;
+      max-height: none !important;
+      overflow: visible !important;
+      -webkit-overflow-scrolling: auto !important;
     }
 
     /* CTA: smaller spacing and button size */
@@ -221,9 +222,26 @@ export const AboutContainer = styled.div`
       padding-bottom: 0.4rem !important;
     }
     .about-cta-wrap button,
-    .about-cta-wrap .ant-btn {
+    .about-cta-wrap .ant-btn,
+    .about-cta-wrap button {
       padding: 0.6rem 1rem !important;
-      font-size: 0.95rem !important;
+      font-size: clamp(0.82rem, 2.5vw, 0.95rem) !important;
+      line-height: 1.1;
+      min-width: 0;
+    }
+    @media (max-width: 480px) {
+      .about-cta-wrap .ant-btn,
+      .about-cta-wrap button {
+        font-size: clamp(0.75rem, 3vw, 0.88rem) !important;
+        padding: 0.5rem 0.8rem !important;
+      }
+    }
+    @media (max-width: 375px) {
+      .about-cta-wrap .ant-btn,
+      .about-cta-wrap button {
+        font-size: clamp(0.7rem, 3.5vw, 0.82rem) !important;
+        padding: 0.4rem 0.7rem !important;
+      }
     }
 
     /* Constrain the content-inner to avoid pushing content off screen */
@@ -304,7 +322,7 @@ export const ServicesContainer = styled.div`
     sometimes pushed out of view on certain desktop aspect ratios (e.g. 1536x864). */
   height: auto;
   max-height: none;
-  overflow: visible;
+  overflow: visible !important;
 
   @media (max-width: 768px) {
     padding: 0.75rem 0.5rem 0 0.5rem; /* Sin padding bottom, con top pequeño */
@@ -502,6 +520,43 @@ export const ServicesContainer = styled.div`
 `;
 
 export const ServicesGrid = styled.div`
+  /* Desktop: reducir tamaño de cards y fuentes si la altura es baja */
+  @media screen and (min-width: 769px) and (max-height: 800px) {
+    gap: clamp(0.5rem, 1vw, 1.2rem);
+    .service-item {
+      max-width: 260px !important;
+    }
+    .service-item:nth-child(odd):last-child {
+      max-width: clamp(200px, 22vw, 300px);
+    }
+    h3 {
+      font-size: clamp(0.7rem, 0.85vw, 0.95rem) !important;
+    }
+    p {
+      font-size: clamp(0.7rem, 0.8vw, 0.9rem) !important;
+    }
+    .service-spotlight-card {
+      padding: 1.1rem !important;
+    }
+  }
+  @media screen and (min-width: 769px) and (max-height: 700px) {
+    gap: clamp(0.3rem, 0.7vw, 0.8rem);
+    .service-item {
+      max-width: 220px !important;
+    }
+    .service-item:nth-child(odd):last-child {
+      max-width: clamp(180px, 18vw, 240px);
+    }
+    h3 {
+      font-size: clamp(0.62rem, 0.7vw, 0.8rem) !important;
+    }
+    p {
+      font-size: clamp(0.62rem, 0.7vw, 0.8rem) !important;
+    }
+    .service-spotlight-card {
+      padding: 0.7rem !important;
+    }
+  }
   display: grid;
   grid-template-columns: repeat(2, minmax(clamp(220px, 24vw, 320px), 1fr));
   gap: clamp(1rem, 2vw, 2rem);
@@ -509,35 +564,24 @@ export const ServicesGrid = styled.div`
   max-width: clamp(600px, 60vw, 900px);
   margin: 0 auto;
 
-  /* Si el alto es bajo, compactar el grid y los cards */
-  @media (max-height: 900px) {
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(0.5rem, 1vw, 1.2rem);
-    max-width: 700px;
-    .service-item {
-      max-width: 280px !important;
-    }
-  }
-  @media (max-height: 800px) {
-    grid-template-columns: 1fr;
-    gap: clamp(0.4rem, 0.8vw, 1rem);
-    max-width: 420px;
-    .service-item {
-      max-width: 220px !important;
-    }
-  }
-
   /* Pirámide invertida: 2 arriba, 1 abajo centrada */
-  .service-item:nth-child(3) {
+  /* Centrar cualquier item que esté solo en la última fila (cantidad impar de servicios) */
+  .service-item:nth-child(odd):last-child {
     grid-column: 1 / -1;
     justify-self: center;
-    max-width: 500px;
+    max-width: clamp(220px, 28vw, 360px);
     width: 100%;
   }
 
   @media (max-width: 768px) {
     /* On tablet and below, switch to single column but allow centered narrower cards */
     grid-template-columns: 1fr;
+    .service-item:nth-child(3) {
+      max-width: 300px !important;
+      width: 100% !important;
+      justify-self: center !important;
+    }
+  }
     gap: clamp(1rem, 2vw, 2rem);
     grid-template-columns: repeat(2, minmax(clamp(220px, 24vw, 320px), 1fr));
     grid-template-rows: auto auto;

@@ -3,6 +3,52 @@ import styled from "styled-components";
 /* Solo estilos específicos del formulario - ContentBlock maneja el layout */
 
 export const FormGroup = styled("form")`
+  @media only screen and (max-height: 700px) {
+    padding: 0.5em;
+    gap: 0.25em;
+    font-size: 0.9em;
+    margin: 0.3em auto 0;
+    max-width: min(600px, 90vw);
+    input,
+    textarea {
+      padding: 0.4em 0.6em !important;
+      font-size: 0.95em !important;
+    }
+    label {
+      margin-bottom: 0.08em !important;
+      font-size: 0.92em !important;
+    }
+    button,
+    & > div[role="button"],
+    & > .ant-btn,
+    & .ant-btn {
+      font-size: 0.9em !important;
+      padding: 0.5em 0.8em !important;
+    }
+  }
+  @media only screen and (max-height: 620px) {
+    padding: 0.3em;
+    gap: 0.12em;
+    font-size: 0.85em;
+    margin: 0.15em auto 0;
+    max-width: min(520px, 98vw);
+    input,
+    textarea {
+      padding: 0.3em 0.4em !important;
+      font-size: 0.9em !important;
+    }
+    label {
+      margin-bottom: 0.05em !important;
+      font-size: 0.88em !important;
+    }
+    button,
+    & > div[role="button"],
+    & > .ant-btn,
+    & .ant-btn {
+      font-size: 0.85em !important;
+      padding: 0.4em 0.6em !important;
+    }
+  }
   /* Formulario limpio que funciona dentro de ContentBlock */
   width: 100%;
   /* Allow the form to grow horizontally but cap to a comfortable max */

@@ -108,7 +108,6 @@ const ContentBlock = ({
       </FullViewportSection>
     );
   }
-
   // Non-center directions keep the original layout
   return (
     <ContentSection>
@@ -116,7 +115,7 @@ const ContentBlock = ({
         <StyledRow justify={isCenter ? "center" : "space-between"} align="middle" id={id} direction={direction}>
           {/* ...existing non-center layout... */}
           <>
-            <Col lg={11} md={11} sm={12} xs={24} style={{ display: "flex", alignItems: "center" }}>
+            <Col span={11} style={{ display: "flex", alignItems: "center" }}>
               {typeof icon === "string" ? (
                 icon.endsWith(".png") || icon.endsWith(".jpg") || icon.endsWith(".jpeg") ? (
                   <img
@@ -135,7 +134,7 @@ const ContentBlock = ({
                 icon
               )}
             </Col>
-            <Col lg={11} md={11} sm={11} xs={24} style={{ display: "flex", flexDirection: "column" }}>
+            <Col span={11} style={{ display: "flex", flexDirection: "column" }}>
               <ContentWrapper style={{ flex: "1", display: "flex", flexDirection: "column" }}>
                 <h6>
                   <DecryptedText
@@ -161,18 +160,46 @@ const ContentBlock = ({
                       ))}
                   </ButtonWrapper>
                 ) : (
-                  <ServiceWrapper>
-                    <Row justify="space-between">
-                      {typeof section === "object" &&
-                        section.map((item: any, id: number) => (
-                          <Col key={id} span={11}>
-                            <SvgIcon src={item.icon} width="60px" height="60px" />
-                            <MinTitle>{item.title}</MinTitle>
-                            <MinPara>{item.content}</MinPara>
-                          </Col>
+                  // Eliminar ServiceWrapper, dejar que el grid maneje el layout
+                  <>
+                    {typeof section === "object" &&
+                      section
+                        .reduce((rows: any[], item: any, idx: number) => {
+                          if (idx % 2 === 0) rows.push([item]);
+                          else rows[rows.length - 1].push(item);
+                          return rows;
+                        }, [])
+                        .map((row: any[], rowIdx: number) => (
+                          <Row
+                            justify="center"
+                            key={rowIdx}
+                            style={{
+                              width: "100%",
+                              marginBottom: "2em",
+                              display: "flex",
+                              flexDirection: "row",
+                              flexWrap: "nowrap",
+                              gap: "2em",
+                            }}>
+                            {row.map((item: any, colIdx: number) => (
+                              <Col
+                                key={colIdx}
+                                span={row.length === 2 ? 12 : 24}
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  alignItems: "center",
+                                  minWidth: 0,
+                                  flex: 1,
+                                }}>
+                                <SvgIcon src={item.icon} width="60px" height="60px" />
+                                <MinTitle>{item.title}</MinTitle>
+                                <MinPara>{item.content}</MinPara>
+                              </Col>
+                            ))}
+                          </Row>
                         ))}
-                    </Row>
-                  </ServiceWrapper>
+                  </>
                 )}
               </ContentWrapper>
             </Col>

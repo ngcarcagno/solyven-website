@@ -46,6 +46,18 @@
 .item-text {
   color: white;
   margin: 0;
+  font-size: var(--size-body, 1.1em) !important;
+}
+
+@media only screen and (max-height: 700px) {
+  .item-text {
+    font-size: calc(var(--size-body, 1.1em) * 0.9) !important;
+  }
+}
+@media only screen and (max-height: 620px) {
+  .item-text {
+    font-size: calc(var(--size-body, 1.1em) * 0.8) !important;
+  }
 }
 
 .top-gradient {
